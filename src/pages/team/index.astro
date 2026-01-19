@@ -1,0 +1,45 @@
+---
+// Fundations
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Text from "@/components/fundations/elements/Text.astro";
+import Kicker from "@/components/fundations/elements/Kicker.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+// Components
+import TeamCard from "@/components/team/TeamCard.astro";
+// Content
+import { getCollection } from "astro:content";
+const allTeam = await getCollection("team");
+allTeam.sort((a, b) => {
+  const nameA = a.data.name.toLowerCase();
+  const nameB = b.data.name.toLowerCase();
+  return nameA.localeCompare(nameB);
+});
+---
+
+<BaseLayout
+  seoTitle="Team"
+  seoDescription="The MESCo team behind our engineering systems and project support."
+>
+  <section>
+    <Wrapper variant="standard" class="py-24 lg:pt-48">
+      <div class="max-w-xl mx-auto text-center text-balance">
+        <Kicker class="text-base-600">Our team</Kicker>
+        <Text
+          tag="h1"
+          variant="displayMD"
+          class="font-medium tracking-tight mt-12"
+        >
+          Experienced professionals behind every successful build
+        </Text>
+        <Text tag="p" variant="textLG" class="text-base-600 mt-4">
+          Our team brings together project managers, engineers, and skilled
+          trades with a shared focus on planning, safety, and accountable
+          delivery.
+        </Text>
+      </div>
+      <div class="grid grid-cols-1 lg:grid-cols-3 mt-12 gap-x-8 gap-y-24">
+        {allTeam.map((post) => <TeamCard post={post} />)}
+      </div>
+    </Wrapper>
+  </section>
+</BaseLayout>

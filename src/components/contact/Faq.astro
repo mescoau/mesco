@@ -1,0 +1,90 @@
+---
+// Fundations
+import Text from "@/components/fundations/elements/Text.astro";
+import Kicker from "@/components/fundations/elements/Kicker.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+// Icons
+import Plus from "@/components/fundations/icons/Plus.astro";
+const faqs = [
+  {
+    question: "How quickly will you respond to my enquiry?",
+    answer:
+      "We typically reply within one business day. If your request is urgent, include your phone number so we can prioritise a call back.",
+  },
+  {
+    question: "What details should I share about my project or systems?",
+    answer:
+      "A short description of the project, its location, key stakeholders, and any existing WHS or quality systems helps us point you to the right support.",
+  },
+  {
+    question: "Do you support both new builds and existing projects?",
+    answer:
+      "Yes. We help set up systems for new projects and also improve or formalise documentation and processes on live jobs.",
+  },
+  {
+    question: "Can we schedule an on-site or office visit?",
+    answer:
+      "Absolutely. After our initial conversation, we can arrange a meeting or site walk-through to understand your current approach and align on scope.",
+  },
+  {
+    question: "What regions does MESCo support?",
+    answer:
+      "MESCo primarily supports Australian projects, with a focus on major metropolitan and infrastructure corridors. Discuss your location with us and we can confirm fit.",
+  },
+  {
+    question: "How do you approach pricing for MESCo services?",
+    answer:
+      "We start with a high-level view of project scope, timeframes, and deliverables, then provide a transparent proposal covering systems setup, documentation, and ongoing support where required.",
+  },
+];
+---
+
+<section>
+  <Wrapper variant="standard" class="py-24 lg:py-32 space-y-10">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+      <div class="max-w-4xl space-y-6">
+        <Kicker class="text-base-600">FAQ</Kicker>
+        <Text
+          tag="h2"
+          variant="textXL"
+          class="font-medium leading-tight tracking-tight"
+        >
+          Answers to common questions before we get started.
+        </Text>
+        <Text tag="p" variant="textBase" class="text-base-600">
+          If you need anything beyond these, send us a note and we'll respond
+          with the details you need.
+        </Text>
+      </div>
+      <div class="lg:col-span-2 space-y-1">
+        {
+          faqs.map((item) => (
+            <details class="group bg-base-50 p-4 rounded">
+              <summary class="flex items-start gap-4 cursor-pointer list-none [&::-webkit-details-marker]:hidden ">
+                <div class="flex w-full items-start justify-between gap-4">
+                  <Text
+                    tag="h3"
+                    variant="textBase"
+                    class="font-medium  text-accent-900 group-hover:text-accent-500"
+                  >
+                    {item.question}
+                  </Text>
+                  <Plus size="sm" class="group-open:rotate-90" />
+                </div>
+              </summary>
+              <div class="pb-8 pt-4">
+                <Text
+                  tag="p"
+                  variant="textBase"
+                  class="text-base-600 text-balance"
+                >
+                  {item.answer}
+                </Text>
+              </div>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </Wrapper>
+</section>

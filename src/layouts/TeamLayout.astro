@@ -1,0 +1,52 @@
+---
+// Assets
+import { Image } from "astro:assets";
+// Fundations
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Text from "@/components/fundations/elements/Text.astro";
+import Kicker from "@/components/fundations/elements/Kicker.astro";
+import UnderlinedLink from "@/components/fundations/elements/UnderlinedLink.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+// Content
+const { frontmatter } = Astro.props;
+---
+
+<BaseLayout>
+  <section>
+    <Wrapper variant="standard" class="py-24 lg:pt-48">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div class="p-8 bg-base-50 rounded">
+          <Kicker class="text-accent-600"> {frontmatter.name}</Kicker>
+          <Text
+            tag="h1"
+            variant="displayMD"
+            class="font-medium tracking-tight mt-12"
+          >
+            {frontmatter.role}
+          </Text>
+          <Text tag="p" variant="textBase" class="text-base-600 mt-4">
+            {frontmatter.bio}
+          </Text>
+          <div class="flex items-center gap-6 mt-4 text-base-600">
+            {
+              frontmatter.socials?.map((social) => (
+                <UnderlinedLink variant="dark" href={social.href}>
+                  {social.label}
+                </UnderlinedLink>
+              ))
+            }
+          </div>
+        </div>
+        <Image
+          alt={frontmatter.image.alt}
+          src={frontmatter.image.url}
+          width={1400}
+          height={1400}
+          loading="lazy"
+          decoding="async"
+          class="object-cover object-center aspect-9/12"
+        />
+      </div>
+    </Wrapper>
+  </section>
+</BaseLayout>

@@ -1,0 +1,199 @@
+# .pages.yml — Pages CMS config for this site's Astro content collections
+
+media:
+  name: images
+  label: Images
+  input: src/images
+  output: src/images
+  path: ""
+  extensions: [png, jpg, jpeg, webp, svg]
+
+settings:
+  content:
+    merge: true
+
+content:
+  # Blog posts
+  - name: posts
+    label: Posts
+    type: collection
+    path: src/content/posts
+    filename: "{primary}.md"
+    view:
+      primary: title
+      fields: [title, pubDate]
+      sort: [pubDate]
+      default: { sort: pubDate, order: desc }
+    fields:
+      - { name: title, label: Title, type: string, required: true }
+      - { name: pubDate, label: Publication Date, type: date, required: true }
+      - { name: description, label: Description, type: text, required: true }
+      - name: image
+        label: Cover Image
+        type: object
+        required: true
+        fields:
+          - name: url
+            label: Image
+            type: image
+            options:
+              media: images
+              path: blog
+          - { name: alt, label: Alt text, type: string, required: true }
+      - { name: tags, label: Tags, type: string, list: true, required: true }
+      - { name: body, label: Body, type: rich-text }
+
+  # Services
+  - name: services
+    label: Services
+    type: collection
+    path: src/content/services
+    filename: "{primary}.md"
+    view:
+      primary: title
+      fields: [title, excerpt]
+      sort: [title]
+    fields:
+      - { name: title, label: Title, type: string, required: true }
+      - { name: description, label: Description, type: text, required: true }
+      - { name: excerpt, label: Excerpt, type: text }
+      - name: image
+        label: Image
+        type: object
+        required: true
+        fields:
+          - name: url
+            label: Image
+            type: image
+            options:
+              media: images
+              path: services
+          - { name: alt, label: Alt text, type: string, required: true }
+      - { name: highlights, label: Highlights, type: string, list: true }
+      - { name: featured, label: Featured, type: boolean }
+      - { name: body, label: Body, type: rich-text }
+
+  # Projects
+  - name: projects
+    label: Projects
+    type: collection
+    path: src/content/projects
+    filename: "{primary}.md"
+    view:
+      primary: title
+      fields: [title, client, year]
+      sort: [title]
+    fields:
+      - { name: title, label: Title, type: string, required: true }
+      - { name: description, label: Description, type: text, required: true }
+      - { name: client, label: Client, type: string }
+      - { name: location, label: Location, type: string }
+      - { name: year, label: Year, type: number }
+      - { name: category, label: Category, type: string }
+      - { name: services, label: Services, type: string, list: true }
+      - name: cover
+        label: Cover
+        type: object
+        fields:
+          - name: url
+            label: Image
+            type: image
+            options:
+              media: images
+              path: projects
+          - { name: alt, label: Alt text, type: string, required: true }
+      - name: gallery
+        label: Gallery
+        type: object
+        list: true
+        fields:
+          - name: url
+            label: Image
+            type: image
+            options:
+              media: images
+              path: projects
+          - { name: alt, label: Alt text, type: string, required: true }
+      - name: metrics
+        label: Metrics
+        type: object
+        list: true
+        fields:
+          - { name: label, label: Label, type: string, required: true }
+          - { name: value, label: Value, type: string, required: true }
+      - { name: featured, label: Featured, type: boolean }
+
+  # Team
+  - name: team
+    label: Team
+    type: collection
+    path: src/content/team
+    filename: "{primary}.md"
+    view:
+      primary: name
+      fields: [name, role]
+      sort: [name]
+    fields:
+      - { name: name, label: Name, type: string, required: true }
+      - { name: role, label: Role, type: string }
+      - { name: bio, label: Bio, type: text }
+      - name: image
+        label: Profile Image
+        type: object
+        required: true
+        fields:
+          - name: url
+            label: Image
+            type: image
+            options:
+              media: images
+              path: team
+          - { name: alt, label: Alt text, type: string, required: true }
+      - name: socials
+        label: Socials
+        type: object
+        list: true
+        fields:
+          - { name: label, label: Label, type: string }
+          - { name: href, label: URL, type: string }
+
+  # Careers
+  - name: careers
+    label: Careers
+    type: collection
+    path: src/content/careers
+    filename: "{primary}.md"
+    view:
+      primary: title
+      fields: [title, location, type, department]
+      sort: [title]
+    fields:
+      - { name: title, label: Title, type: string, required: true }
+      - { name: description, label: Description, type: text, required: true }
+      - { name: location, label: Location, type: string }
+      - { name: type, label: Type, type: string }
+      - { name: department, label: Department, type: string }
+      - { name: experience, label: Experience, type: string }
+      - { name: salary, label: Salary, type: string }
+      - { name: applyUrl, label: Apply URL, type: string }
+      - { name: email, label: Apply Email, type: string }
+      - { name: responsibilities, label: Responsibilities, type: string, list: true }
+      - { name: requirements, label: Requirements, type: string, list: true }
+      - { name: benefits, label: Benefits, type: string, list: true }
+      - { name: active, label: Active, type: boolean }
+      - { name: body, label: Body, type: rich-text }
+
+  # Legal pages
+  - name: legal
+    label: Legal
+    type: collection
+    path: src/content/legal
+    filename: "{primary}.md"
+    view:
+      primary: page
+      fields: [page, pubDate]
+      sort: [page]
+    fields:
+      - { name: page, label: Page, type: string, required: true }
+      - { name: pubDate, label: Publication Date, type: date, required: true }
+      - { name: body, label: Body, type: rich-text }

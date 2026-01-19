@@ -1,0 +1,61 @@
+---
+// Fundations
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Text from "@/components/fundations/elements/Text.astro";
+import Kicker from "@/components/fundations/elements/Kicker.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+// Sections
+import Testimonials from "@/components/customers/Testimonials.astro";
+// Components
+import ProjectCardSmall from "@/components/projects/ProjectCardSmall.astro";
+import KeenSliderProjectCard from "@/components/fundations/scripts/KeenSliderProjectCard.astro";
+// Content
+import { getCollection } from "astro:content";
+const projects = await getCollection("projects");
+projects.sort((a, b) => {
+  const featuredDiff = (b.data.featured ? 1 : 0) - (a.data.featured ? 1 : 0);
+  if (featuredDiff !== 0) return featuredDiff;
+  const yearA = Number(a.data.year) || 0;
+  const yearB = Number(b.data.year) || 0;
+  return yearB - yearA;
+});
+---
+
+<BaseLayout
+  navTransparent={true}
+  seoTitle="Case studies"
+  seoDescription="Featured MESCo project case studies and outcomes."
+>
+  <section class="bg-accent-800">
+    <Wrapper
+      variant="standard"
+      class="py-12 pt-48 lg:border-x lg:border-white/10"
+    >
+      <div class="grid grid-cols-1 lg:grid-cols-3 lg:items-end gap-12">
+        <div class="max-w-4xl text-balance lg:col-span-2">
+          <Kicker class="text-white">Case studies</Kicker>
+          <Text
+            tag="h1"
+            variant="displayMD"
+            class="font-medium tracking-tight mt-12 text-white"
+          >
+            A selection of MESCo case studies across sectors
+          </Text>
+          <Text tag="p" variant="textLG" class="text-base-200 mt-4">
+            Explore projects where structured systems, documentation, and
+            compliance support helped deliver clean, auditable outcomes.
+          </Text>
+        </div>
+      </div>
+    </Wrapper>
+  </section>
+  <section>
+    <Wrapper variant="standard" class="py-12">
+      <div class="flex flex-col space-y-8">
+        {projects.map((project) => <ProjectCardSmall project={project} />)}
+      </div>
+    </Wrapper>
+  </section>
+  <Testimonials />
+  <KeenSliderProjectCard />
+</BaseLayout>

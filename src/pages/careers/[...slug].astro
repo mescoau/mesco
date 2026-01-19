@@ -1,0 +1,21 @@
+---
+import { getCollection } from "astro:content";
+import CareersLayout from "@/layouts/CareersLayout.astro";
+export async function getStaticPaths() {
+  const careers = await getCollection("careers");
+  const paths = careers.map((page) => {
+    return {
+      params: { slug: page.slug },
+      props: { page },
+      trailingSlash: false,
+    };
+  });
+  return paths;
+}
+const { page } = Astro.props;
+const { Content } = await page.render();
+---
+
+<CareersLayout frontmatter={page.data}>
+  <Content />
+</CareersLayout>

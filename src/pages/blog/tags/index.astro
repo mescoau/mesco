@@ -1,0 +1,43 @@
+---
+// Fundations
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Text from "@/components/fundations/elements/Text.astro";
+import Kicker from "@/components/fundations/elements/Kicker.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+// Content
+import { getCollection } from "astro:content";
+const allPosts = await getCollection("posts");
+const tags = [...new Set(allPosts.map((post) => post.data.tags).flat())];
+---
+
+<BaseLayout>
+  <section>
+    <Wrapper variant="standard" class="py-24 lg:pt-48">
+      <div class="max-w-xl mx-auto text-center text-balance">
+        <Kicker class="text-base-600">Journal</Kicker>
+        <Text
+          tag="h1"
+          variant="displayMD"
+          class="font-medium tracking-tight mt-12"
+        >
+          Browse by tag
+        </Text>
+        <Text tag="p" variant="textLG" class="text-base-600 mt-4">
+          Explore articles by topic. Click a tag to see all related posts.
+        </Text>
+      </div>
+      <div class="flex flex-wrap gap-4 mt-12 lg:mt-24 justify-center">
+        {
+          tags.map((tag, index) => (
+            <a
+              class="capitalize flex text-base-600 hover:text-accent-500 transition-colors"
+              href={`/blog/tags/${tag}`}
+            >
+              {tag}
+            </a>
+          ))
+        }
+      </div>
+    </Wrapper>
+  </section>
+</BaseLayout>

@@ -1,0 +1,65 @@
+---
+// Fundations
+import Text from "@/components/fundations/elements/Text.astro";
+import Kicker from "@/components/fundations/elements/Kicker.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+const items = [
+  {
+    title: "Clarify systems and responsibilities",
+    description:
+      "We can help you map who owns which parts of WHS, quality, and documentation so there is less ambiguity on your project.",
+  },
+  {
+    title: "Discuss your current or upcoming project",
+    description:
+      "Share where you are in the project lifecycle and we can recommend frameworks, templates, and support that fit.",
+  },
+  {
+    title: "Understand how MESCo fits in",
+    description:
+      "We will explain how MESCo works alongside your existing consultants and contractors without disrupting existing arrangements.",
+  },
+];
+---
+
+<section>
+  <Wrapper variant="standard" class="py-24">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+      <Kicker class="text-base-600">How to reach us</Kicker>
+      <Text
+        tag="h2"
+        variant="displayMD"
+        class="font-medium tracking-tight text-balance lg:col-span-2"
+      >
+        Get in touch with MESCo to talk through systems, documentation, and
+        <span class="text-accent-500">
+          compliance support for your current or upcoming project.
+        </span>
+      </Text>
+    </div>
+    <div
+      class="grid gap-x-8 gap-y-12 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-12 lg:mt-24"
+    >
+      {
+        items.map((item) => (
+          <div>
+            <Text
+              tag="h3"
+              variant="textLG"
+              class="font-medium  text-accent-900"
+            >
+              {item.title}
+            </Text>
+            <Text
+              tag="p"
+              variant="textSBase"
+              class="text-base-600 text-pretty mt-2"
+            >
+              {item.description}
+            </Text>
+          </div>
+        ))
+      }
+    </div>
+  </Wrapper>
+</section>

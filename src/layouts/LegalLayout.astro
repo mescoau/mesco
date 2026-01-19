@@ -1,0 +1,52 @@
+---
+// Fundations
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Text from "@/components/fundations/elements/Text.astro";
+import Kicker from "@/components/fundations/elements/Kicker.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+const { frontmatter } = Astro.props;
+---
+
+<BaseLayout
+  navTransparent={true}
+  seoTitle={frontmatter.page}
+>
+  <section class="bg-accent-800">
+    <Wrapper
+      variant="standard"
+      class="py-12 pt-48 lg:border-x lg:border-white/10"
+    >
+      <div class="max-w-xl mx-auto text-center text-balance lg:col-span-2">
+        <Kicker class="text-base-300">LEgal</Kicker>
+        <Text
+          tag="h1"
+          variant="displayMD"
+          class="font-medium tracking-tight mt-12 text-white"
+        >
+          {frontmatter.page}
+        </Text>
+        <Text tag="p" variant="textLG" class="text-base-400 mt-4">
+          Last updated on
+          <time datetime={new Date(frontmatter.pubDate).toISOString()}>
+            {
+              new Date(frontmatter.pubDate).toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "long",
+                day: "2-digit",
+              })
+            }
+          </time>
+        </Text>
+      </div>
+    </Wrapper>
+  </section>
+  <section>
+    <Wrapper variant="standard" class="py-12">
+      <Wrapper variant="narrow" class="mx-auto">
+        <Wrapper variant="prose">
+          <slot />
+        </Wrapper>
+      </Wrapper>
+    </Wrapper>
+  </section>
+</BaseLayout>

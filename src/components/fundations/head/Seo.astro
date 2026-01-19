@@ -1,0 +1,35 @@
+---
+import { AstroSeo } from "@astrolib/seo";
+
+const { title, description } = Astro.props as {
+  title?: string;
+  description?: string;
+};
+
+const defaultTitle = "Bridging the gap between design and delivery";
+const defaultDescription =
+  "Structured systems and compliance support for clean, auditable project delivery.";
+
+const rawTitle = title ?? defaultTitle;
+const finalTitle = rawTitle.endsWith(" - MESCo")
+  ? rawTitle
+  : `${rawTitle} - MESCo`;
+
+const finalDescription = description ?? defaultDescription;
+const siteName = "McPhee Engineering Systems (MESCo)";
+const url = Astro.url?.href ?? "";
+---
+
+<AstroSeo
+  title={finalTitle}
+  description={finalDescription}
+  canonical={url || undefined}
+  openGraph={{
+    url: url || undefined,
+    title: finalTitle,
+    description: finalDescription,
+    site_name: siteName,
+    type: "website",
+    locale: "en_AU",
+  }}
+/>

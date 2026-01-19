@@ -1,0 +1,21 @@
+---
+// Fundations
+import BaseLayout from "@/layouts/BaseLayout.astro";
+// Sections
+import Hero from "@/components/contact/Hero.astro";
+import Form from "@/components/contact/Form.astro";
+import Navigate from "@/components/contact/Navigate.astro";
+import ReachOut from "@/components/contact/ReachOut.astro";
+import Faq from "@/components/contact/Faq.astro";
+---
+<BaseLayout
+  navTransparent={true}
+  seoTitle="Contact"
+  seoDescription="Contact MESCo to make your next project audit-ready from day one."
+>
+  <Hero />
+  <Form />
+  <Navigate />
+  <ReachOut />
+  <Faq />
+</BaseLayout>

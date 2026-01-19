@@ -1,0 +1,40 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+@plugin "@tailwindcss/forms";
+@plugin "tailwind-scrollbar-hide";
+@theme {
+  --font-sans: "Inter", sans-serif;
+  --color-accent-50: #f4f7fb;
+  --color-accent-100: #e3e9f3;
+  --color-accent-200: #c7d3e6;
+  --color-accent-300: #a1b4d3;
+  --color-accent-400: #7a95bf;
+  --color-accent-500: #5677aa;
+  --color-accent-600: #405d8c;
+  --color-accent-700: #32476d;
+  --color-accent-800: #1b3150;
+  --color-accent-900: #121f33;
+  --color-accent-950: #0b141f;
+
+  /* Base */
+  --color-base-50: oklch(0.985 0 0);
+  --color-base-100: oklch(0.97 0 0);
+  --color-base-200: oklch(0.922 0 0);
+  --color-base-300: oklch(0.87 0 0);
+  --color-base-400: oklch(0.708 0 0);
+  --color-base-500: oklch(0.556 0 0);
+  --color-base-600: oklch(0.439 0 0);
+  --color-base-700: oklch(0.371 0 0);
+  --color-base-800: oklch(0.269 0 0);
+  --color-base-900: oklch(0.205 0 0);
+  --color-base-950: oklch(0.145 0 0);
+  --color-brand-blue: #1b3150;
+  --color-brand-gold: #be9b48;
+}
+:root {
+  font-family: Inter, sans-serif;
+  font-feature-settings: 'liga' 1, 'calt' 1; /* fix for Chrome */
+}
+@supports (font-variation-settings: normal) {
+  :root { font-family: InterVariable, sans-serif; }
+}
