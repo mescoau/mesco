@@ -2,56 +2,49 @@
 import Text from "@/components/fundations/elements/Text.astro";
 import Kicker from "@/components/fundations/elements/Kicker.astro";
 import Wrapper from "@/components/fundations/containers/Wrapper.astro";
-const focusAreas = [
-  {
-    title: "Systems and documentation",
-    description:
-      "Frameworks, templates, and registers that keep WHS, quality, and project records organised and easy to audit.",
-  },
-  {
-    title: "Support for delivery teams",
-    description:
-      "Hands-on support for project managers, engineers, and supervisors so systems work in both the office and on site.",
-  },
+const services = [
+  { title: "Project Start-Up Services" },
+  { title: "Project Familiarisation & Delivery Tools" },
+  { title: "Systems Design & Engineering Administration" },
+  { title: "HSE & Environmental Compliance" },
+  { title: "ISO Systems & Audit Support" },
+  { title: "Project Close-Out Services" },
+  { title: "Training, Induction & Capability" },
+  { title: "Short-Term Fill-Ins & Technical Support" },
 ];
 ---
 
 <section>
   <Wrapper variant="standard" class="py-24">
     <div class="max-w-3xl">
-      <Kicker class="text-base-600">Our focus</Kicker>
+      <Kicker class="text-base-600">Our Services</Kicker>
       <Text
         tag="h2"
         variant="displayMD"
         class="font-medium tracking-tight mt-12 text-balance"
       >
-        <span class="text-accent-900">We are here </span>
-        <span class="text-accent-500">
-          to put structured systems, documentation, and compliance support
-          around how projects are planned and delivered.
-        </span>
-      </Text>
-      <Text tag="p" variant="textLG" class="text-base-600 mt-4">
-        Our work focuses on bridging the gap between design consultants and
-        contractors, giving project teams practical tools, responsibilities, and
-        workflows they can rely on every day.
+        <span class="text-accent-900">Core Services Snapshot</span>
       </Text>
     </div>
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 mt-12 lg:mt-24">
+    <div
+      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-12 mt-12 lg:mt-24"
+    >
       {
-        focusAreas.map((area) => (
-          <div>
-            <Text
-              tag="h3"
-              variant="textXL"
-              class="text-accent-900 font-medium "
-            >
-              {area.title}
-            </Text>
-            <Text tag="p" variant="textLG" class="text-base-600 mt-2">
-              {area.description}
-            </Text>
-          </div>
+        services.map((service) => (
+          <a href="#" class="group block h-full">
+            <div class="h-full flex flex-col justify-between p-6 bg-base-50 rounded-lg hover:bg-accent-50 transition-colors duration-300">
+              <Text
+                tag="h3"
+                variant="textLG"
+                class="text-accent-900 font-medium group-hover:text-accent-700"
+              >
+                {service.title}
+              </Text>
+              <div class="mt-4 flex justify-end">
+                 <span class="text-accent-500 group-hover:translate-x-1 transition-transform duration-300">→</span>
+              </div>
+            </div>
+          </a>
         ))
       }
     </div>

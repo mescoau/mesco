@@ -1,116 +1,49 @@
 ---
-// Assets
-import Logo from "@/components/assets/Logo.astro";
 // Fundations
 import Text from "@/components/fundations/elements/Text.astro";
 import Kicker from "@/components/fundations/elements/Kicker.astro";
-import Button from "@/components/fundations/elements/Button.astro";
 import Wrapper from "@/components/fundations/containers/Wrapper.astro";
-const contactDetails = [
-  {
-    label: "Address",
-    value: ["Your office address", "City, State, Postcode", "Australia"],
-  },
-  {
-    label: "Phone",
-    value: ["+61 0000 0000"],
-    href: "tel:+61000000000",
-  },
-  {
-    label: "Email",
-    value: ["hello@mesco.com"],
-    href: "mailto:hello@mesco.com",
-  },
-  {
-    label: "Office hours",
-    value: ["Monday–Friday, 8:00–17:00 (AEST)"],
-  },
-];
 ---
 
-<section class="bg-accent-950">
+<section class="bg-white">
   <Wrapper
     variant="standard"
-    class="py-8 lg:py-0 lg:border-x lg:border-white/10"
+    class="py-24 lg:border-x lg:border-brand-gold"
   >
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-y-8 gap-x-20">
-      <div class="bg-accent-600 p-8 lg:-mt-26 z-10 relative overflow-hidden">
-        <div class="relative flex flex-col justify-between h-full">
-          <Logo class="h-12 w-fit text-white" />
-          <div>
-            <Text
-              tag="h2"
-              variant="displayMD"
-              class="font-medium tracking-tight text-white mt-12"
-            >
-              Contact
-            </Text>
-            <div class="mt-8 space-y-6">
-              {
-                contactDetails.map((detail) => (
-                  <div>
-                    <Text
-                      tag="span"
-                      variant="textSM"
-                      class="uppercase text-base-100 font-medium block"
-                    >
-                      {detail.label}
-                    </Text>
-                    <Text tag="p" variant="textBase" class="mt-1  text-white">
-                      {detail.value.map((line, index) => (
-                        <>
-                          {detail.href ? (
-                            <a
-                              href={
-                                Array.isArray(detail.href)
-                                  ? detail.href[index] || detail.href[0]
-                                  : detail.href
-                              }
-                              class="hover:underline decoration-2 underline-offset-4"
-                            >
-                              {line}
-                            </a>
-                          ) : (
-                            line
-                          )}
-                          {index < detail.value.length - 1 ? <br /> : ""}
-                        </>
-                      ))}
-                    </Text>
-                  </div>
-                ))
-              }
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="lg:col-span-2 py-12 lg:py-24 max-w-xl">
-        <Kicker class="text-accent-300">Get in touch</Kicker>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
+      <!-- The Problem -->
+      <div>
+        <Kicker class="text-base-500">The Problem</Kicker>
         <Text
-          tag="h3"
+          tag="h2"
           variant="displayMD"
-          class="text-white font-medium tracking-tight mt-12"
+          class="font-medium tracking-tight mt-8 text-accent-950 text-balance"
         >
-          Let’s discuss your project.
+          Projects often start before systems are ready
         </Text>
+        <Text tag="p" variant="textLG" class="text-base-600 mt-6">
+          Engineers often scramble to build registers, gather documentation, and
+          meet compliance requirements after work has already begun. This
+          reactive approach causes unnecessary stress, operational inefficiency,
+          and significant audit risk.
+        </Text>
+      </div>
+
+      <!-- How MESCo Fixes It -->
+      <div>
+        <Kicker class="text-accent-600">How MESCo Fixes It</Kicker>
         <Text
-          tag="p"
-          variant="textBase"
-          class="text-base-300 mt-4 text-balance"
+          tag="h2"
+          variant="displayMD"
+          class="font-medium tracking-tight mt-8 text-accent-950 text-balance"
         >
-          Whether you are planning a new project or improving systems on an
-          existing one, we can review your requirements and outline practical,
-          audit-ready next steps.
+          Systems set up before mobilisation
         </Text>
-        <Button
-          isLink
-          size="base"
-          variant="muted"
-          href="/contact"
-          class="w-fit mt-8"
-        >
-          Send us a message
-        </Button>
+        <Text tag="p" variant="textLG" class="text-base-600 mt-6">
+          MESCo steps in early—before mobilisation—to set up QA/QC, HSE, and
+          compliance systems. We ensure the difference between "catching up" and
+          being <strong>audit-ready from day one</strong>.
+        </Text>
       </div>
     </div>
   </Wrapper>

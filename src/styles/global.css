@@ -4,17 +4,18 @@
 @plugin "tailwind-scrollbar-hide";
 @theme {
   --font-sans: "Inter", sans-serif;
-  --color-accent-50: #f4f7fb;
-  --color-accent-100: #e3e9f3;
-  --color-accent-200: #c7d3e6;
-  --color-accent-300: #a1b4d3;
-  --color-accent-400: #7a95bf;
-  --color-accent-500: #5677aa;
-  --color-accent-600: #405d8c;
-  --color-accent-700: #32476d;
-  --color-accent-800: #1b3150;
-  --color-accent-900: #121f33;
-  --color-accent-950: #0b141f;
+  --color-accent-50: #f3f6fc;
+  --color-accent-100: #e6edf8;
+  --color-accent-200: #c7d9f0;
+  --color-accent-300: #95b9e4;
+  --color-accent-400: #5d95d3;
+  --color-accent-500: #3878bf;
+  --color-accent-600: #285ea1;
+  --color-accent-700: #214b83;
+  --color-accent-800: #1f416d;
+  --color-accent-900: #1b3150;
+  --color-accent-950: #14243d;
+
 
   /* Base */
   --color-base-50: oklch(0.985 0 0);
@@ -28,7 +29,7 @@
   --color-base-800: oklch(0.269 0 0);
   --color-base-900: oklch(0.205 0 0);
   --color-base-950: oklch(0.145 0 0);
-  --color-brand-blue: #1b3150;
+  --color-brand-blue: #1B3150;
   --color-brand-gold: #be9b48;
 }
 :root {

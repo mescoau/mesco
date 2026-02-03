@@ -14,7 +14,7 @@ const stats = [
 <section class="relative min-h-[80dvh] flex flex-col">
   <div class="absolute inset-0 z-0">
     <video autoplay muted loop playsinline class="size-full object-cover">
-      <source src="/night.mp4" type="video/mp4" />
+      <source src="/hero.mp4" type="video/mp4" />
     </video>
     <div
       aria-hidden="true"
@@ -25,7 +25,7 @@ const stats = [
   <div class="relative z-10 flex-1 flex flex-col">
     <Wrapper
       variant="standard"
-      class="flex-1 flex flex-col justify-end py-12 lg:pb-12 pt-24 lg:border-x lg:border-white/10"
+      class="flex-1 flex flex-col justify-end py-12 lg:pb-12 pt-24 lg:border-x lg:border-brand-gold"
     >
       <div class="max-w-xl text-balance">
         <Kicker class="text-white">Bridging design and delivery</Kicker>
@@ -34,25 +34,24 @@ const stats = [
           variant="displayLG"
           class="text-white font-medium tracking-tight mt-12"
         >
-          Bridging the gap between design and delivery
+          Bridging the critical gap between engineering design and practical site delivery
         </Text>
         <Text tag="p" variant="textLG" class="text-white max-w-xl mt-4">
-          Structured systems and compliance support for clean, auditable project
-          delivery.
+          We provide structured systems, engineering administration, and compliance support for clean, auditable project delivery in the construction, resources, and energy sectors.
         </Text>
       </div>
     </Wrapper>
-    <div class="relative z-10 border-t border-white/10">
-      <Wrapper variant="standard" class="py-8 lg:border-x lg:border-white/10">
+    <div class="relative z-10 border-t border-brand-gold">
+      <Wrapper variant="standard" class="py-8 lg:border-x lg:border-brand-gold">
         <div
-          class="grid grid-cols-2 md:grid-cols-4 gap-y-4 gap-x-8 lg:max-w-3xl lg:ml-auto"
+          class="grid grid-cols-2 md:grid-cols-4 gap-y-4 gap-x-8 w-full"
         >
           {
             stats.map((stat) => (
               <div>
                 <Text
                   tag="p"
-                  variant="displayLG"
+                  variant="displayMD"
                   class="text-white italic font-medium"
                 >
                   {stat.value}
