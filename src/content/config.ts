@@ -19,19 +19,6 @@ const team = defineCollection({
         .optional(),
     }),
 });
-const posts = defineCollection({
-  schema: ({ image }) =>
-    z.object({
-      title: z.string(),
-      pubDate: z.date(),
-      description: z.string(),
-      image: z.object({
-        url: image(),
-        alt: z.string(),
-      }),
-      tags: z.array(z.string()),
-    }),
-});
 const legal = defineCollection({
   schema: z.object({
     page: z.string(),
@@ -60,6 +47,8 @@ const industries = defineCollection({
       title: z.string(),
       description: z.string(),
       order: z.number().optional(),
+      focus: z.string().optional(),
+      typicalProjects: z.string().optional(),
     }),
 });
 const projects = defineCollection({
@@ -70,6 +59,8 @@ const projects = defineCollection({
       client: z.string().optional(),
       location: z.string().optional(),
       year: z.union([z.number(), z.string()]).optional(),
+      duration: z.string().optional(),
+      scope: z.string().optional(),
       category: z.string().optional(),
       services: z.array(z.string()).optional(),
       cover: z
@@ -97,30 +88,10 @@ const projects = defineCollection({
       featured: z.boolean().optional(),
     }),
 });
-const careers = defineCollection({
-  schema: () =>
-    z.object({
-      title: z.string(),
-      description: z.string(),
-      location: z.string().optional(),
-      type: z.string().optional(), 
-      department: z.string().optional(),
-      experience: z.string().optional(), 
-      salary: z.string().optional(), 
-      applyUrl: z.string().optional(),
-      email: z.string().email().optional(),
-      responsibilities: z.array(z.string()).optional(),
-      requirements: z.array(z.string()).optional(),
-      benefits: z.array(z.string()).optional(),
-      active: z.boolean().optional(),
-    }),
-});
 export const collections = {
   team,
   legal,
-  posts,
   services,
   projects,
-  careers,
   industries,
 };

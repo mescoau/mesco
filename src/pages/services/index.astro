@@ -6,7 +6,6 @@ import Kicker from "@/components/fundations/elements/Kicker.astro";
 import Wrapper from "@/components/fundations/containers/Wrapper.astro";
 // Sections
 import Principles from "@/components/services/Principles.astro";
-import Testimonials from "@/components/customers/Testimonials.astro";
 // Components
 import ServiceCard from "@/components/services/ServiceCard.astro";
 // Content
@@ -31,18 +30,20 @@ services.sort((a, b) => {
     >
       <div class="grid grid-cols-1 lg:grid-cols-3 lg:items-end gap-12">
         <div class="max-w-4xl text-balance lg:col-span-2">
-          <Kicker class="text-white">Services</Kicker>
+          <Kicker class="text-white">Our Core Services</Kicker>
           <Text
             tag="h1"
             variant="displayMD"
             class="font-medium tracking-tight mt-12 text-white"
           >
-            Systems and support that make projects clean and auditable
+            Systems and support across the full project lifecycle
           </Text>
           <Text tag="p" variant="textLG" class="text-base-200 mt-4">
-            MESCo services focus on WHS, quality, documentation, and project
-            systems—so consultants, contractors, and delivery teams have
-            practical tools that hold up under audit.
+            MESCo covers the full project lifecycle — from mobilisation to
+            close-out — ensuring systems are built, maintained and traceable.
+            Our frameworks combine engineering precision and practical execution
+            with structured compliance, helping contractors meet quality, safety
+            and environmental obligations without slowing delivery.
           </Text>
         </div>
       </div>
@@ -57,5 +58,4 @@ services.sort((a, b) => {
     </Wrapper>
   </section>
   <Principles />
-  <Testimonials />
 </BaseLayout>

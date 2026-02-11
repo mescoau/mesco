@@ -1,0 +1,81 @@
+---
+import Text from "@/components/fundations/elements/Text.astro";
+import Kicker from "@/components/fundations/elements/Kicker.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+const steps = [
+  {
+    number: "01",
+    title: "Design",
+    subtitle: "The Intent",
+    description:
+      "Where consultants and clients define scope, standards and performance requirements.",
+  },
+  {
+    number: "02",
+    title: "MESCo Systems",
+    subtitle: "The Assurance Layer",
+    description:
+      "Where design intent is translated into QA/QC, HSE and compliance frameworks built for real-world use.",
+  },
+  {
+    number: "03",
+    title: "Construction Delivery",
+    subtitle: "The Execution",
+    description:
+      "Where site teams apply MESCo's systems to deliver works that are structured, safe and fully verifiable.",
+  },
+];
+---
+
+<section class="bg-accent-950">
+  <Wrapper variant="standard" class="py-24">
+    <div class="max-w-3xl">
+      <Kicker class="text-accent-300">Where MESCo Fits In</Kicker>
+      <Text
+        tag="h2"
+        variant="displayMD"
+        class="font-medium tracking-tight mt-12 text-white text-balance"
+      >
+        The essential middle layer between design intent and practical site
+        execution
+      </Text>
+      <Text tag="p" variant="textBase" class="text-base-400 mt-4">
+        MESCo doesn't just manage documents — we manage the transition of
+        complex engineering data into clear, auditable execution frameworks.
+      </Text>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12 lg:mt-24">
+      {
+        steps.map((step, i) => (
+          <div class="p-8 rounded bg-accent-900 relative">
+            <Text
+              tag="span"
+              variant="displayXL"
+              class="text-accent-700 italic font-medium"
+            >
+              {step.number}
+            </Text>
+            <Text
+              tag="h3"
+              variant="displaySM"
+              class="text-white font-medium mt-4"
+            >
+              {step.title}
+            </Text>
+            <Text tag="p" variant="textSM" class="text-accent-300 mt-1">
+              {step.subtitle}
+            </Text>
+            <Text tag="p" variant="textBase" class="text-base-400 mt-4">
+              {step.description}
+            </Text>
+            {i < steps.length - 1 && (
+              <span class="hidden md:block absolute top-1/2 -right-5 text-accent-500 text-2xl">
+                &rarr;
+              </span>
+            )}
+          </div>
+        ))
+      }
+    </div>
+  </Wrapper>
+</section>

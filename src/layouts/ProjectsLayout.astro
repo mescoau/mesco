@@ -15,7 +15,7 @@ import ArrowRight from "@/components/fundations/icons/ArrowRight.astro";
 // Content
 import { getCollection } from "astro:content";
 const { frontmatter } = Astro.props;
-const meta = [frontmatter.category, frontmatter.location, frontmatter.year]
+const meta = [frontmatter.category, frontmatter.location, frontmatter.duration]
   .filter(Boolean)
   .join(" • ");
 const allProjects = await getCollection("projects");
@@ -48,56 +48,62 @@ const latestProjects = allProjects
             {frontmatter.description}
           </Text>
         </div>
-        <ul role="list" class="space-y-1 list-none">
+        {frontmatter.services && (
+          <ul role="list" class="space-y-1 list-none">
+            {
+              frontmatter.services.map((service) => (
+                <li>
+                  <Text tag="p" variant="textBase" class="text-base-400 ">
+                    {service}
+                  </Text>
+                </li>
+              ))
+            }
+          </ul>
+        )}
+      </div>
+    </Wrapper>
+    {frontmatter.cover && (
+      <Wrapper
+        variant="standard"
+        class="py-8 lg:border-x lg:border-brand-gold/10 border-t"
+      >
+        <Image
+          width={1400}
+          height={1400}
+          loading="lazy"
+          decoding="async"
+          src={frontmatter.cover.url}
+          alt={frontmatter.cover.alt || frontmatter.title}
+          class="object-cover object-center w-full max-h-120"
+        />
+      </Wrapper>
+    )}
+  </section>
+  {frontmatter.metrics && frontmatter.metrics.length > 0 && (
+    <section>
+      <Wrapper variant="standard" class="py-24">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
           {
-            frontmatter.services.map((service) => (
-              <li>
-                <Text tag="p" variant="textBase" class="text-base-400 ">
-                  {service}
+            frontmatter.metrics.map((metric) => (
+              <div>
+                <Text
+                  tag="p"
+                  variant="displayLG"
+                  class="text-accent-900 italic font-medium "
+                >
+                  {metric.value}
                 </Text>
-              </li>
+                <Text tag="p" variant="textLG" class="text-base-600 mt-2">
+                  {metric.label}
+                </Text>
+              </div>
             ))
           }
-        </ul>
-      </div>
-    </Wrapper>
-    <Wrapper
-      variant="standard"
-      class="py-8 lg:border-x lg:border-brand-gold/10 border-t"
-    >
-      <Image
-        width={1400}
-        height={1400}
-        loading="lazy"
-        decoding="async"
-        src={frontmatter.cover.url}
-        alt={frontmatter.cover.alt || frontmatter.title}
-        class="object-cover object-center w-full max-h-120"
-      />
-    </Wrapper>
-  </section>
-  <section>
-    <Wrapper variant="standard" class="py-24">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-        {
-          frontmatter.metrics.map((metric) => (
-            <div>
-              <Text
-                tag="p"
-                variant="displayLG"
-                class="text-accent-900 italic font-medium "
-              >
-                {metric.value}
-              </Text>
-              <Text tag="p" variant="textLG" class="text-base-600 mt-2">
-                {metric.label}
-              </Text>
-            </div>
-          ))
-        }
-      </div>
-    </Wrapper>
-  </section>
+        </div>
+      </Wrapper>
+    </section>
+  )}
   <section>
     <Wrapper variant="standard" class="py-12">
       <div>
@@ -188,16 +194,16 @@ const latestProjects = allProjects
               variant="displaySM"
               class="font-medium  tracking-tight   text-accent-900"
             >
-              Latest projects
+              Other case studies
             </Text>
             <Button
               isLink
               size="xs"
               variant="muted"
-              href="/projects"
+              href="/case-studies"
               class="w-fit"
             >
-              See all projects
+              See all case studies
             </Button>
           </div>
           <div class="flex flex-col mt-12 lg:mt-24 space-y-8">

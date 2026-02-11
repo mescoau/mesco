@@ -18,8 +18,6 @@ const {
   seoTitle?: string;
   seoDescription?: string;
 };
-
-import KeenSliderTestimonials from "@/components/fundations/scripts/KeenSliderTestimonials.astro";
 ---
 
 <html lang="en" class="scroll-smooth">
@@ -37,6 +35,5 @@ import KeenSliderTestimonials from "@/components/fundations/scripts/KeenSliderTe
     }
     <main class="grow"><slot /></main>
     {!hideFooter && <Footer />}
-    <KeenSliderTestimonials />
   </body>
 </html>

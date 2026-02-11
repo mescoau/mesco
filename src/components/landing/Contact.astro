@@ -8,22 +8,22 @@ import Button from "@/components/fundations/elements/Button.astro";
 import Wrapper from "@/components/fundations/containers/Wrapper.astro";
 const contactDetails = [
   {
-    label: "Address",
-    value: ["Your office address", "City, State, Postcode", "Australia"],
+    label: "Location",
+    value: ["Perth, WA"],
   },
   {
     label: "Phone",
-    value: ["+61 0000 0000"],
-    href: "tel:+61000000000",
+    value: ["+61 409 729 303"],
+    href: "tel:+61409729303",
   },
   {
     label: "Email",
-    value: ["hello@mesco.com"],
-    href: "mailto:hello@mesco.com",
+    value: ["adrian@mesco.au", "kyriah@mesco.au"],
+    href: ["mailto:adrian@mesco.au", "mailto:kyriah@mesco.au"],
   },
   {
     label: "Office hours",
-    value: ["Monday–Friday, 8:00–17:00 (AEST)"],
+    value: ["Monday–Friday, 8:00–17:00 (AWST)"],
   },
 ];
 ---
@@ -91,16 +91,14 @@ const contactDetails = [
           variant="displayMD"
           class="text-white font-medium tracking-tight mt-12"
         >
-          Let’s discuss your project.
+          Ready to make your next project cleaner, smarter and more controlled?
         </Text>
         <Text
           tag="p"
           variant="textBase"
           class="text-base-300 mt-4 text-balance"
         >
-          Whether you are planning a new project or improving systems on an
-          existing one, we can review your requirements and outline practical,
-          audit-ready next steps.
+          Talk directly with our directors to scope systems that bring structure, efficiency and confidence to your delivery.
         </Text>
         <Button
           isLink

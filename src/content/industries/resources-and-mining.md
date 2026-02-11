@@ -1,14 +1,17 @@
 ---
-title: Resources & Mining
+title: Mining & Resources
 description: >
-  HSE, environmental, and documentation systems tailored to mining and
-  resources projects with strict compliance expectations.
+  Mining and resources projects operate in tightly regulated environments where
+  major clients expect ISO-aligned systems, rigorous HSE integration and
+  complete environmental compliance. MESCo develops structured management plans,
+  procedures, QA/QC frameworks and HSE systems that connect design intent to
+  safe, compliant and verifiable delivery across complex operational interfaces.
 order: 2
+focus: >
+  Clear compliance evidence, integrated HSE controls, proactive environmental
+  management, readiness for client audits and coordination across multiple
+  contractors.
+typicalProjects: >
+  Mine remediation, tailings infrastructure works, exploration and drilling
+  support, and ongoing operational compliance programs.
 ---
-
-MESCo supports resources and mining projects with:
-
-- Environmental and HSE frameworks built for high-risk sites
-- Audit-ready documentation and reporting structures
-- Tools that help site teams stay on top of obligations
-

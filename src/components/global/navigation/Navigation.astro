@@ -9,30 +9,15 @@ import Wrapper from "@/components/fundations/containers/Wrapper.astro";
 // Components
 import Search from "@/components/global/Search.astro";
 import MobileNavigation from "@/components/global/navigation/MobileNavigation.astro";
-// Content
-import { getCollection } from "astro:content";
 // Allow pages/layouts to opt-in to transparent behavior; default is solid
 const { transparent } = Astro.props as { transparent?: boolean };
 const isTransparent = !!transparent;
-// Fetch content collections for navigation
-const services = (await getCollection("services")).sort((a, b) =>
-  a.data.title.localeCompare(b.data.title)
-);
-const posts = (await getCollection("posts"))
-  .slice()
-  .sort(
-    (a, b) =>
-      new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime()
-  )
-  .slice(0, 2);
-const projects = (await getCollection("projects"))
-  .filter((p) => p.data.featured)
-  .slice(0, 1);
 const navLinks = [
   { label: "About", href: "/about" },
   { label: "Services", href: "/services" },
-  { label: "Industries", href: "/services" },
-  { label: "Case studies", href: "/case-studies" },
+  { label: "Case Studies", href: "/case-studies" },
+  { label: "Industries", href: "/industries" },
+  { label: "Team", href: "/team" },
   { label: "Contact", href: "/contact" },
 ];
 ---

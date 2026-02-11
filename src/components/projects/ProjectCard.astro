@@ -6,10 +6,10 @@ import Text from "@/components/fundations/elements/Text.astro";
 import UnderlinedLink from "@/components/fundations/elements/UnderlinedLink.astro";
 // Content
 const { title, description, url, image, meta } = {
-  url: "/projects/" + Astro.props.project.slug,
+  url: "/case-studies/" + Astro.props.project.slug,
   title: Astro.props.project.data.title,
   description: Astro.props.project.data.description,
-  image: Astro.props.project.data.cover.url,
+  image: Astro.props.project.data.cover?.url,
   meta: [
     Astro.props.project.data.category,
     Astro.props.project.data.location,

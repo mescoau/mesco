@@ -33,9 +33,10 @@ industries.sort((a, b) => {
           Supporting projects across major Australian industries
         </Text>
         <Text tag="p" variant="textLG" class="text-base-400 mt-4">
-          MESCo’s systems apply across construction, resources, infrastructure,
-          energy, and government work. We adapt the same structured approach to
-          suit the risk profile and requirements of each sector.
+          MESCo's systems apply across major Australian industries. Whether your
+          project is civil construction, mining, infrastructure, energy or
+          government-led, we understand the compliance requirements and build
+          systems that work for your sector.
         </Text>
       </div>
     </Wrapper>
@@ -57,6 +58,26 @@ industries.sort((a, b) => {
               <Text tag="p" variant="textBase" class="text-base-600">
                 {industry.data.description}
               </Text>
+              {industry.data.focus && (
+                <div class="mt-2">
+                  <Text tag="p" variant="textSM" class="font-medium text-accent-700">
+                    Focus
+                  </Text>
+                  <Text tag="p" variant="textSM" class="text-base-600 mt-1">
+                    {industry.data.focus}
+                  </Text>
+                </div>
+              )}
+              {industry.data.typicalProjects && (
+                <div class="mt-2">
+                  <Text tag="p" variant="textSM" class="font-medium text-accent-700">
+                    Typical Projects
+                  </Text>
+                  <Text tag="p" variant="textSM" class="text-base-600 mt-1">
+                    {industry.data.typicalProjects}
+                  </Text>
+                </div>
+              )}
             </article>
           ))
         }
@@ -64,4 +85,3 @@ industries.sort((a, b) => {
     </Wrapper>
   </section>
 </BaseLayout>
-

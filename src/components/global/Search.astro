@@ -6,24 +6,14 @@ import Close from "@/components/fundations/icons/Close.astro";
 import SearchIcon from "@/components/fundations/icons/Search.astro";
 import { getCollection } from "astro:content";
 
-const [posts, services, projects, team, careers, legal] = await Promise.all([
-  getCollection("posts"),
+const [services, projects, team, legal] = await Promise.all([
   getCollection("services"),
   getCollection("projects"),
   getCollection("team"),
-  getCollection("careers"),
   getCollection("legal"),
 ]);
 
 const searchItems = [
-  ...posts.map((item) => ({
-    type: "Post",
-    title: item.data.title,
-    description: item.data.description,
-    date: item.data.pubDate,
-    meta: item.data.tags?.join(", "),
-    url: `/blog/posts/${item.slug}`,
-  })),
   ...services.map((item) => ({
     type: "Service",
     title: item.data.title,
@@ -32,18 +22,18 @@ const searchItems = [
     url: `/services/${item.slug}`,
   })),
   ...projects.map((item) => ({
-    type: "Project",
+    type: "Case Study",
     title: item.data.title,
     description: item.data.description,
     meta: [
       item.data.client,
       item.data.location,
       item.data.category,
-      item.data.year?.toString(),
+      item.data.duration,
     ]
       .filter(Boolean)
       .join(" • "),
-    url: `/projects/${item.slug}`,
+    url: `/case-studies/${item.slug}`,
   })),
   ...team.map((item) => ({
     type: "Team",
@@ -51,15 +41,6 @@ const searchItems = [
     description: item.data.bio,
     meta: item.data.role,
     url: `/team/${item.slug}`,
-  })),
-  ...careers.map((item) => ({
-    type: "Career",
-    title: item.data.title,
-    description: item.data.description,
-    meta: [item.data.location, item.data.type, item.data.department]
-      .filter(Boolean)
-      .join(" • "),
-    url: `/careers/${item.slug}`,
   })),
   ...legal.map((item) => ({
     type: "Legal",
@@ -102,7 +83,7 @@ const searchItems = [
                 Find what you need
               </h2>
               <p class="text-base-300 text-sm">
-                Posts, services, projects, team, careers, and legal pages.
+                Services, case studies, team, and legal pages.
               </p>
             </div>
             <Button
@@ -183,7 +164,7 @@ const searchItems = [
       if (!searchInput.value.trim()) {
         searchResults.innerHTML = `
           <div class="p-4 text-sm text-base-300">
-            Start typing to search posts, services, projects, team, careers, and legal content.
+            Start typing to search services, case studies, team, and legal content.
           </div>
         `;
         searchResults.classList.remove("hidden");

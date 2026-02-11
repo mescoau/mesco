@@ -11,7 +11,10 @@ import Wrapper from "@/components/fundations/containers/Wrapper.astro";
 const { frontmatter } = Astro.props;
 ---
 
-<BaseLayout>
+<BaseLayout
+  seoTitle={frontmatter.name}
+  seoDescription={frontmatter.bio}
+>
   <section>
     <Wrapper variant="standard" class="py-24 lg:pt-48">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -49,4 +52,11 @@ const { frontmatter } = Astro.props;
       </div>
     </Wrapper>
   </section>
+  <Wrapper variant="standard" class="pb-24">
+    <Wrapper variant="narrow" class="mx-auto">
+      <Wrapper variant="prose">
+        <slot />
+      </Wrapper>
+    </Wrapper>
+  </Wrapper>
 </BaseLayout>

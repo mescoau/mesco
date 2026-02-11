@@ -22,6 +22,12 @@
             "string"
           ]
         },
+        "duration": {
+          "type": "string"
+        },
+        "scope": {
+          "type": "string"
+        },
         "category": {
           "type": "string"
         },

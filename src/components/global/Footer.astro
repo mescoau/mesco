@@ -5,9 +5,6 @@ import Logo from "@/components/assets/Logo.astro";
 import Text from "@/components/fundations/elements/Text.astro";
 import Button from "@/components/fundations/elements/Button.astro";
 import Wrapper from "@/components/fundations/containers/Wrapper.astro";
-// Content
-import { getCollection } from "astro:content";
-
 type LinkItem = {
   label: string;
   href: string;
@@ -18,44 +15,42 @@ type LinkSection = {
   links: LinkItem[];
 };
 
-const services = (await getCollection("services"))
-  .sort((a, b) => a.data.title.localeCompare(b.data.title))
-  .slice(0, 6);
-
 const linkSections: LinkSection[] = [
   {
     title: "Company",
     links: [
-      { label: "About", href: "#" },
-      { label: "Why Us", href: "#" },
-      { label: "Partners", href: "#" },
-      { label: "Mission", href: "#" },
+      { label: "About", href: "/about" },
+      { label: "Industries", href: "/industries" },
+      { label: "Team", href: "/team" },
+      { label: "Contact", href: "/contact" },
     ],
   },
   {
     title: "Services",
-    links: services.map((service) => ({
-      label: service.data.title,
-      href: `/services/${service.slug}`,
-    })),
+    links: [
+      { label: "Project Start-Up Services", href: "/services/project-start-up-services" },
+      { label: "Automated Engineering Systems", href: "/services/automated-engineering-systems-and-qaqc-frameworks" },
+      { label: "Engineering Administration", href: "/services/engineering-administration-and-project-support" },
+      { label: "HSE Systems", href: "/services/health-safety-and-environmental-systems" },
+      { label: "ISO Systems & Audit Support", href: "/services/iso-systems-and-audit-support" },
+      { label: "Project Close-Out Services", href: "/services/project-close-out-services" },
+    ],
   },
   {
     title: "Resources",
     links: [
-      { label: "Case studies", href: "/case-studies" },
-      { label: "Blog", href: "/blog" },
-      { label: "Careers", href: "/careers" },
-      { label: "Team", href: "/team" },
+      { label: "Case Studies", href: "/case-studies" },
+      { label: "Services", href: "/services" },
       { label: "Privacy", href: "/legal/privacy" },
     ],
   },
 ];
 
 const contactDetails = {
-  email: "hello@mesco.com",
-  phone: "+617 1234 5678",
-  address: "Your office address\nCity, State, Postcode",
-  hours: ["Mon-Fri: 8:00 AM - 6:00 PM", "Sat-Sun: By appointment"],
+  email: "adrian@mesco.au",
+  phone: "+61 409 729 303",
+  address: "Perth, WA",
+  hours: ["Mon-Fri: 8:00 AM - 5:00 PM"],
 };
 
 const legalLinks: LinkItem[] = [
@@ -142,12 +137,9 @@ const legalLinks: LinkItem[] = [
           Contact
         </Text>
         <div class="mt-12">
-          <Text tag="p" variant="textSM" class="text-base-200"
-            >{contactDetails.hours[0]}</Text
-          >
-          <Text tag="p" variant="textSM" class="text-base-200"
-            >{contactDetails.hours[1]}</Text
-          >
+          {contactDetails.hours.map((h) => (
+            <Text tag="p" variant="textSM" class="text-base-200">{h}</Text>
+          ))}
           <address>
             <p class="whitespace-pre-line leading-relaxed mt-2">
               {contactDetails.address}

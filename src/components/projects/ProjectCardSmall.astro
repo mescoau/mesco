@@ -10,13 +10,13 @@ import ArrowRight from "@/components/fundations/icons/ArrowRight.astro";
 import ArrowUpRight from "@/components/fundations/icons/ArrowUpRight.astro";
 // Content
 const { title, description, url, category, location, year, image, gallery } = {
-  url: "/projects/" + Astro.props.project.slug,
+  url: "/case-studies/" + Astro.props.project.slug,
   title: Astro.props.project.data.title,
   description: Astro.props.project.data.description,
   category: Astro.props.project.data.category,
   location: Astro.props.project.data.location,
   year: Astro.props.project.data.year,
-  image: Astro.props.project.data.cover.url,
+  image: Astro.props.project.data.cover?.url,
   gallery: Astro.props.project.data.gallery,
 };
 ---
@@ -75,17 +75,19 @@ const { title, description, url, category, location, year, image, gallery } = {
       class="keen-slider mt-4"
       id={`project-gallery-slider-${Astro.props.project.slug}`}
     >
-      <div class="keen-slider__slide">
-        <Image
-          src={image}
-          alt={title}
-          width={400}
-          height={300}
-          loading="lazy"
-          decoding="async"
-          class="object-cover object-center w-full aspect-4/3 rounded"
-        />
-      </div>
+      {image && (
+        <div class="keen-slider__slide">
+          <Image
+            src={image}
+            alt={title}
+            width={400}
+            height={300}
+            loading="lazy"
+            decoding="async"
+            class="object-cover object-center w-full aspect-4/3 rounded"
+          />
+        </div>
+      )}
       {
         gallery &&
           gallery.map((img) => (
