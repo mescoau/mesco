@@ -4,20 +4,29 @@
 @plugin "tailwind-scrollbar-hide";
 @theme {
   --font-sans: "Inter", sans-serif;
-  --color-accent-50: #f3f6fc;
-  --color-accent-100: #e6edf8;
-  --color-accent-200: #c7d9f0;
-  --color-accent-300: #95b9e4;
-  --color-accent-400: #5d95d3;
-  --color-accent-500: #3878bf;
-  --color-accent-600: #285ea1;
-  --color-accent-700: #214b83;
-  --color-accent-800: #1f416d;
-  --color-accent-900: #1b3150;
-  --color-accent-950: #14243d;
 
+  /* Core */
+  --color-white: #F9FDFE;
+  --color-black: #0F171F;
 
-  /* Base */
+  /* Brand */
+  --color-brand-blue: #04203E;
+  --color-brand-gold: #be9b48;
+
+  /* Accent (blue scale) */
+  --color-accent-50: #e6e9ec;
+  --color-accent-100: #b9c1c9;
+  --color-accent-200: #8c98a6;
+  --color-accent-300: #5e7083;
+  --color-accent-400: #314861;
+  --color-accent-500: #04203E;
+  --color-accent-600: #031931;
+  --color-accent-700: #021224;
+  --color-accent-800: #010c16;
+  --color-accent-900: #010509;
+  --color-accent-950: #04203e;
+
+  /* Base (neutral grayscale) */
   --color-base-50: oklch(0.985 0 0);
   --color-base-100: oklch(0.97 0 0);
   --color-base-200: oklch(0.922 0 0);
@@ -29,8 +38,6 @@
   --color-base-800: oklch(0.269 0 0);
   --color-base-900: oklch(0.205 0 0);
   --color-base-950: oklch(0.145 0 0);
-  --color-brand-blue: #1B3150;
-  --color-brand-gold: #be9b48;
 }
 :root {
   font-family: Inter, sans-serif;
