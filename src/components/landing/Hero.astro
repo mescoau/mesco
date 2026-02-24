@@ -78,6 +78,12 @@ const stats = [
     </div>
   </div>
 </section>
+<style is:inline>
+  video[data-hero-video]::-webkit-media-controls-start-playback-button {
+    display: none !important;
+    -webkit-appearance: none;
+  }
+</style>
 <script is:inline>
   if (typeof window !== "undefined") {
     const video = document.querySelector("video[data-hero-video]");
