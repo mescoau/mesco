@@ -1,27 +1,26 @@
 ---
-// Assets
-import { Image } from "astro:assets";
 // Fundations
 import Text from "@/components/fundations/elements/Text.astro";
-import Button from "@/components/fundations/elements/Button.astro";
 // Icons
 import ArrowUpRight from "@/components/fundations/icons/ArrowUpRight.astro";
 // Content
-const { title, description, url, category, location, year, image } = {
+const { title, description, url, category, location, year } = {
   url: "/case-studies/" + Astro.props.project.slug,
   title: Astro.props.project.data.title,
   description: Astro.props.project.data.description,
   category: Astro.props.project.data.category,
   location: Astro.props.project.data.location,
   year: Astro.props.project.data.year,
-  image: Astro.props.project.data.cover?.url,
 };
-const hideImage =
-  "hideImage" in Astro.props ? Boolean(Astro.props.hideImage) : false;
 ---
 
-<details class="pb-8 border-b border-base-200 group">
-  <summary class="cursor-pointer list-none">
+<article class="pb-8 border-b border-base-200 group">
+  <a
+    href={url}
+    title={`View project: ${title}`}
+    aria-label={`View project: ${title}`}
+    class="block"
+  >
     <div class="grid grid-cols-1 lg:grid-cols-4 gap-y-4 lg:gap-x-8 items-start">
       <Text
         tag="p"
@@ -41,55 +40,24 @@ const hideImage =
         >
           {description}
         </Text>
+        <Text
+          tag="p"
+          variant="textXS"
+          class="uppercase text-base-500 font-medium mt-3 flex items-center gap-2"
+        >
+          {location}
+          <span aria-hidden="true" class="pointer-events-none">·</span>
+          {year}
+        </Text>
       </div>
-      <a
-        href={url}
-        title={`View project: ${title}`}
-        aria-label={`View project: ${title}`}
-        class="lg:ml-auto text-accent-900 hover:text-brand-gold font-medium text-lg flex items-center gap-2 group"
-      >
+      <div class="lg:ml-auto text-accent-900 font-medium text-lg flex items-center gap-2">
         <span>View project</span>
         <ArrowUpRight
           slot="icon"
           size="sm"
           class="group-hover:rotate-45 duration-300 transition"
         />
-      </a>
-    </div>
-  </summary>
-  <div class="mt-12 pt-12 border-t border-base-200">
-    <Text
-      tag="p"
-      variant="textXS"
-      class="uppercase text-base-600 font-medium flex items-center gap-2"
-    >
-      {location}
-      <span aria-hidden="true" class="pointer-events-none">·</span>
-      {year}
-    </Text>
-    {!hideImage && image && (
-      <div class="mt-4">
-        <Image
-          src={image}
-          alt={title}
-          width={400}
-          height={300}
-          loading="lazy"
-          decoding="async"
-          class="object-cover object-center w-full aspect-4/3 rounded"
-        />
       </div>
-    )}
-    <Button
-      isLink
-      href={url}
-      size="xs"
-      variant="muted"
-      title={`View project: ${title}`}
-      aria-label={`View project: ${title}`}
-      class="w-fit mt-4"
-    >
-      View project
-    </Button>
-  </div>
-</details>
+    </div>
+  </a>
+</article>

@@ -13,7 +13,18 @@ const stats = [
 
 <section class="relative min-h-[80dvh] flex flex-col">
   <div class="absolute inset-0 z-0">
-    <video autoplay muted loop playsinline class="size-full object-cover">
+    <video
+      data-hero-video
+      autoplay
+      muted
+      playsinline
+      webkit-playsinline
+      preload="auto"
+      aria-hidden="true"
+      disablePictureInPicture
+      controlsList="nodownload noplaybackrate noremoteplayback"
+      class="size-full object-cover"
+    >
       <source src="/hero.mp4" type="video/mp4" />
     </video>
     <div
@@ -67,3 +78,16 @@ const stats = [
     </div>
   </div>
 </section>
+<script is:inline>
+  if (typeof window !== "undefined") {
+    const video = document.querySelector("video[data-hero-video]");
+    if (video) {
+      video.muted = true;
+      video.playsInline = true;
+      const playPromise = video.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {});
+      }
+    }
+  }
+</script>
