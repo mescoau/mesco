@@ -577,7 +577,7 @@ Lessons Learned
 	•	Daily reporting to principal builds confidence and surfaces issues early. 
 	•	Clear allocation of approval authority prevents delays. Integration of all systems—plans, procedures, frameworks, registers—ensures nothing falls through the cracks.
 
-
+
 Case Study: Northern Revetment Wall Rehabilitation
 Duration: 5 months | Location: North Queensland | Client: North Queensland Bulk Port Corporation | Scope: Revetment wall rehabilitation, environmental management, QA/QC coordination, and compliance documentation
 The Challenge
@@ -587,11 +587,11 @@ The Challenge
 	•	Access and staging: Tidal windows and fluctuating weather conditions limited working hours, requiring detailed staging and progressive sign-offs.
 	•	Documentation burden: The project required full traceability from rock source to placement, with ITPs, lot records, and material test results forming part of close-out deliverables.
 MESCo’s Role
-MESCo was engaged by the principal contractor to establish and manage the QA/QC, HSE, and environmental compliance systems for the rehabilitation of the 322-metre northern revetment wall. MESCo developed and implemented project-specific management plans, QA frameworks, and document control systems to ensure alignment with ISO 9001, 14001, and 45001 standards. MESCo’s structured approach ensured that all armour rock, interlocking, and filter layers were installed in compliance with design and environmental requirements, while maintaining full operational interface with port authorities.
+MESCo was engaged by the principal contractor to establish and manage the QA/QC, HSE, and environmental compliance systems for the rehabilitation of the 322-metre northern revetment wall. MESCo developed and implemented project-specific management plans, QA frameworks, and document control systems to ensure alignment with ISO 9001, 14001, and 45001 standards.MESCo’s structured approach ensured that all armour rock, interlocking, and filter layers were installed in compliance with design and environmental requirements, while maintaining full operational interface with port authorities.
 Key Deliverables
 	•	Project Management and Environmental Plans tailored for marine construction.
 	•	Full QA/QC framework including ITPs for geotextile, filter, interlocking, and armour rock placement.
-	•	Lot Register and material traceability register (linked to source quarries and test results). Construction Staging Plan integrating tidal windows and operational coordination.
+	•	Lot Register and material traceability register (linked to source quarries and test results).Construction Staging Plan integrating tidal windows and operational coordination.
 	•	Hold and Witness Point Matrix for all critical activities.
 	•	Environmental monitoring system including turbidity testing and fauna observation logs.
 	•	Non-conformance tracking and closure register.

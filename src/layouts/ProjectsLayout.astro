@@ -22,6 +22,24 @@ const allProjects = await getCollection("projects");
 const latestProjects = allProjects
   .filter((project) => project.data.title !== frontmatter.title)
   .slice(0, 3);
+const galleryAssets = import.meta.glob(
+  "/src/images/**/*.{jpg,jpeg,png,webp}",
+  {
+    eager: true,
+  }
+);
+const galleryDir = frontmatter.galleryDir;
+const dynamicGallery = galleryDir
+  ? Object.entries(galleryAssets)
+      .filter(([path]) => path.includes(galleryDir.replace("/src", "")))
+      .map(([, mod]) => (mod as any).default)
+  : [];
+const manualGallery = frontmatter.gallery ?? [];
+const hasGallery =
+  !!frontmatter.cover &&
+  ((manualGallery && manualGallery.length > 0) ||
+    dynamicGallery.length > 0 ||
+    !!galleryDir);
 ---
 
 <BaseLayout
@@ -104,16 +122,23 @@ const latestProjects = allProjects
       </Wrapper>
     </section>
   )}
+  <Wrapper variant="standard" class="py-12">
+    <Wrapper variant="narrow" class="mx-auto">
+      <Wrapper variant="prose">
+        <slot />
+      </Wrapper>
+    </Wrapper>
+  </Wrapper>
   <section>
     <Wrapper variant="standard" class="py-12">
       <div>
         {
-          frontmatter.gallery && (
+          hasGallery && (
             <div
               id="project-slider-container-gallery"
               class="grid gird-cols-1 lg:grid-cols-4 gap-8 "
             >
-              <div class=" order-last lg:order-first p-8 bg-base-50 rounded">
+              <div class="p-8 bg-base-50 rounded">
                 <Text
                   tag="h3"
                   variant="displaySM"
@@ -154,10 +179,11 @@ const latestProjects = allProjects
                     height={600}
                     loading="lazy"
                     decoding="async"
-                    class="object-cover object-center w-full  rounded aspect-square"
+                    data-lightbox="project-gallery"
+                    class="object-contain object-center w-full h-auto rounded bg-black"
                   />
                 </div>
-                {frontmatter.gallery.map((img) => (
+                {manualGallery.map((img) => (
                   <div class="keen-slider__slide ">
                     <Image
                       src={img.url}
@@ -166,7 +192,22 @@ const latestProjects = allProjects
                       height={600}
                       loading="lazy"
                       decoding="async"
-                      class="object-cover object-center w-full  rounded aspect-square"
+                      data-lightbox="project-gallery"
+                      class="object-contain object-center w-full h-auto rounded bg-black"
+                    />
+                  </div>
+                ))}
+                {dynamicGallery.map((img) => (
+                  <div class="keen-slider__slide ">
+                    <Image
+                      src={img}
+                      alt={frontmatter.title}
+                      width={800}
+                      height={600}
+                      loading="lazy"
+                      decoding="async"
+                      data-lightbox="project-gallery"
+                      class="object-contain object-center w-full h-auto rounded bg-black"
                     />
                   </div>
                 ))}
@@ -177,13 +218,6 @@ const latestProjects = allProjects
       </div>
     </Wrapper>
   </section>
-  <Wrapper variant="standard" class="py-12">
-    <Wrapper variant="narrow" class="mx-auto">
-      <Wrapper variant="prose">
-        <slot />
-      </Wrapper>
-    </Wrapper>
-  </Wrapper>
   {
     latestProjects.length > 0 && (
       <section>

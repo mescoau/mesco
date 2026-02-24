@@ -72,6 +72,9 @@
             "additionalProperties": false
           }
         },
+        "galleryDir": {
+          "type": "string"
+        },
         "metrics": {
           "type": "array",
           "items": {

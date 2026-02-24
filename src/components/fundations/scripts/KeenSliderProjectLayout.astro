@@ -1,7 +1,6 @@
 <script type="module">
   import KeenSlider from "https://cdn.jsdelivr.net/npm/keen-slider@6.8.6/+esm";
 
-  // Initialize the project layout gallery slider
   const sliderElement = document.querySelector("#project-gallery-slider");
   const prevButton = document.querySelector(
     "#project-slider-container-gallery .project-slider-prev"
@@ -44,5 +43,49 @@
       prevButton.addEventListener("click", () => keenSlider.prev());
       nextButton.addEventListener("click", () => keenSlider.next());
     }
+
+    const overlay = document.createElement("div");
+    overlay.className =
+      "fixed inset-0 bg-black/80 z-50 hidden items-center justify-center p-4";
+    overlay.innerHTML =
+      '<button type="button" aria-label="Close image" class="absolute top-4 right-4 text-white text-3xl leading-none">&times;</button><img class="max-w-full max-h-full object-contain" alt="" />';
+    document.body.appendChild(overlay);
+    const overlayImage = overlay.querySelector("img");
+    const closeButton = overlay.querySelector("button");
+    const openOverlay = (src, alt) => {
+      if (!overlayImage) return;
+      overlayImage.src = src;
+      overlayImage.alt = alt || "";
+      overlay.classList.remove("hidden");
+      overlay.classList.add("flex");
+    };
+    const closeOverlay = () => {
+      overlay.classList.add("hidden");
+      overlay.classList.remove("flex");
+    };
+    if (closeButton) {
+      closeButton.addEventListener("click", () => {
+        closeOverlay();
+      });
+    }
+    overlay.addEventListener("click", (event) => {
+      if (event.target === overlay) {
+        closeOverlay();
+      }
+    });
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        closeOverlay();
+      }
+    });
+    const images = sliderElement.querySelectorAll(
+      '[data-lightbox="project-gallery"]'
+    );
+    images.forEach((img) => {
+      img.style.cursor = "zoom-in";
+      img.addEventListener("click", () => {
+        openOverlay(img.src, img.alt);
+      });
+    });
   }
 </script>

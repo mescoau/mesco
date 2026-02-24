@@ -5,11 +5,9 @@ import { Image } from "astro:assets";
 import Text from "@/components/fundations/elements/Text.astro";
 import Button from "@/components/fundations/elements/Button.astro";
 // Icons
-import ArrowLeft from "@/components/fundations/icons/ArrowLeft.astro";
-import ArrowRight from "@/components/fundations/icons/ArrowRight.astro";
 import ArrowUpRight from "@/components/fundations/icons/ArrowUpRight.astro";
 // Content
-const { title, description, url, category, location, year, image, gallery } = {
+const { title, description, url, category, location, year, image } = {
   url: "/case-studies/" + Astro.props.project.slug,
   title: Astro.props.project.data.title,
   description: Astro.props.project.data.description,
@@ -17,7 +15,6 @@ const { title, description, url, category, location, year, image, gallery } = {
   location: Astro.props.project.data.location,
   year: Astro.props.project.data.year,
   image: Astro.props.project.data.cover?.url,
-  gallery: Astro.props.project.data.gallery,
 };
 ---
 
@@ -58,10 +55,7 @@ const { title, description, url, category, location, year, image, gallery } = {
       </a>
     </div>
   </summary>
-  <div
-    id={`project-slider-container-${Astro.props.project.slug}`}
-    class="mt-12 pt-12 border-t border-base-200"
-  >
+  <div class="mt-12 pt-12 border-t border-base-200">
     <Text
       tag="p"
       variant="textXS"
@@ -71,72 +65,29 @@ const { title, description, url, category, location, year, image, gallery } = {
       <span aria-hidden="true" class="pointer-events-none">·</span>
       {year}
     </Text>
-    <div
-      class="keen-slider mt-4"
-      id={`project-gallery-slider-${Astro.props.project.slug}`}
-    >
-      {image && (
-        <div class="keen-slider__slide">
-          <Image
-            src={image}
-            alt={title}
-            width={400}
-            height={300}
-            loading="lazy"
-            decoding="async"
-            class="object-cover object-center w-full aspect-4/3 rounded"
-          />
-        </div>
-      )}
-      {
-        gallery &&
-          gallery.map((img) => (
-            <div class="keen-slider__slide">
-              <Image
-                src={img.url}
-                alt={img.alt || title}
-                width={400}
-                height={300}
-                loading="lazy"
-                decoding="async"
-                class="object-cover object-center w-full aspect-4/3 rounded"
-              />
-            </div>
-          ))
-      }
-    </div>
-    <div class="flex items-center justify-between mt-4">
-      <div class="flex justify-center gap-2">
-        <Button
-          iconOnly
-          size="xs"
-          variant="muted"
-          aria-label="Previous image"
-          class="project-slider-prev"
-        >
-          <ArrowLeft size="sm" slot="icon" />
-        </Button>
-        <Button
-          iconOnly
-          size="xs"
-          variant="muted"
-          aria-label="Next image"
-          class="project-slider-next"
-        >
-          <ArrowRight size="sm" slot="icon" />
-        </Button>
+    {image && (
+      <div class="mt-4">
+        <Image
+          src={image}
+          alt={title}
+          width={400}
+          height={300}
+          loading="lazy"
+          decoding="async"
+          class="object-cover object-center w-full aspect-4/3 rounded"
+        />
       </div>
-      <Button
-        isLink
-        href={url}
-        size="xs"
-        variant="muted"
-        title={`View project: ${title}`}
-        aria-label={`View project: ${title}`}
-        class="w-fit"
-      >
-        View project
-      </Button>
-    </div>
+    )}
+    <Button
+      isLink
+      href={url}
+      size="xs"
+      variant="muted"
+      title={`View project: ${title}`}
+      aria-label={`View project: ${title}`}
+      class="w-fit mt-4"
+    >
+      View project
+    </Button>
   </div>
 </details>

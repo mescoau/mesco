@@ -77,6 +77,7 @@ const projects = defineCollection({
           })
         )
         .optional(),
+      galleryDir: z.string().optional(),
       metrics: z
         .array(
           z.object({

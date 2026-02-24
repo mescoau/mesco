@@ -7,7 +7,7 @@ bio: >
   Western Australia and Queensland. Adrian leads MESCo's HSE and compliance
   systems portfolio.
 image:
-  url: "/src/images/team/1.jpeg"
+  url: "/src/images/adrian.png"
   alt: "Adrian McPhee — Director, HSE & Compliance Systems"
 socials:
   - label: Email
