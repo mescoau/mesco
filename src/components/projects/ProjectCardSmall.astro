@@ -16,6 +16,8 @@ const { title, description, url, category, location, year, image } = {
   year: Astro.props.project.data.year,
   image: Astro.props.project.data.cover?.url,
 };
+const hideImage =
+  "hideImage" in Astro.props ? Boolean(Astro.props.hideImage) : false;
 ---
 
 <details class="pb-8 border-b border-base-200 group">
@@ -65,7 +67,7 @@ const { title, description, url, category, location, year, image } = {
       <span aria-hidden="true" class="pointer-events-none">·</span>
       {year}
     </Text>
-    {image && (
+    {!hideImage && image && (
       <div class="mt-4">
         <Image
           src={image}
