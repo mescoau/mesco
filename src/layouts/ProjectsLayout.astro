@@ -8,10 +8,7 @@ import Kicker from "@/components/fundations/elements/Kicker.astro";
 import Wrapper from "@/components/fundations/containers/Wrapper.astro";
 // Components
 import ProjectCardSmall from "@/components/projects/ProjectCardSmall.astro";
-import KeenSliderProjectLayout from "@/components/fundations/scripts/KeenSliderProjectLayout.astro";
 import Button from "@/components/fundations/elements/Button.astro";
-import ArrowLeft from "@/components/fundations/icons/ArrowLeft.astro";
-import ArrowRight from "@/components/fundations/icons/ArrowRight.astro";
 // Content
 import { getCollection } from "astro:content";
 const { frontmatter } = Astro.props;
@@ -22,24 +19,6 @@ const allProjects = await getCollection("projects");
 const latestProjects = allProjects
   .filter((project) => project.data.title !== frontmatter.title)
   .slice(0, 3);
-const galleryAssets = import.meta.glob(
-  "/src/images/**/*.{jpg,jpeg,png,webp}",
-  {
-    eager: true,
-  }
-);
-const galleryDir = frontmatter.galleryDir;
-const dynamicGallery = galleryDir
-  ? Object.entries(galleryAssets)
-      .filter(([path]) => path.includes(galleryDir.replace("/src", "")))
-      .map(([, mod]) => (mod as any).default)
-  : [];
-const manualGallery = frontmatter.gallery ?? [];
-const hasGallery =
-  !!frontmatter.cover &&
-  ((manualGallery && manualGallery.length > 0) ||
-    dynamicGallery.length > 0 ||
-    !!galleryDir);
 ---
 
 <BaseLayout
@@ -129,95 +108,6 @@ const hasGallery =
       </Wrapper>
     </Wrapper>
   </Wrapper>
-  <section>
-    <Wrapper variant="standard" class="py-12">
-      <div>
-        {
-          hasGallery && (
-            <div
-              id="project-slider-container-gallery"
-              class="grid gird-cols-1 lg:grid-cols-4 gap-8 "
-            >
-              <div class="p-8 bg-base-50 rounded">
-                <Text
-                  tag="h3"
-                  variant="displaySM"
-                  class="font-medium text-accent-900"
-                >
-                  Gallery
-                </Text>
-                <div class="flex gap-2 mt-4">
-                  <Button
-                    iconOnly
-                    size="xs"
-                    variant="muted"
-                    aria-label="Previous image"
-                    class="project-slider-prev"
-                  >
-                    <ArrowLeft size="sm" slot="icon" />
-                  </Button>
-                  <Button
-                    iconOnly
-                    size="xs"
-                    variant="muted"
-                    aria-label="Next image"
-                    class="project-slider-next"
-                  >
-                    <ArrowRight size="sm" slot="icon" />
-                  </Button>
-                </div>
-              </div>
-              <div
-                class="keen-slider lg:col-span-3"
-                id="project-gallery-slider"
-              >
-                <div class="keen-slider__slide">
-                  <Image
-                    src={frontmatter.cover.url}
-                    alt={frontmatter.cover.alt || frontmatter.title}
-                    width={800}
-                    height={600}
-                    loading="lazy"
-                    decoding="async"
-                    data-lightbox="project-gallery"
-                    class="object-contain object-center w-full h-auto rounded bg-black"
-                  />
-                </div>
-                {manualGallery.map((img) => (
-                  <div class="keen-slider__slide ">
-                    <Image
-                      src={img.url}
-                      alt={img.alt || frontmatter.title}
-                      width={800}
-                      height={600}
-                      loading="lazy"
-                      decoding="async"
-                      data-lightbox="project-gallery"
-                      class="object-contain object-center w-full h-auto rounded bg-black"
-                    />
-                  </div>
-                ))}
-                {dynamicGallery.map((img) => (
-                  <div class="keen-slider__slide ">
-                    <Image
-                      src={img}
-                      alt={frontmatter.title}
-                      width={800}
-                      height={600}
-                      loading="lazy"
-                      decoding="async"
-                      data-lightbox="project-gallery"
-                      class="object-contain object-center w-full h-auto rounded bg-black"
-                    />
-                  </div>
-                ))}
-              </div>
-            </div>
-          )
-        }
-      </div>
-    </Wrapper>
-  </section>
   {
     latestProjects.length > 0 && (
       <section>
@@ -250,4 +140,3 @@ const hasGallery =
     )
   }
 </BaseLayout>
-<KeenSliderProjectLayout />
