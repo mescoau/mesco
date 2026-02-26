@@ -32,7 +32,7 @@ const contactItems = [
     icon: "mail",
   },
 ];
-const inputClass = "w-full rounded border-brand-gold/15 bg-accent-950 px-4 py-3 h-12 text-white focus:border-brand-gold focus:ring-2 focus:ring-brand-gold duration-300 transition-all focus:border-transparent focus:outline-none";
+const inputClass = "w-full rounded border-brand-gold/15 bg-white px-4 py-3 h-12 text-accent-950 focus:border-brand-gold focus:ring-2 focus:ring-brand-gold duration-300 transition-all focus:border-transparent focus:outline-none";
 const services = [
   "Project Start-Up Services",
   "Automated Engineering Systems & QA/QC Frameworks",
@@ -46,7 +46,7 @@ const services = [
 ---
 
 <section>
-  <Wrapper variant="standard" class="py-24">
+  <Wrapper variant="standard" class="py-24 lg:border-x lg:border-brand-gold">
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
       <div>
         <Kicker class="text-accent-600">Get in touch</Kicker>
@@ -181,7 +181,7 @@ const services = [
             <div class="grid grid-cols-1 gap-2 mt-2">
               {services.map((service) => (
                 <label class="flex items-center gap-2 text-sm text-base-300 cursor-pointer">
-                  <input type="checkbox" name="services" value={service} class="rounded border-brand-gold/15 bg-accent-950 text-brand-gold focus:ring-brand-gold" />
+                  <input type="checkbox" name="services" value={service} class="rounded border-brand-gold/15 bg-white text-brand-gold focus:ring-brand-gold" />
                   {service}
                 </label>
               ))}
@@ -195,18 +195,18 @@ const services = [
               id="contact-message"
               name="message"
               rows="4"
-              class="w-full rounded border-brand-gold/15 bg-accent-950 px-4 py-3 text-white focus:border-brand-gold focus:ring-2 focus:ring-brand-gold duration-300 transition-all focus:border-transparent focus:outline-none"
+              class="w-full rounded border-brand-gold/15 bg-white px-4 py-3 text-accent-950 focus:border-brand-gold focus:ring-2 focus:ring-brand-gold duration-300 transition-all focus:border-transparent focus:outline-none"
             ></textarea>
           </div>
           <fieldset class="space-y-2">
             <legend class="text-sm text-base-400">Preferred Contact Method</legend>
             <div class="flex gap-6 mt-2">
               <label class="flex items-center gap-2 text-sm text-base-300 cursor-pointer">
-                <input type="radio" name="preferred_contact" value="phone" class="border-brand-gold/15 bg-accent-950 text-brand-gold focus:ring-brand-gold" />
+                <input type="radio" name="preferred_contact" value="phone" class="border-brand-gold/15 bg-white text-brand-gold focus:ring-brand-gold" />
                 Phone
               </label>
               <label class="flex items-center gap-2 text-sm text-base-300 cursor-pointer">
-                <input type="radio" name="preferred_contact" value="email" class="border-brand-gold/15 bg-accent-950 text-brand-gold focus:ring-brand-gold" />
+                <input type="radio" name="preferred_contact" value="email" class="border-brand-gold/15 bg-white text-brand-gold focus:ring-brand-gold" />
                 Email
               </label>
             </div>

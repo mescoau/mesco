@@ -26,7 +26,7 @@ const latestServices = allServices
   <section class="bg-accent-800">
     <Wrapper
       variant="standard"
-      class="py-12 pt-48 lg:border-x lg:border-brand-gold/10"
+      class="py-12 pt-48 lg:border-x lg:border-brand-gold"
     >
       <div class="max-w-xl text-balance lg:col-span-2">
         <Kicker class="text-base-300">{frontmatter.title}</Kicker>
@@ -57,7 +57,7 @@ const latestServices = allServices
   </section>
 
   <section>
-    <Wrapper variant="paddingless">
+    <Wrapper variant="paddingless" class="lg:border-x lg:border-brand-gold">
       <Image
         width={1400}
         height={1400}
@@ -69,7 +69,7 @@ const latestServices = allServices
       />
     </Wrapper>
   </section>
-  <Wrapper variant="standard" class="py-12">
+  <Wrapper variant="standard" class="py-12 lg:border-x lg:border-brand-gold">
     <Wrapper variant="narrow" class="mx-auto">
       <Wrapper variant="prose">
         <slot />
@@ -79,7 +79,7 @@ const latestServices = allServices
   {
     latestServices.length > 0 && (
       <section>
-        <Wrapper variant="standard" class="py-24">
+        <Wrapper variant="standard" class="py-24 lg:border-x lg:border-brand-gold">
           <div class="flex flex-col md:flex-row gap-4 md:items-center justify-between">
             <Text
               tag="h2"

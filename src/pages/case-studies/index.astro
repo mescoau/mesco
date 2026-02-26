@@ -25,7 +25,7 @@ projects.sort((a, b) => {
   <section class="bg-accent-800">
     <Wrapper
       variant="standard"
-      class="py-12 pt-48 lg:border-x lg:border-brand-gold/10"
+      class="py-12 pt-48 lg:border-x lg:border-brand-gold"
     >
       <div class="grid grid-cols-1 lg:grid-cols-3 lg:items-end gap-12">
         <div class="max-w-4xl text-balance lg:col-span-2">
@@ -47,7 +47,7 @@ projects.sort((a, b) => {
     </Wrapper>
   </section>
   <section>
-    <Wrapper variant="standard" class="py-12">
+    <Wrapper variant="standard" class="py-12 lg:border-x lg:border-brand-gold">
       <div class="flex flex-col space-y-8">
         {projects.map((project) => <ProjectCardSmall project={project} />)}
       </div>

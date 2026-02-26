@@ -29,7 +29,7 @@ const latestProjects = allProjects
   <section class="bg-accent-800">
     <Wrapper
       variant="standard"
-      class="py-12 pt-48 lg:border-x lg:border-brand-gold/10"
+      class="py-12 pt-48 lg:border-x lg:border-brand-gold"
     >
       <div class="grid grid-cols-1 lg:grid-cols-3 lg:items-end gap-12">
         <div class="max-w-xl text-balance lg:col-span-2">
@@ -63,7 +63,7 @@ const latestProjects = allProjects
     {frontmatter.cover && (
       <Wrapper
         variant="standard"
-        class="py-8 lg:border-x lg:border-brand-gold/10 border-t"
+        class="py-8 lg:border-x lg:border-brand-gold border-t border-brand-gold"
       >
         <Image
           width={1400}
@@ -79,7 +79,7 @@ const latestProjects = allProjects
   </section>
   {frontmatter.metrics && frontmatter.metrics.length > 0 && (
     <section>
-      <Wrapper variant="standard" class="py-24">
+      <Wrapper variant="standard" class="py-24 lg:border-x lg:border-brand-gold">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
           {
             frontmatter.metrics.map((metric) => (
@@ -101,7 +101,7 @@ const latestProjects = allProjects
       </Wrapper>
     </section>
   )}
-  <Wrapper variant="standard" class="py-12">
+  <Wrapper variant="standard" class="py-12 lg:border-x lg:border-brand-gold">
     <Wrapper variant="narrow" class="mx-auto">
       <Wrapper variant="prose">
         <slot />
@@ -111,7 +111,7 @@ const latestProjects = allProjects
   {
     latestProjects.length > 0 && (
       <section>
-        <Wrapper variant="standard" class="py-24">
+        <Wrapper variant="standard" class="py-24 lg:border-x lg:border-brand-gold">
           <div class="flex flex-col md:flex-row gap-4 md:items-center justify-between">
             <Text
               tag="h2"
