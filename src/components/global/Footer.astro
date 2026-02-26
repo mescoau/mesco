@@ -174,3 +174,30 @@ const legalLinks: LinkItem[] = [
     </div>
   </Wrapper>
 </footer>
+
+<style>
+  .credit-link {
+    @apply relative inline-block text-base-300 transition-colors duration-300;
+  }
+  
+  .credit-link::after {
+    content: '';
+    @apply absolute left-0 bottom-0 w-full h-[1px] bg-brand-gold origin-right scale-x-0 transition-transform duration-300 ease-out;
+  }
+  
+  .credit-link:hover {
+    @apply text-brand-gold;
+  }
+  
+  .credit-link:hover::after {
+    @apply origin-left scale-x-100;
+  }
+
+  .credit-text:hover .credit-link {
+    @apply text-base-200;
+  }
+  
+  .credit-text:hover .credit-link:hover {
+    @apply text-brand-gold;
+  }
+</style>
