@@ -105,7 +105,7 @@ const legalLinks: LinkItem[] = [
   </Wrapper>
   <Wrapper
     variant="standard"
-    class="relative py-8 lg:border-x lg:border-brand-gold/15 space-y-12 z-10"
+    class="relative pt-8 pb-12 lg:border-x lg:border-brand-gold space-y-12 z-10"
   >
     <div class="grid gap-x-8 sm:grid-cols-2 lg:grid-cols-4 gap-y-24">
       {
@@ -149,13 +149,18 @@ const legalLinks: LinkItem[] = [
       </div>
     </div>
 
-    <div class="border-t border-brand-gold pt-8">
+    <div class="border-t border-brand-gold pt-8 -mx-8 px-8">
       <div
-        class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between"
+        class="flex flex-col gap-8 md:flex-row md:items-start md:justify-between"
       >
-        <Text tag="p" variant="textSM" class="text-base-300">
-          © {new Date().getFullYear()} MESCo. All rights reserved.
-        </Text>
+        <div class="flex flex-col gap-2">
+          <Text tag="p" variant="textSM" class="text-base-300">
+            © {new Date().getFullYear()} MESCo. All rights reserved.
+          </Text>
+          <Text tag="p" variant="textXS" class="text-base-400 credit-text">
+            Another <a href="https://unpopular.au" target="_blank" rel="noopener noreferrer" class="credit-link">Unpopular</a> website by <a href="https://joshwithers.au" target="_blank" rel="noopener noreferrer" class="credit-link">Josh Withers</a>
+          </Text>
+        </div>
         <div class="flex flex-wrap gap-4 text-white text-sm">
           {
             legalLinks.map((link) => (

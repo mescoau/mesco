@@ -9,6 +9,22 @@ import UnderlinedLink from "@/components/fundations/elements/UnderlinedLink.astr
 import Wrapper from "@/components/fundations/containers/Wrapper.astro";
 // Content
 const { frontmatter } = Astro.props;
+const navCards = [
+  {
+    title: "Services",
+    description:
+      "See how MESCo supports WHS, quality, and project systems across the lifecycle.",
+    href: "/services",
+    cta: "Explore all services",
+  },
+  {
+    title: "Case studies",
+    description:
+      "Explore MESCo project case studies and the systems behind each outcome.",
+    href: "/case-studies",
+    cta: "View case studies",
+  },
+];
 ---
 
 <BaseLayout
@@ -16,7 +32,7 @@ const { frontmatter } = Astro.props;
   seoDescription={frontmatter.bio}
 >
   <section>
-    <Wrapper variant="standard" class="py-24 lg:pt-48">
+    <Wrapper variant="standard" class="py-24 lg:pt-48 lg:border-x lg:border-brand-gold">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
         <div class="p-8 bg-base-50 rounded">
           <Kicker class="text-accent-600"> {frontmatter.name}</Kicker>
@@ -52,11 +68,48 @@ const { frontmatter } = Astro.props;
       </div>
     </Wrapper>
   </section>
-  <Wrapper variant="standard" class="pb-24">
+  <Wrapper variant="standard" class="pb-24 lg:border-x lg:border-brand-gold">
     <Wrapper variant="narrow" class="mx-auto">
       <Wrapper variant="prose">
         <slot />
       </Wrapper>
     </Wrapper>
   </Wrapper>
+  <section class="bg-accent-950">
+    <Wrapper variant="standard" class="py-24 lg:border-x lg:border-brand-gold">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+        <div class="lg:col-span-1">
+          <Kicker class="text-base-300">Navigate</Kicker>
+        </div>
+        <div class="lg:col-span-2">
+          <Text tag="h2" variant="displayLG" class="text-white font-medium">
+            Explore our systems and project outcomes
+          </Text>
+        </div>
+      </div>
+      <div class="grid gap-6 lg:gap-8 md:grid-cols-2 mt-12 lg:mt-24">
+        {
+          navCards.map((card) => (
+            <div>
+              <div>
+                <Text tag="h3" variant="textLG" class="font-medium text-base-100">
+                  {card.title}
+                </Text>
+                <Text
+                  tag="p"
+                  variant="textBase"
+                  class="text-base-400 mt-2 text-balance"
+                >
+                  {card.description}
+                </Text>
+              </div>
+              <UnderlinedLink variant="light" href={card.href} class="mt-12">
+                {card.cta}
+              </UnderlinedLink>
+            </div>
+          ))
+        }
+      </div>
+    </Wrapper>
+  </section>
 </BaseLayout>
