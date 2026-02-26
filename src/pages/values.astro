@@ -1,0 +1,100 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+import Text from "@/components/fundations/elements/Text.astro";
+import Kicker from "@/components/fundations/elements/Kicker.astro";
+import Button from "@/components/fundations/elements/Button.astro";
+
+const values = [
+  {
+    letter: "M",
+    title: "Mobilise with Intent",
+    description: "Every job starts structured — with clear scope, systems, and deliverables."
+  },
+  {
+    letter: "E",
+    title: "Engineer for Execution",
+    description: "We build tools that work — on site, under pressure, in real-world projects."
+  },
+  {
+    letter: "S",
+    title: "Simplify Compliance",
+    description: "We make ISO, HSE, and QA practical, auditable, and field-ready."
+  },
+  {
+    letter: "C",
+    title: "Communicate Clearly",
+    description: "No jargon. No confusion. Just clear, direct, professional delivery."
+  },
+  {
+    letter: "O",
+    title: "Own the Outcome",
+    description: "We take responsibility for results — not just advice or templates."
+  }
+];
+
+const seoTitle = "Our Values - MESCo";
+const seoDescription = "Built from experience. Delivered with intent. The core values that underpin every system, document, and project we deliver.";
+---
+
+<BaseLayout
+  seoTitle={seoTitle}
+  seoDescription={seoDescription}
+>
+  <section class="relative bg-brand-blue pt-32 pb-24 overflow-hidden">
+    <Wrapper variant="standard" class="relative z-10">
+      <div class="max-w-3xl">
+        <Kicker class="text-brand-gold mb-4">Our DNA</Kicker>
+        <Text
+          tag="h1"
+          variant="displayLG"
+          class="text-white font-medium tracking-tight mb-8"
+        >
+          Built from experience. <span class="text-brand-gold">Delivered with intent.</span>
+        </Text>
+        <Text tag="p" variant="textLG" class="text-accent-100 max-w-2xl">
+          These values underpin every system, document, and project we deliver. They are the framework for how we operate and the promise we make to our clients.
+        </Text>
+      </div>
+    </Wrapper>
+    
+    <!-- Decorative background element -->
+    <div class="absolute top-0 right-0 -mt-20 -mr-20 w-96 h-96 bg-brand-gold/10 rounded-full blur-3xl pointer-events-none"></div>
+  </section>
+
+  <section class="py-24 bg-white">
+    <Wrapper variant="standard">
+      <div class="flex flex-col gap-16 md:gap-24">
+        {values.map((item, index) => (
+          <div class="group grid md:grid-cols-12 gap-8 items-start p-6 md:p-8 transition-colors duration-300 hover:bg-brand-gold">
+            <div class="md:col-span-3 lg:col-span-2 relative">
+              <Text 
+                tag="span" 
+                variant="display6XL" 
+                class="block text-accent-100 font-bold leading-none opacity-50 group-hover:text-white transition-colors duration-500 select-none transform group-hover:scale-110 origin-left"
+              >
+                {item.letter}
+              </Text>
+              <div class="hidden md:block absolute top-1/2 left-full w-full h-px bg-base-200 group-hover:bg-white/30 -translate-y-1/2 ml-4"></div>
+            </div>
+            
+            <div class="md:col-span-9 lg:col-span-10 flex flex-col justify-center pt-4 md:pt-8 md:pl-8">
+              <div class="flex items-baseline gap-4 mb-4">
+                <span class="text-brand-gold group-hover:text-white font-bold text-xl md:text-2xl">{item.letter}</span>
+                <span class="h-px w-8 bg-brand-gold/50 group-hover:bg-white/50"></span>
+                <Text tag="h2" variant="displayMD" class="text-brand-blue font-semibold group-hover:text-white">
+                  {item.title}
+                </Text>
+              </div>
+              
+              <Text tag="p" variant="textLG" class="text-base-600 group-hover:text-white/90 max-w-3xl">
+                {item.description}
+              </Text>
+            </div>
+          </div>
+        ))}
+      </div>
+    </Wrapper>
+  </section>
+
+</BaseLayout>
