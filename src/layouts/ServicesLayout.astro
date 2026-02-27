@@ -9,12 +9,37 @@ import Button from "@/components/fundations/elements/Button.astro";
 import Wrapper from "@/components/fundations/containers/Wrapper.astro";
 // Components
 import ServiceCard from "@/components/services/ServiceCard.astro";
+import SchemaOrg from "@/components/fundations/head/SchemaOrg.astro";
 // Config
-import { link } from "@/config/site";
+import { link, siteConfig } from "@/config/site";
+import { ORG_ID, SITE_ID } from "@/config/schema";
 // Content
 import { getCollection } from "astro:content";
 const { frontmatter } = Astro.props;
 const allServices = await getCollection("services");
+
+const pageUrl = `${siteConfig.url}${Astro.url.pathname}`;
+const serviceSchema = [
+  {
+    "@type": "Service",
+    "@id": `${pageUrl}#service`,
+    name: frontmatter.title,
+    description: frontmatter.description,
+    provider: { "@id": ORG_ID },
+    url: pageUrl,
+    serviceType: "Engineering and Systems Consulting",
+    areaServed: { "@type": "Country", name: "Australia" },
+    isPartOf: { "@id": SITE_ID },
+  },
+  {
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: `${siteConfig.url}/` },
+      { "@type": "ListItem", position: 2, name: "Services", item: `${siteConfig.url}${link("/services")}` },
+      { "@type": "ListItem", position: 3, name: frontmatter.title, item: pageUrl },
+    ],
+  },
+];
 const latestServices = allServices
   .filter((service) => service.data.title !== frontmatter.title)
   .slice(0, 2);
@@ -25,6 +50,9 @@ const latestServices = allServices
   seoTitle={frontmatter.title}
   seoDescription={frontmatter.description ?? frontmatter.excerpt}
 >
+  <Fragment slot="head">
+    <SchemaOrg schema={serviceSchema} />
+  </Fragment>
   <section class="bg-accent-800">
     <Wrapper
       variant="standard"

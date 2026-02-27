@@ -9,8 +9,10 @@ import Wrapper from "@/components/fundations/containers/Wrapper.astro";
 // Components
 import ProjectCardSmall from "@/components/projects/ProjectCardSmall.astro";
 import Button from "@/components/fundations/elements/Button.astro";
+import SchemaOrg from "@/components/fundations/head/SchemaOrg.astro";
 // Config
-import { link } from "@/config/site";
+import { link, siteConfig } from "@/config/site";
+import { ORG_ID, SITE_ID } from "@/config/schema";
 // Content
 import { getCollection } from "astro:content";
 const { frontmatter } = Astro.props;
@@ -21,6 +23,33 @@ const allProjects = await getCollection("projects");
 const latestProjects = allProjects
   .filter((project) => project.data.title !== frontmatter.title)
   .slice(0, 3);
+
+const pageUrl = `${siteConfig.url}${Astro.url.pathname}`;
+const projectSchema = [
+  {
+    "@type": "Article",
+    "@id": `${pageUrl}#article`,
+    headline: frontmatter.title,
+    description: frontmatter.description,
+    author: { "@id": ORG_ID },
+    publisher: { "@id": ORG_ID },
+    url: pageUrl,
+    isPartOf: { "@id": SITE_ID },
+    ...(frontmatter.year ? { datePublished: String(frontmatter.year) } : {}),
+    ...(frontmatter.client ? { sourceOrganization: frontmatter.client } : {}),
+    ...(frontmatter.category
+      ? { about: { "@type": "Thing", name: frontmatter.category } }
+      : {}),
+  },
+  {
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: `${siteConfig.url}/` },
+      { "@type": "ListItem", position: 2, name: "Case Studies", item: `${siteConfig.url}${link("/case-studies")}` },
+      { "@type": "ListItem", position: 3, name: frontmatter.title, item: pageUrl },
+    ],
+  },
+];
 ---
 
 <BaseLayout

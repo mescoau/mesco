@@ -23,6 +23,7 @@ const {
 <html lang="en" class="scroll-smooth">
   <head>
     <BaseHead title={seoTitle} description={seoDescription} />
+    <slot name="head" />
   </head>
   <body class="flex flex-col bg-white min-h-dvh">
     {

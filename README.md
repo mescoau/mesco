@@ -1,6 +1,6 @@
 # MESCo Website
 
-**McPhee Engineering Systems Co (MESCo)** — [mesco.com.au](https://mesco.com.au)
+**McPhee Engineering Systems Co (MESCo)** — [mesco.au](https://mesco.au)
 
 Custom website designed and built by **Josh Withers** of **[Unpopular](https://unpopular.au)**.
 For technical questions, contact Josh Withers [josh@jwithers.co](mailto:josh@joshwithers.au).
@@ -300,7 +300,7 @@ The site builds to fully static files in `./dist/`. It requires no server runtim
 1. Run `npm install` then `npm run build`
 2. Upload the contents of `./dist/` to your host
 
-**Sitemap:** Auto-generated at `/sitemap-index.xml` during build. The site URL is configured in `astro.config.mjs` — update `site: "https://mesco.com.au"` if the domain changes.
+**Sitemap:** Auto-generated at `/sitemap-index.xml` during build. The site URL is configured in `astro.config.mjs` — update `site: "https://mesco.au"` if the domain changes.
 
 ---
 
