@@ -20,10 +20,11 @@ const team = defineCollection({
     }),
 });
 const legal = defineCollection({
-  schema: z.object({
-    page: z.string(),
-    pubDate: z.date(),
-  }),
+  schema: () =>
+    z.object({
+      page: z.string(),
+      pubDate: z.date(),
+    }),
 });
 
 const services = defineCollection({
