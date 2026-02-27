@@ -7,6 +7,8 @@ import Button from "@/components/fundations/elements/Button.astro";
 import Wrapper from "@/components/fundations/containers/Wrapper.astro";
 // Config
 import { link, siteConfig } from "@/config/site";
+import { Image } from "astro:assets";
+import footerFallback from "@/images/failsafe-footer.jpg";
 type LinkItem = {
   label: string;
   href: string;
@@ -67,6 +69,11 @@ const contactDetails = {
   <div class="absolute inset-0 z-0 pointer-events-none">
     <video autoplay muted loop playsinline class="size-full object-cover">
       <source src="/footer.mp4" type="video/mp4" />
+      <Image
+        src={footerFallback}
+        alt="Mining and infrastructure project site"
+        class="size-full object-cover"
+      />
     </video>
     <div class="absolute inset-0 bg-accent-950/75"></div>
   </div>

@@ -3,6 +3,8 @@
 import Text from "@/components/fundations/elements/Text.astro";
 import Kicker from "@/components/fundations/elements/Kicker.astro";
 import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+import { Image } from "astro:assets";
+import heroFallback from "@/images/failsafe-hero.jpg";
 const stats = [
   { value: "Systems-first", label: "Approach from mobilisation to close-out" },
   { value: "Audit-ready", label: "Documentation and compliance" },
@@ -26,6 +28,11 @@ const stats = [
       class="size-full object-cover"
     >
       <source src="/hero.mp4" type="video/mp4" />
+      <Image
+        src={heroFallback}
+        alt="Civil engineering and infrastructure project site"
+        class="size-full object-cover"
+      />
     </video>
     <div
       aria-hidden="true"
