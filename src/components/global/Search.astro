@@ -5,6 +5,7 @@ import Button from "@/components/fundations/elements/Button.astro";
 import Close from "@/components/fundations/icons/Close.astro";
 import SearchIcon from "@/components/fundations/icons/Search.astro";
 import { getCollection } from "astro:content";
+import { link } from "@/config/site";
 
 const [services, projects, team, legal] = await Promise.all([
   getCollection("services"),
@@ -19,7 +20,7 @@ const searchItems = [
     title: item.data.title,
     description: item.data.excerpt ?? item.data.description,
     meta: item.data.highlights?.join(", "),
-    url: `/services/${item.slug}`,
+    url: link(`/services/${item.slug}`),
   })),
   ...projects.map((item) => ({
     type: "Case Study",
@@ -33,14 +34,14 @@ const searchItems = [
     ]
       .filter(Boolean)
       .join(" • "),
-    url: `/case-studies/${item.slug}`,
+    url: link(`/case-studies/${item.slug}`),
   })),
   ...team.map((item) => ({
     type: "Team",
     title: item.data.name,
     description: item.data.bio,
     meta: item.data.role,
-    url: `/team/${item.slug}`,
+    url: link(`/team/${item.slug}`),
   })),
   ...legal.map((item) => ({
     type: "Legal",
@@ -48,7 +49,7 @@ const searchItems = [
     description:
       item.data.pubDate?.toISOString?.().split("T")[0] || "Legal notice",
     date: item.data.pubDate,
-    url: `/legal/${item.slug}`,
+    url: link(`/legal/${item.slug}`),
   })),
 ];
 ---
