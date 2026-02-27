@@ -1,167 +1,260 @@
-# Bastion
+# MESCo Website
 
-## Template Integrations
+**McPhee Engineering Systems Co (MESCo)** — [mesco.com.au](https://mesco.com.au)
 
-- Tailwind CSS v4
-- Astro SEO - Powered by [@astrolib/seo](https://github.com/onwidget/astrolib/tree/main/packages/seo)
-- Astro Sitemap - https://docs.astro.build/en/guides/integrations-guide/sitemap/
+Custom website designed and built by **Josh Withers** of **[Unpopular](https://unpopular.au)**.
+For technical questions, contact Josh at [josh@unpopular.au](mailto:josh@unpopular.au) or [josh@joshwithers.au](mailto:josh@joshwithers.au).
 
-## Template Structure
+---
 
-The template follows a typical Astro project structure. You'll find the following key directories and files:
+## Tech Stack
+
+| Technology | Purpose |
+|---|---|
+| [Astro](https://astro.build) | Static site framework |
+| [Tailwind CSS v4](https://tailwindcss.com) | Utility-first styling (via Vite plugin) |
+| [@tailwindcss/forms](https://github.com/tailwindlabs/tailwindcss-forms) | Form element base styles |
+| [@astrojs/mdx](https://docs.astro.build/en/guides/integrations-guide/mdx/) | MDX support for content |
+| [@astrojs/sitemap](https://docs.astro.build/en/guides/integrations-guide/sitemap/) | Auto-generated sitemap |
+| [@astrolib/seo](https://github.com/onwidget/astrolib/tree/main/packages/seo) | SEO meta tags |
+
+The site compiles to fully static HTML/CSS/JS — no server required.
+
+---
+
+## Project Structure
 
 ```
 /
 ├── public/
+│   ├── brand/          # Logo files and brand guidelines PDF (served at /brand/*)
+│   └── *.mp4           # Background video assets (hero, footer, etc.)
 ├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+│   ├── components/     # Reusable UI components
+│   │   ├── assets/     # Logo, AnimatedLogo
+│   │   ├── contact/    # Contact page sections
+│   │   ├── fundations/ # Base elements (Button, Text, Kicker, Wrapper, icons)
+│   │   ├── global/     # Navigation, Footer
+│   │   └── landing/    # Homepage sections
+│   ├── content/        # Content collections (see below)
+│   ├── images/         # Images imported via Astro image processing
+│   ├── layouts/        # Page layout wrappers
+│   ├── pages/          # Routes (each file = a URL)
+│   ├── styles/
+│   │   └── global.css  # Tailwind theme, CSS variables, font config
+│   └── types/          # TypeScript type definitions
+├── astro.config.mjs
+├── package.json
+└── tsconfig.json
 ```
 
-- `src/pages/`: Contains `.astro` and `.md` files. Each file becomes a route in your project based on its name.
-- `src/components/`: Ideal for placing your Astro/React/Vue/Svelte/Preact components.
-- `public/`: For static assets such as images that you want to serve directly.
+---
 
 ## Commands
 
-All commands are run from the root of the project, from a terminal:
+Run from the project root:
 
-| Command                | Action                                           |
-| :--------------------- | :----------------------------------------------- |
-| `npm install`          | Installs dependencies                            |
-| `npm run dev`          | Starts local dev server at `localhost:3000`      |
-| `npm run build`        | Build your production site to `./dist/`          |
-| `npm run preview`      | Preview your build locally, before deploying     |
-| `npm run astro ...`    | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro --help` | Get help using the Astro CLI                     |
-
-Learn more - Explore more through Astro's official [documentation](https://docs.astro.build).
-
----
-## Components
-
-- Reusable components
-  This template now includes reusable components, such as the `Text` component:
-
-- Text Component  
-  A versatile and reusable component for handling text across your project, ensuring consistency and easy customization.
-
-- **HTML Tags:** Easily change the HTML element (like `p`, `h1`, `span`, `a`) using the `tag` prop, with `p` being the default.
-- **Variants:** Pick from preset text styles (such as `displayXL` or `textBase`) for a consistent look.
-- **Custom Classes:** Add or adjust styles with the `class` prop.
-- **Accessibility:** Customize with additional props like `id`, `href`, `title`, and `style`.
-- **Content Slot:** Add any content inside the component, including optional left and right icons.
-  Example usage:
-
-```astro
-<Text tag="h1" variant="displayXL" class="text-center">
-  Welcome to the new version!
-</Text>
-```
-
-- Kicker Component  
-  A small uppercase label for sections or banners.
-
-- **Base styles:** Uppercase, `textSM` variant, `font-medium`.
-- **Custom color:** Pass a `class` prop to set text color (or other utilities) while keeping the base casing/weight.
-- **Content Slot:** Place your label text inside.
-  Example usage:
-
-```astro
-<Kicker class="text-accent-500">Built for you</Kicker>
-```
-
-- Button Component  
-  A customizable button component with options to fit your design needs:
-
-- **Variants:** Choose from predefined styles like `default` (dark background) and `secondary` (lighter background), with support for dark mode.
-- **Sizes:** Select `small` or `medium` for different button heights and padding.
-- **Gaps:** Control the spacing between content with the `gapSize` prop (either `small` or `medium`).
-- **Custom Classes:** Apply additional styles using the `class` prop.
-- **Slots:** Include icons or extra content with optional `left-icon` and `right-icon` slots.  
-  Example usage:
-
-```astro
-<!-- Default button -->
-<Button size="small" variant="default">Default small</Button>
-<!-- Button with icon -->
-<Button iconOnly size="small" variant="default">·</Button>
-<!-- Button as link -->
-<Button isLink={true} href="#_" size="small" variant="default">Default small</Button>
-```
-
-- UnderlinedLink Component  
-  An inline link with an animated underline and optional theme.
-
-- **Variants:** `dark` (default, dark text) or `light` (light text) controlled via the `variant` prop.
-- **Custom Classes:** Add more styling with the `class` prop.
-- **Underline hover:** Underline animates on hover and text shifts to the secondary color.
-  Example usage:
-
-```astro
-<UnderlinedLink href="/about" variant="light" class="text-lg">
-  Learn more
-</UnderlinedLink>
-```
-
-- Logo Component  
-  SVG logo that inherits `currentColor` so you can recolor it via text utilities.
-
-- **Sizing/Color:** Use the `class` prop to control height/width and text color (e.g., `text-white` or `text-base-900`).
-- **Additional props:** Any other props are passed to the `<svg>` (e.g., `aria-label`, `role`).
-  Example usage:
-
-```astro
-<Logo class="h-10 w-auto text-white" aria-label="Bastion logo" />
-```
-
-- Wrapper Component  
-  A flexible layout component that helps with consistent spacing and alignment.
-
-- **Variants:** The default `standard` variant includes responsive widths, centered content, and padding.
-- **Custom Classes:** Add or change styles with the `class` prop.
-- **Content Slot:** Easily add any child components or content inside.
-
-```astro
-<Wrapper variant="standard">
-Your content goes here
-</Wrapper>
-```
-
-## Navigation transparency
-
-The main navigation supports an opt-in transparent mode that swaps colors on scroll.
-
-- Default: solid white navigation on all pages.
-- Transparent (opt-in): pass a flag on the page layout.
-
-Enable transparent nav on a page
-
-```astro
----
-import BaseLayout from "@/layouts/BaseLayout.astro";
----
-
-<BaseLayout navTransparent={true}>
-  <!-- page content -->
-</BaseLayout>
-```
-
-Force solid nav (explicit)
-
-```astro
-<BaseLayout navTransparent={false}>
-  <!-- page content -->
-</BaseLayout>
-```
-
-Notes
-- `BaseLayout` forwards the flag to `Navigation`, which handles scroll-based color swapping for the logo, links, and mobile icons.
-- If you render `Navigation` directly (outside the layout), it also supports `<Navigation transparent={true} />`.
+| Command | Action |
+|---|---|
+| `npm install` | Install dependencies |
+| `npm run dev` | Start local dev server at `localhost:4321` |
+| `npm run build` | Build the production site to `./dist/` |
+| `npm run preview` | Preview the production build locally |
+| `npm run astro check` | Type-check the project |
 
 ---
 
-### [Support](https://lexingtonthemes.com/legal/support/)
-### [Documentation](https://lexingtonthemes.com/documentation/)
-### [Get your bundle](https://lexingtonthemes.com)
+## Content Collections
+
+Content is managed via Astro Content Collections in `src/content/`. Each collection is a folder of Markdown files with a defined front matter schema.
+
+The schema is defined in `src/content/config.ts`.
+
+---
+
+### `services` — `src/content/services/`
+
+One file per service offering. Slug becomes the URL: `/services/<slug>`.
+
+```yaml
+---
+featured: true                          # boolean (optional) — show on homepage/featured lists
+title: Project Start-Up Services        # string — page title and card heading
+description: >                          # string — full description (used in meta and page intro)
+  Systems, registers and procedures...
+excerpt: Move from blank page to...     # string (optional) — short card teaser
+image:
+  url: "/src/images/services/file.png"  # image path (Astro image processing)
+  alt: "Alt text for the image"         # string
+highlights:                             # string[] (optional) — bullet points shown on cards
+  - Management plans and project procedures
+  - QA/QC frameworks
+---
+
+Page body content in Markdown...
+```
+
+---
+
+### `projects` — `src/content/projects/`
+
+One file per case study. Slug becomes the URL: `/case-studies/<slug>`.
+
+```yaml
+---
+featured: true                          # boolean (optional)
+title: Paraburdoo Airport Asphalt Overlay
+description: >                          # string — meta description and intro
+  On-site QA/QC engineering support...
+client: DTI on behalf of Rio Tinto      # string (optional)
+location: Paraburdoo, WA (Pilbara)      # string (optional)
+year: 2024                              # number or string (optional)
+duration: 6 months                      # string (optional)
+scope: Asphalt overlay, QA/QC...        # string (optional)
+category: Infrastructure & Transport    # string (optional) — used for filtering
+services:                               # string[] (optional) — related service names
+  - Project Start-Up Services
+cover:
+  url: "/src/images/folder/image.jpg"   # image path (Astro image processing)
+  alt: "Alt text"
+gallery:                                # array (optional) — additional images
+  - url: "/src/images/folder/img2.jpg"
+    alt: "Gallery image alt"
+galleryDir: "/src/images/folder"        # string (optional) — auto-load all images from dir
+metrics:                                # array (optional) — stat callouts on project page
+  - label: "Duration"
+    value: "6 months"
+  - label: "Audit findings"
+    value: "Zero"
+---
+
+Page body content in Markdown...
+```
+
+---
+
+### `team` — `src/content/team/`
+
+One file per team member. Slug becomes the URL: `/team/<slug>`.
+
+```yaml
+---
+name: Adrian McPhee                     # string
+role: Director, HSE & Compliance Systems  # string (optional)
+bio: >                                  # string (optional) — short bio for cards
+  A safety and operations professional...
+image:
+  url: "/src/images/adrian.png"         # image path (Astro image processing)
+  alt: "Adrian McPhee — Director..."
+socials:                                # array (optional) — links shown on profile
+  - label: Email
+    href: "mailto:adrian@mesco.au"
+  - label: LinkedIn
+    href: "https://linkedin.com/in/..."
+---
+
+Full profile content in Markdown...
+```
+
+---
+
+### `industries` — `src/content/industries/`
+
+One file per industry. Rendered on the `/industries` page.
+
+```yaml
+---
+title: Civil Construction               # string
+description: >                          # string — shown on industry cards
+  Civil construction projects...
+order: 1                                # number (optional) — sort order on the page
+focus: >                                # string (optional) — "MESCo's focus" callout
+  Translating specifications into...
+typicalProjects: >                      # string (optional) — example project types
+  Civil infrastructure works...
+---
+```
+
+No page body is used for industries — all content is in front matter.
+
+---
+
+### `legal` — `src/content/legal/`
+
+One file per legal page (`privacy.md`, `terms.md`, `cookies.md`). Rendered via `/legal/<slug>`.
+
+```yaml
+---
+page: Privacy                           # string — page title
+pubDate: 2026-02-27                     # date — last updated date (YYYY-MM-DD)
+---
+
+Full legal text in Markdown...
+```
+
+---
+
+## Contact Form
+
+The contact form is at `src/components/contact/Form.astro`.
+
+**Form fields:**
+
+| Field | Name | Type | Required |
+|---|---|---|---|
+| Name | `name` | text | Yes |
+| Company | `company` | text | No |
+| Role | `role` | text | No |
+| Email | `email` | email | Yes |
+| Phone | `phone` | tel | No |
+| Project Stage | `project_stage` | select | No |
+| Services of Interest | `services` | checkbox (multiple) | No |
+| Preferred Contact Method | `preferred_contact` | radio | No |
+| Project Summary / Enquiry | `message` | textarea | No |
+
+**Form action:**
+
+The form currently posts to:
+
+```
+https://forms-backend.withersco.workers.dev/api/forms/mesco
+```
+
+This is a Cloudflare Workers endpoint maintained by Josh Withers. It receives form submissions and forwards them to MESCo. If MESCo or a future administrator needs to change this — for example to use a different form backend, Formspree, or a self-hosted solution — update the `action` attribute on the `<form>` element in `src/components/contact/Form.astro`.
+
+---
+
+## Brand Assets
+
+Brand assets (logos, PDFs, AI/EPS source files) are served statically from `public/brand/`. They are accessible at `/brand/<filename>` and linked from the brand reference page at `/brand`.
+
+The full brand guidelines PDF is at `/brand/brand-guidelines.pdf`.
+
+---
+
+## Hosting Requirements
+
+The site builds to fully static files in `./dist/`. It requires no server runtime, no database, and no Node.js in production.
+
+**Minimum hosting requirements:**
+- Static file hosting (Netlify, Cloudflare Pages, Vercel, AWS S3 + CloudFront, or any web host)
+- HTTPS (required — form submissions and modern browser features depend on it)
+- Ability to serve a custom 404 page (`dist/404.html`)
+- No PHP, no server-side processing required
+
+**Recommended:** Cloudflare Pages or Netlify — both support automatic builds from a Git repository, custom domains, and HTTPS out of the box.
+
+**To deploy manually:**
+1. Run `npm install` then `npm run build`
+2. Upload the contents of `./dist/` to your host
+
+**Sitemap:** Auto-generated at `/sitemap-index.xml` during build. The site URL is configured in `astro.config.mjs` — update `site: "https://mesco.com.au"` if the domain changes.
+
+---
+
+## Architect
+
+**Josh Withers**
+[Unpopular](https://unpopular.au) — Perth, WA
+[josh@unpopular.au](mailto:josh@unpopular.au)
+[joshwithers.au](https://joshwithers.au)

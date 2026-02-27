@@ -1,0 +1,56 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+import Text from "@/components/fundations/elements/Text.astro";
+import Button from "@/components/fundations/elements/Button.astro";
+import Logo from "@/components/assets/Logo.astro";
+---
+
+<BaseLayout
+  hideNavigation={true}
+  hideFooter={true}
+  seoTitle="Message Received"
+  seoDescription="Thank you for contacting MESCo."
+>
+  <div class="min-h-dvh bg-accent-500 flex flex-col">
+
+    <Wrapper variant="standard" class="py-8">
+      <a href="/" aria-label="MESCo home">
+        <Logo class="h-10 w-auto text-white" />
+      </a>
+    </Wrapper>
+
+    <Wrapper variant="standard" class="flex-1 flex flex-col justify-center py-20">
+      <div class="max-w-xl">
+        <Text tag="p" variant="textSM" class="text-brand-gold font-medium uppercase tracking-widest">
+          Message received
+        </Text>
+        <Text tag="h1" variant="display2XL" class="mt-4 text-white font-medium">
+          We'll be in touch shortly.
+        </Text>
+        <Text tag="p" variant="textLG" class="mt-6 text-accent-200">
+          One of our directors will respond within one business day. In the meantime, feel free to explore our work.
+        </Text>
+
+        <div class="mt-12 flex flex-col sm:flex-row gap-3">
+          <Button isLink size="base" variant="muted" href="/case-studies">
+            Case Studies
+          </Button>
+          <Button isLink size="base" variant="default" href="/services">
+            Our Services
+          </Button>
+          <Button isLink size="base" variant="default" href="/about">
+            About MESCo
+          </Button>
+        </div>
+      </div>
+    </Wrapper>
+
+    <Wrapper variant="standard" class="py-8 border-t border-accent-400">
+      <Text tag="p" variant="textXS" class="text-accent-400">
+        © {new Date().getFullYear()} McPhee Engineering Systems Co (MESCo). All rights reserved.
+      </Text>
+    </Wrapper>
+
+  </div>
+</BaseLayout>

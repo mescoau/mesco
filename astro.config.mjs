@@ -18,5 +18,11 @@ export default defineConfig({
     drafts: true,
   },
   site: "https://mesco.com",
-  integrations: [tailwindcss(), sitemap(), mdx()],
+  integrations: [
+    tailwindcss(),
+    sitemap({
+      filter: (page) => !page.includes("/thank-you"),
+    }),
+    mdx(),
+  ],
 });
