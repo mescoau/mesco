@@ -12,7 +12,7 @@
  *                       (must match the `trailingSlash` option in astro.config.mjs)
  */
 export const siteConfig = {
-  url: "https://mesco.au",
+  url: "https://mesco.pages.dev",
   trailingSlash: false,
 } as const;
 
