@@ -57,6 +57,9 @@ const projectSchema = [
   seoTitle={frontmatter.title}
   seoDescription={frontmatter.description}
 >
+  <Fragment slot="head">
+    <SchemaOrg schema={projectSchema} />
+  </Fragment>
   <section class="bg-accent-800">
     <Wrapper
       variant="standard"
