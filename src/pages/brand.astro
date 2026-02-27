@@ -54,6 +54,8 @@ const downloadAssets = [
   { format: "JPG",  variant: "White on banner",     colourspace: "RGB",  useCase: "Banners / signage",      file: "mesco_jpg_white-on-banner.jpg"     },
   { format: "PNG",  variant: "Blue on white",       colourspace: "RGB",  useCase: "Social media profile",   file: "mesco_png_social_blue-on-white.png"},
   { format: "PNG",  variant: "White on blue",       colourspace: "RGB",  useCase: "Social media profile",   file: "mesco_png_social_white-on-blue.png"},
+  { format: "PNG",  variant: "Profile picture",     colourspace: "RGB",  useCase: "Profile picture",        file: "mesco_profile_pic.png"             },
+  { format: "SVG",  variant: "Profile picture",     colourspace: "RGB",  useCase: "Profile picture",        file: "mesco_profile_pic.svg"             },
   { format: "PDF",  variant: "CMYK",                colourspace: "CMYK", useCase: "Print / press-ready",    file: "mesco_pdf_cmyk.pdf"                },
   { format: "PDF",  variant: "RGB",                 colourspace: "RGB",  useCase: "Print / digital",        file: "mesco_pdf_rgb.pdf"                 },
   { format: "AI",   variant: "CMYK",                colourspace: "CMYK", useCase: "Print / Illustrator",    file: "mesco_ai_cmyk.ai"                  },
@@ -97,7 +99,7 @@ const downloadAssets = [
         The MESCo logo is available in multiple formats for web, print, signage, and social media.
       </Text>
 
-      <div class="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-4">
+      <div class="mt-12 grid grid-cols-1 lg:grid-cols-3 gap-4">
         <!-- Dark background -->
         <div class="bg-accent-500 rounded-2xl p-16 flex flex-col items-center gap-8">
           <Text tag="p" variant="textXS" class="text-accent-300 uppercase tracking-widest">
@@ -124,6 +126,14 @@ const downloadAssets = [
           >
             Replay animation
           </button>
+        </div>
+
+        <!-- Profile picture -->
+        <div class="bg-base-100 border border-base-200 rounded-2xl p-16 flex flex-col items-center gap-8">
+          <Text tag="p" variant="textXS" class="text-base-400 uppercase tracking-widest">
+            Profile picture
+          </Text>
+          <img src="/brand/mesco_profile_pic.png" alt="MESCo profile picture" class="h-20 w-20 rounded-full object-cover" />
         </div>
       </div>
 
@@ -410,6 +420,8 @@ const downloadAssets = [
             {[
               { label: "Blue on white", file: "mesco_png_social_blue-on-white.png" },
               { label: "White on blue", file: "mesco_png_social_white-on-blue.png" },
+              { label: "Profile picture (PNG)", file: "mesco_profile_pic.png" },
+              { label: "Profile picture (SVG)", file: "mesco_profile_pic.svg" },
             ].map((a) => (
               <a
                 href={`/brand/${a.file}`}

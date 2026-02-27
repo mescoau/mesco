@@ -3,7 +3,58 @@
 **McPhee Engineering Systems Co (MESCo)** — [mesco.com.au](https://mesco.com.au)
 
 Custom website designed and built by **Josh Withers** of **[Unpopular](https://unpopular.au)**.
-For technical questions, contact Josh at [josh@unpopular.au](mailto:josh@unpopular.au) or [josh@joshwithers.au](mailto:josh@joshwithers.au).
+For technical questions, contact Josh Withers [josh@jwithers.co](mailto:josh@joshwithers.au).
+
+---
+
+## How this website works
+
+This website is built with **Astro**, a modern static site framework. Understanding two tools is all you need to work on it: **Node.js** and **Astro**.
+
+### Node.js
+
+[Node.js](https://nodejs.org) is a JavaScript runtime that runs on your computer (not in the browser). It is the engine that powers the build process — it reads the source files, processes them, and outputs a finished website.
+
+You don't need to know how to write Node.js code. You just need it installed on your machine so the build tools can run. Download and install it from [nodejs.org](https://nodejs.org) — install the LTS (Long Term Support) version.
+
+Once Node.js is installed, you get access to `npm` (Node Package Manager), which is the command-line tool used to install this project's dependencies and run build commands.
+
+To verify Node.js is installed correctly, run:
+
+```bash
+node --version
+npm --version
+```
+
+Both should print a version number.
+
+### Astro
+
+[Astro](https://astro.build) is the framework this website is built on. It takes the source files in `src/` — pages, components, content, images — and compiles them into a folder of plain HTML, CSS, and JavaScript files ready to put on a web server.
+
+Astro pages and components use `.astro` files, which look like HTML with a JavaScript frontmatter block at the top (between the `---` lines). Content is written in Markdown (`.md` files) inside `src/content/`.
+
+You do not need to understand Astro deeply to update content. The content collections (services, case studies, team, industries, legal) are all plain Markdown files with structured front matter — no code knowledge required to edit them.
+
+### The build process in plain English
+
+1. You write or edit source files in `src/`
+2. You run `npm run build` in your terminal from the project folder
+3. Astro reads all the source files and outputs a complete website into `./dist/`
+4. You upload the contents of `./dist/` to your web host
+
+The `./dist/` folder is the actual website — plain files a browser can read. Nothing in `src/` is ever uploaded to a web server.
+
+### Working locally
+
+To preview the website on your own machine before building:
+
+1. Open a terminal and navigate to the project folder
+2. Run `npm install` (only needed once, or after pulling new changes)
+3. Run `npm run dev`
+4. Open `http://localhost:4321` in your browser
+
+Changes to source files will live-reload in the browser automatically.
 
 ---
 
@@ -18,7 +69,7 @@ For technical questions, contact Josh at [josh@unpopular.au](mailto:josh@unpopul
 | [@astrojs/sitemap](https://docs.astro.build/en/guides/integrations-guide/sitemap/) | Auto-generated sitemap |
 | [@astrolib/seo](https://github.com/onwidget/astrolib/tree/main/packages/seo) | SEO meta tags |
 
-The site compiles to fully static HTML/CSS/JS — no server required.
+The site compiles to fully static HTML/CSS/JS — no server required, this is a static site.
 
 ---
 
@@ -29,6 +80,7 @@ The site compiles to fully static HTML/CSS/JS — no server required.
 ├── public/
 │   ├── brand/          # Logo files and brand guidelines PDF (served at /brand/*)
 │   └── *.mp4           # Background video assets (hero, footer, etc.)
+│   └── favicons        # Browser favicon assets and default.jpg Opengraph image
 ├── src/
 │   ├── components/     # Reusable UI components
 │   │   ├── assets/     # Logo, AnimatedLogo
