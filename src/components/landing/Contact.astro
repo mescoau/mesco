@@ -15,8 +15,8 @@ const contactDetails = [
   },
   {
     label: "Phone",
-    value: ["+61 409 729 303"],
-    href: "tel:+61409729303",
+    value: [siteConfig.phone],
+    href: `tel:${siteConfig.phone.replace(/[^\d+]/g, "")}`,
   },
   {
     label: "Email",
