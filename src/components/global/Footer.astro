@@ -41,7 +41,10 @@ const linkSections: LinkSection[] = [
     links: [
       { label: "Case Studies", href: "/case-studies" },
       { label: "Services", href: "/services" },
+      { label: "Brand Assets", href: "/brand" },
       { label: "Privacy", href: "/legal/privacy" },
+      { label: "Terms", href: "/legal/terms" },
+      { label: "Cookies", href: "/legal/cookies" },
     ],
   },
 ];
@@ -53,11 +56,7 @@ const contactDetails = {
   hours: ["Mon-Fri: 8:00 AM - 5:00 PM"],
 };
 
-const legalLinks: LinkItem[] = [
-  { label: "Privacy", href: "/legal/privacy" },
-  { label: "Terms", href: "/legal/terms" },
-  { label: "Cookies", href: "/legal/cookies" },
-];
+
 ---
 
 <footer class="relative isolate overflow-hidden bg-accent-950 text-base-100">
@@ -132,7 +131,7 @@ const legalLinks: LinkItem[] = [
         ))
       }
 
-      <div>
+      <!-- <div>
         <Text tag="p" variant="textXS" class="uppercase font-medium text-white">
           Contact
         </Text>
@@ -146,7 +145,7 @@ const legalLinks: LinkItem[] = [
             </p>
           </address>
         </div>
-      </div>
+      </div> -->
     </div>
 
     <div class="border-t border-brand-gold pt-8 -mx-8 px-8">
@@ -160,15 +159,6 @@ const legalLinks: LinkItem[] = [
           <Text tag="p" variant="textXS" class="text-base-400 credit-text">
             Another <a href="https://unpopular.au" target="_blank" rel="noopener noreferrer" class="credit-link">Unpopular</a> website by <a href="https://joshwithers.au" target="_blank" rel="noopener noreferrer" class="credit-link">Josh Withers</a>
           </Text>
-        </div>
-        <div class="flex flex-wrap gap-4 text-white text-sm">
-          {
-            legalLinks.map((link) => (
-              <a href={link.href} class="hover:text-accent-300 transition">
-                {link.label}
-              </a>
-            ))
-          }
         </div>
       </div>
     </div>

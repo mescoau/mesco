@@ -1,0 +1,483 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+import Text from "@/components/fundations/elements/Text.astro";
+import Kicker from "@/components/fundations/elements/Kicker.astro";
+import Button from "@/components/fundations/elements/Button.astro";
+import Logo from "@/components/assets/Logo.astro";
+import AnimatedLogo from "@/components/assets/AnimatedLogo.astro";
+import Plus from "@/components/fundations/icons/Plus.astro";
+
+const primaryColors = [
+  { name: "Brand Blue", hex: "#04203E", bg: "bg-accent-500", text: "text-white" },
+  { name: "Brand Gold", hex: "#BE9B48", bg: "bg-brand-gold", text: "text-white" },
+  { name: "White", hex: "#F9FDFE", bg: "bg-white border border-base-200", text: "text-base-900" },
+  { name: "Black", hex: "#0F171F", bg: "bg-black", text: "text-white" },
+];
+
+const accentScale = [
+  { name: "50",  hex: "#e6e9ec", class: "bg-accent-50",  label: "accent-50"  },
+  { name: "100", hex: "#b9c1c9", class: "bg-accent-100", label: "accent-100" },
+  { name: "200", hex: "#8c98a6", class: "bg-accent-200", label: "accent-200" },
+  { name: "300", hex: "#5e7083", class: "bg-accent-300", label: "accent-300" },
+  { name: "400", hex: "#314861", class: "bg-accent-400", label: "accent-400" },
+  { name: "500", hex: "#04203E", class: "bg-accent-500", label: "accent-500" },
+  { name: "600", hex: "#031931", class: "bg-accent-600", label: "accent-600" },
+  { name: "700", hex: "#021224", class: "bg-accent-700", label: "accent-700" },
+  { name: "800", hex: "#010c16", class: "bg-accent-800", label: "accent-800" },
+  { name: "900", hex: "#010509", class: "bg-accent-900", label: "accent-900" },
+  { name: "950", hex: "#04203e", class: "bg-accent-950", label: "accent-950" },
+];
+
+const baseScale = [
+  { name: "50",  class: "bg-base-50",  label: "base-50"  },
+  { name: "100", class: "bg-base-100", label: "base-100" },
+  { name: "200", class: "bg-base-200", label: "base-200" },
+  { name: "300", class: "bg-base-300", label: "base-300" },
+  { name: "400", class: "bg-base-400", label: "base-400" },
+  { name: "500", class: "bg-base-500", label: "base-500" },
+  { name: "600", class: "bg-base-600", label: "base-600" },
+  { name: "700", class: "bg-base-700", label: "base-700" },
+  { name: "800", class: "bg-base-800", label: "base-800" },
+  { name: "900", class: "bg-base-900", label: "base-900" },
+  { name: "950", class: "bg-base-950", label: "base-950" },
+];
+
+const downloadAssets = [
+  { format: "SVG",  variant: "Blue",                colourspace: "RGB",  useCase: "Web / digital",          file: "mesco_svg_blue.svg"                },
+  { format: "SVG",  variant: "White",               colourspace: "RGB",  useCase: "Web / digital",          file: "mesco_svg_white.svg"               },
+  { format: "PNG",  variant: "Blue (transparent)",  colourspace: "RGB",  useCase: "Web / overlay",          file: "mesco_png_blue-on-transparent.png" },
+  { format: "PNG",  variant: "White (transparent)", colourspace: "RGB",  useCase: "Web / overlay",          file: "mesco_png_white-on-transparent.png"},
+  { format: "PNG",  variant: "Blue on banner",      colourspace: "RGB",  useCase: "Banners / signage",      file: "mesco_png_blue-on-banner.png"      },
+  { format: "PNG",  variant: "White on banner",     colourspace: "RGB",  useCase: "Banners / signage",      file: "mesco_png_white-on-banner.png"     },
+  { format: "JPG",  variant: "Blue on banner",      colourspace: "RGB",  useCase: "Banners / signage",      file: "mesco_jpg_blue-on-banner.jpg"      },
+  { format: "JPG",  variant: "White on banner",     colourspace: "RGB",  useCase: "Banners / signage",      file: "mesco_jpg_white-on-banner.jpg"     },
+  { format: "PNG",  variant: "Blue on white",       colourspace: "RGB",  useCase: "Social media profile",   file: "mesco_png_social_blue-on-white.png"},
+  { format: "PNG",  variant: "White on blue",       colourspace: "RGB",  useCase: "Social media profile",   file: "mesco_png_social_white-on-blue.png"},
+  { format: "PDF",  variant: "CMYK",                colourspace: "CMYK", useCase: "Print / press-ready",    file: "mesco_pdf_cmyk.pdf"                },
+  { format: "PDF",  variant: "RGB",                 colourspace: "RGB",  useCase: "Print / digital",        file: "mesco_pdf_rgb.pdf"                 },
+  { format: "AI",   variant: "CMYK",                colourspace: "CMYK", useCase: "Print / Illustrator",    file: "mesco_ai_cmyk.ai"                  },
+  { format: "AI",   variant: "RGB",                 colourspace: "RGB",  useCase: "Digital / Illustrator",  file: "mesco_ai_rgb.ai"                   },
+  { format: "EPS",  variant: "CMYK",                colourspace: "CMYK", useCase: "Print / vehicle wraps",  file: "mesco_eps_cmyk.eps"                },
+  { format: "EPS",  variant: "RGB",                 colourspace: "RGB",  useCase: "Digital / vector",       file: "mesco_eps_rgb.eps"                 },
+];
+---
+
+<BaseLayout>
+
+  <!-- ── 1. HERO ──────────────────────────────────────────────────────── -->
+  <section class="bg-accent-500 pt-32 pb-20">
+    <Wrapper variant="standard">
+      <Kicker class="text-brand-gold tracking-widest font-medium">Brand Assets</Kicker>
+      <Text tag="h1" variant="display3XL" class="mt-4 text-white font-medium max-w-3xl">
+        MESCo Brand Reference
+      </Text>
+      <Text tag="p" variant="textLG" class="mt-6 text-accent-200 max-w-2xl">
+        This page is the authoritative reference for MESCo's visual identity — logos, colours,
+        typography, and UI components. It is intended for clients, printing partners, vehicle
+        wrap suppliers, and designers working with the MESCo brand.
+      </Text>
+      <Text tag="p" variant="textSM" class="mt-4 text-accent-300 max-w-2xl">
+        All brand assets are copyright McPhee Engineering Systems Co (MESCo) and may only be
+        used with written permission.
+      </Text>
+      <div class="mt-8">
+        <Button isLink size="base" variant="accent" href="/brand/brand-guidelines.pdf" download="MESCo Brand Guidelines.pdf">
+          Download Brand Guidelines
+        </Button>
+      </div>
+    </Wrapper>
+  </section>
+
+  <!-- ── 2. LOGO ──────────────────────────────────────────────────────── -->
+  <section class="py-20 bg-base-50 border-b border-base-200" id="logo">
+    <Wrapper variant="standard">
+      <Text tag="h2" variant="displaySM" class="font-medium text-base-900">Logo</Text>
+      <Text tag="p" variant="textBase" class="mt-2 text-base-500 max-w-xl">
+        The MESCo logo is available in multiple formats for web, print, signage, and social media.
+      </Text>
+
+      <div class="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-4">
+        <!-- Dark background -->
+        <div class="bg-accent-500 rounded-2xl p-16 flex flex-col items-center gap-8">
+          <Text tag="p" variant="textXS" class="text-accent-300 uppercase tracking-widest">
+            On dark
+          </Text>
+          <AnimatedLogo class="h-20 w-auto text-white" id="logo-dark" />
+          <button
+            id="replay-dark"
+            class="mt-2 text-sm text-brand-gold border border-brand-gold/30 rounded-full px-4 py-2 hover:bg-brand-gold/10 transition"
+          >
+            Replay animation
+          </button>
+        </div>
+
+        <!-- Light background -->
+        <div class="bg-white border border-base-200 rounded-2xl p-16 flex flex-col items-center gap-8">
+          <Text tag="p" variant="textXS" class="text-base-400 uppercase tracking-widest">
+            On light
+          </Text>
+          <AnimatedLogo class="h-20 w-auto text-accent-500" id="logo-light" />
+          <button
+            id="replay-light"
+            class="mt-2 text-sm text-brand-gold border border-brand-gold/30 rounded-full px-4 py-2 hover:bg-brand-gold/10 transition"
+          >
+            Replay animation
+          </button>
+        </div>
+      </div>
+
+      <!-- Download table -->
+      <div class="mt-12 overflow-x-auto">
+        <Text tag="h3" variant="textSM" class="font-medium uppercase text-base-500 tracking-widest mb-4">
+          Logo Downloads
+        </Text>
+        <table class="w-full text-sm text-left border border-base-200 rounded-xl overflow-hidden">
+          <thead class="bg-base-100 text-base-600">
+            <tr>
+              <th class="px-4 py-3 font-medium">Format</th>
+              <th class="px-4 py-3 font-medium">Variant</th>
+              <th class="px-4 py-3 font-medium">Colourspace</th>
+              <th class="px-4 py-3 font-medium">Use Case</th>
+              <th class="px-4 py-3 font-medium">Download</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-base-200">
+            {downloadAssets.map((asset) => (
+              <tr class="bg-white hover:bg-base-50 transition">
+                <td class="px-4 py-3">
+                  <span class="inline-block bg-accent-50 text-accent-600 text-xs font-medium px-2 py-0.5 rounded">
+                    {asset.format}
+                  </span>
+                </td>
+                <td class="px-4 py-3 text-base-700">{asset.variant}</td>
+                <td class="px-4 py-3 text-base-500">{asset.colourspace}</td>
+                <td class="px-4 py-3 text-base-500">{asset.useCase}</td>
+                <td class="px-4 py-3">
+                  <a
+                    href={`/brand/${asset.file}`}
+                    download={asset.file}
+                    class="inline-flex items-center gap-1 text-accent-500 hover:text-accent-400 font-medium transition"
+                  >
+                    Download
+                  </a>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </Wrapper>
+  </section>
+
+  <!-- ── 3. COLOUR PALETTE ─────────────────────────────────────────────── -->
+  <section class="py-20 border-b border-base-200" id="colours">
+    <Wrapper variant="standard">
+      <Text tag="h2" variant="displaySM" class="font-medium text-base-900">Colour Palette</Text>
+
+      <!-- Primary colours -->
+      <Text tag="h3" variant="textSM" class="mt-10 font-medium uppercase text-base-500 tracking-widest mb-6">
+        Primary Brand Colours
+      </Text>
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+        {primaryColors.map((c) => (
+          <div class="flex flex-col gap-2">
+            <div class={`rounded-xl h-32 w-full ${c.bg} flex items-end p-3`}>
+              <button
+                data-copy={c.hex}
+                class={`text-xs font-mono px-2 py-1 rounded bg-black/20 hover:bg-black/40 transition cursor-pointer ${c.text}`}
+                title="Copy hex"
+              >
+                {c.hex}
+              </button>
+            </div>
+            <Text tag="p" variant="textSM" class="font-medium text-base-800">{c.name}</Text>
+          </div>
+        ))}
+      </div>
+
+      <!-- Accent scale -->
+      <details class="mt-10 group">
+        <summary class="cursor-pointer list-none flex items-center gap-2 select-none">
+          <Text tag="span" variant="textSM" class="font-medium uppercase text-base-500 tracking-widest">
+            Accent Scale (Blue)
+          </Text>
+          <span class="text-base-400 text-xs group-open:rotate-90 transition-transform inline-block">▶</span>
+        </summary>
+        <div class="mt-4 grid grid-cols-11 gap-1">
+          {accentScale.map((s) => (
+            <div class="flex flex-col items-center gap-1">
+              <div
+                class={`w-full aspect-square rounded-md ${s.class}`}
+                title={s.hex ?? s.label}
+              />
+              <span class="text-[10px] text-base-500 text-center leading-tight">{s.name}</span>
+            </div>
+          ))}
+        </div>
+      </details>
+
+      <!-- Base scale -->
+      <details class="mt-6 group">
+        <summary class="cursor-pointer list-none flex items-center gap-2 select-none">
+          <Text tag="span" variant="textSM" class="font-medium uppercase text-base-500 tracking-widest">
+            Base Scale (Neutral)
+          </Text>
+          <span class="text-base-400 text-xs group-open:rotate-90 transition-transform inline-block">▶</span>
+        </summary>
+        <div class="mt-4 grid grid-cols-11 gap-1">
+          {baseScale.map((s) => (
+            <div class="flex flex-col items-center gap-1">
+              <div
+                class={`w-full aspect-square rounded-md ${s.class} ${s.name === "50" || s.name === "100" ? "border border-base-200" : ""}`}
+                title={s.label}
+              />
+              <span class="text-[10px] text-base-500 text-center leading-tight">{s.name}</span>
+            </div>
+          ))}
+        </div>
+      </details>
+    </Wrapper>
+  </section>
+
+  <!-- ── 4. TYPOGRAPHY ─────────────────────────────────────────────────── -->
+  <section class="py-20 bg-base-50 border-b border-base-200" id="typography">
+    <Wrapper variant="standard">
+      <Text tag="h2" variant="displaySM" class="font-medium text-base-900">Typography</Text>
+      <Text tag="p" variant="textBase" class="mt-2 text-base-500">
+        Primary typeface: <a href="https://fonts.google.com/specimen/Inter" target="_blank" rel="noopener noreferrer" class="font-medium text-accent-500 hover:text-accent-400 transition">Inter</a> — a variable sans-serif optimised for screens.
+      </Text>
+
+      <div class="flex flex-col mt-12 font-medium text-base-900 divide-y divide-base-200">
+        {[
+          { variant: "textXS",     label: "Text XS"      },
+          { variant: "textSM",     label: "Text SM"      },
+          { variant: "textBase",   label: "Text Base"    },
+          { variant: "textLG",     label: "Text LG"      },
+          { variant: "textXL",     label: "Text XL"      },
+          { variant: "displayXS",  label: "Display XS"   },
+          { variant: "displaySM",  label: "Display SM"   },
+          { variant: "displayMD",  label: "Display MD"   },
+          { variant: "displayLG",  label: "Display LG"   },
+          { variant: "displayXL",  label: "Display XL"   },
+          { variant: "display2XL", label: "Display 2XL"  },
+          { variant: "display3XL", label: "Display 3XL"  },
+        ].map(({ variant, label }) => (
+          <div class="py-4 flex items-baseline justify-between gap-4">
+            <Text tag="p" variant={variant}>{label}</Text>
+            <span class="text-xs text-base-400 font-mono shrink-0">{variant}</span>
+          </div>
+        ))}
+      </div>
+    </Wrapper>
+  </section>
+
+  <!-- ── 5. WEBSITE ELEMENTS ───────────────────────────────────────────── -->
+  <section class="py-20 border-b border-base-200" id="elements">
+    <Wrapper variant="standard">
+      <Text tag="h2" variant="displaySM" class="font-medium text-base-900">Website Elements</Text>
+
+      <!-- Buttons -->
+      <div class="mt-12">
+        <Text tag="h3" variant="textSM" class="font-medium uppercase text-base-500 tracking-widest mb-6">
+          Buttons — representative sizes
+        </Text>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div class="flex flex-col gap-3">
+            <Text tag="p" variant="textXS" class="font-medium uppercase text-base-400">Default</Text>
+            <Button size="xxs" variant="default">Default XXS</Button>
+            <Button size="xs"  variant="default">Default XS</Button>
+            <Button size="sm"  variant="default">Default SM</Button>
+            <Button size="base" variant="default">Default Base</Button>
+          </div>
+          <div class="flex flex-col gap-3">
+            <Text tag="p" variant="textXS" class="font-medium uppercase text-base-400">Accent</Text>
+            <Button size="xxs" variant="accent">Accent XXS</Button>
+            <Button size="xs"  variant="accent">Accent XS</Button>
+            <Button size="sm"  variant="accent">Accent SM</Button>
+            <Button size="base" variant="accent">Accent Base</Button>
+          </div>
+          <div class="flex flex-col gap-3">
+            <Text tag="p" variant="textXS" class="font-medium uppercase text-base-400">Muted</Text>
+            <Button size="xxs" variant="muted">Muted XXS</Button>
+            <Button size="xs"  variant="muted">Muted XS</Button>
+            <Button size="sm"  variant="muted">Muted SM</Button>
+            <Button size="base" variant="muted">Muted Base</Button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Links -->
+      <div class="mt-16">
+        <Text tag="h3" variant="textSM" class="font-medium uppercase text-base-500 tracking-widest mb-6">
+          Links — representative samples
+        </Text>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div class="flex flex-col gap-3">
+            <Text tag="p" variant="textXS" class="font-medium uppercase text-base-400">Default</Text>
+            <Button isLink={true} href="#_" size="xs"   variant="default">Default XS</Button>
+            <Button isLink={true} href="#_" size="sm"   variant="default">Default SM</Button>
+            <Button isLink={true} href="#_" size="base" variant="default">Default Base</Button>
+          </div>
+          <div class="flex flex-col gap-3">
+            <Text tag="p" variant="textXS" class="font-medium uppercase text-base-400">Accent</Text>
+            <Button isLink={true} href="#_" size="xs"   variant="accent">Accent XS</Button>
+            <Button isLink={true} href="#_" size="sm"   variant="accent">Accent SM</Button>
+            <Button isLink={true} href="#_" size="base" variant="accent">Accent Base</Button>
+          </div>
+          <div class="flex flex-col gap-3">
+            <Text tag="p" variant="textXS" class="font-medium uppercase text-base-400">Muted</Text>
+            <Button isLink={true} href="#_" size="xs"   variant="muted">Muted XS</Button>
+            <Button isLink={true} href="#_" size="sm"   variant="muted">Muted SM</Button>
+            <Button isLink={true} href="#_" size="base" variant="muted">Muted Base</Button>
+          </div>
+        </div>
+      </div>
+    </Wrapper>
+  </section>
+
+  <!-- ── 6. FULL DOWNLOADS ──────────────────────────────────────────────── -->
+  <section class="py-20 bg-accent-500" id="downloads">
+    <Wrapper variant="standard">
+      <Text tag="h2" variant="displaySM" class="font-medium text-white">All Downloads</Text>
+      <Text tag="p" variant="textBase" class="mt-2 text-accent-200 max-w-xl">
+        All assets are copyright MESCo and may only be used with written permission.
+      </Text>
+
+      <div class="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+        <!-- Web logos -->
+        <div class="bg-accent-600 rounded-xl p-6 flex flex-col gap-4">
+          <Text tag="h3" variant="textBase" class="font-medium text-white">Web Logos</Text>
+          <Text tag="p" variant="textXS" class="text-accent-300">SVG and PNG formats for digital use.</Text>
+          <div class="flex flex-col gap-2 mt-auto">
+            {[
+              { label: "SVG Blue",             file: "mesco_svg_blue.svg"                },
+              { label: "SVG White",            file: "mesco_svg_white.svg"               },
+              { label: "PNG Blue (transparent)", file: "mesco_png_blue-on-transparent.png"  },
+              { label: "PNG White (transparent)", file: "mesco_png_white-on-transparent.png" },
+            ].map((a) => (
+              <a
+                href={`/brand/${a.file}`}
+                download={a.file}
+                class="flex items-center justify-between gap-2 text-xs text-accent-100 hover:text-white transition py-1 border-b border-accent-500 last:border-0"
+              >
+                <span>{a.label}</span>
+                <span class="text-[10px] font-mono bg-accent-500/50 px-1.5 py-0.5 rounded text-accent-300 uppercase">
+                  {a.file.split(".").pop()}
+                </span>
+              </a>
+            ))}
+          </div>
+        </div>
+
+        <!-- Print logos -->
+        <div class="bg-accent-600 rounded-xl p-6 flex flex-col gap-4">
+          <Text tag="h3" variant="textBase" class="font-medium text-white">Print Logos</Text>
+          <Text tag="p" variant="textXS" class="text-accent-300">Vector formats for print, signage, and vehicle wraps.</Text>
+          <div class="flex flex-col gap-2 mt-auto">
+            {[
+              { label: "PDF CMYK",  file: "mesco_pdf_cmyk.pdf"  },
+              { label: "PDF RGB",   file: "mesco_pdf_rgb.pdf"   },
+              { label: "AI CMYK",   file: "mesco_ai_cmyk.ai"    },
+              { label: "AI RGB",    file: "mesco_ai_rgb.ai"     },
+              { label: "EPS CMYK",  file: "mesco_eps_cmyk.eps"  },
+              { label: "EPS RGB",   file: "mesco_eps_rgb.eps"   },
+              { label: "PNG Blue (banner)",  file: "mesco_png_blue-on-banner.png"  },
+              { label: "PNG White (banner)", file: "mesco_png_white-on-banner.png" },
+              { label: "JPG Blue (banner)",  file: "mesco_jpg_blue-on-banner.jpg"  },
+              { label: "JPG White (banner)", file: "mesco_jpg_white-on-banner.jpg" },
+            ].map((a) => (
+              <a
+                href={`/brand/${a.file}`}
+                download={a.file}
+                class="flex items-center justify-between gap-2 text-xs text-accent-100 hover:text-white transition py-1 border-b border-accent-500 last:border-0"
+              >
+                <span>{a.label}</span>
+                <span class="text-[10px] font-mono bg-accent-500/50 px-1.5 py-0.5 rounded text-accent-300 uppercase">
+                  {a.file.split(".").pop()}
+                </span>
+              </a>
+            ))}
+          </div>
+        </div>
+
+        <!-- Social media -->
+        <div class="bg-accent-600 rounded-xl p-6 flex flex-col gap-4">
+          <Text tag="h3" variant="textBase" class="font-medium text-white">Social Media</Text>
+          <Text tag="p" variant="textXS" class="text-accent-300">Profile picture formats for social platforms.</Text>
+          <div class="flex flex-col gap-2 mt-auto">
+            {[
+              { label: "Blue on white", file: "mesco_png_social_blue-on-white.png" },
+              { label: "White on blue", file: "mesco_png_social_white-on-blue.png" },
+            ].map((a) => (
+              <a
+                href={`/brand/${a.file}`}
+                download={a.file}
+                class="flex items-center justify-between gap-2 text-xs text-accent-100 hover:text-white transition py-1 border-b border-accent-500 last:border-0"
+              >
+                <span>{a.label}</span>
+                <span class="text-[10px] font-mono bg-accent-500/50 px-1.5 py-0.5 rounded text-accent-300 uppercase">
+                  {a.file.split(".").pop()}
+                </span>
+              </a>
+            ))}
+          </div>
+        </div>
+
+        <!-- Brand guidelines -->
+        <div class="bg-brand-gold rounded-xl p-6 flex flex-col gap-4">
+          <Text tag="h3" variant="textBase" class="font-medium text-white">Brand Guidelines</Text>
+          <Text tag="p" variant="textXS" class="text-white/70">
+            The complete MESCo brand guidelines document.
+          </Text>
+          <div class="mt-auto">
+            <a
+              href="/brand/brand-guidelines.pdf"
+              download="MESCo Brand Guidelines.pdf"
+              class="inline-flex items-center justify-center w-full gap-2 bg-white text-accent-500 font-medium text-sm rounded-lg px-4 py-2.5 hover:bg-base-100 transition"
+            >
+              Download PDF
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Copyright notice -->
+      <div class="mt-12 border-t border-accent-400 pt-8">
+        <Text tag="p" variant="textSM" class="text-accent-300">
+          © {new Date().getFullYear()} McPhee Engineering Systems Co (MESCo). All brand assets are copyright MESCo and may only be used with prior written permission. Unauthorised reproduction or use is prohibited.
+        </Text>
+      </div>
+    </Wrapper>
+  </section>
+
+</BaseLayout>
+
+<script is:inline>
+  // Replay logo animation
+  document.querySelectorAll('[id^="replay-"]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const container = btn.closest('div');
+      const svg = container.querySelector('svg');
+      if (!svg) return;
+      svg.classList.remove('logo-animate');
+      void svg.offsetWidth;
+      svg.classList.add('logo-animate');
+    });
+  });
+
+  // Copy hex to clipboard
+  document.querySelectorAll('[data-copy]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const hex = btn.getAttribute('data-copy');
+      if (!hex) return;
+      navigator.clipboard.writeText(hex).then(() => {
+        const original = btn.textContent;
+        btn.textContent = 'Copied!';
+        setTimeout(() => { btn.textContent = original; }, 1500);
+      }).catch(() => {});
+    });
+  });
+</script>
