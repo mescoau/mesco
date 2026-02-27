@@ -1,5 +1,5 @@
 ---
-page: Privacy
+page: Privacy Policy
 pubDate: 2026-02-27
 ---
 

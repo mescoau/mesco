@@ -1,5 +1,5 @@
 ---
-page: Terms
+page: Terms and Conditions
 pubDate: 2026-02-27
 ---
 

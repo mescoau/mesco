@@ -1,5 +1,5 @@
 ---
-page: Cookie
+page: Cookie Notice
 pubDate: 2026-02-27
 ---
 
