@@ -1,31 +1,37 @@
 ---
 page: Cookie
-pubDate: 2026-01-01
+pubDate: 2026-02-27
 ---
 
-We use cookies and similar technologies to ensure the site functions correctly, stays secure, and improves over time. This notice explains what we use, why we use it, and the choices you have.
+This Cookie Notice explains how McPhee Engineering Systems Co (MESCo) uses cookies on this Website.
 
 ## What are cookies?
 
-Cookies are small text files stored on your device when you visit a website. They help sites remember preferences, maintain sessions, and understand how visitors interact with content.
+Cookies are small text files placed on your device when you visit a website. They are widely used to make websites work, or to provide website owners with basic information about how their site is being used.
 
-## Types of cookies we use
+## How we use cookies
 
-**Essential cookies**  
-These are required for core functionality such as security, authentication, and basic site operations. Without them, the site will not work properly. Essential cookies are always enabled.
+We use cookies solely for website analytics — to understand how visitors interact with our Website, such as which pages are viewed and how long visitors spend on the site. This information is collected in an anonymised, aggregated form and is not used to personally identify you.
 
-**Analytics cookies (optional)**  
-These help us understand how the site is used—what pages are visited, what features perform well, and where improvements are needed. Analytics data is aggregated and not used to personally identify you. You can disable these through your browser settings or opt out when controls are available.
+We do not use cookies to track you across other websites, serve advertising, or build personal profiles.
 
-## Your choices and controls
+## Your choices
 
-Most browsers allow you to view, block, or delete cookies. You can usually configure these settings to suit your preferences. Be aware that disabling essential cookies may cause parts of the site to break or behave unpredictably.
+Most web browsers allow you to control cookies through their settings. You can typically:
+
+- View the cookies stored on your device
+- Block or delete cookies
+- Set your browser to notify you when cookies are set
+
+Please note that disabling analytics cookies will not affect your ability to use this Website — it will simply mean we receive less information about how the site is being used.
+
+For guidance on managing cookies in your browser, visit your browser's help documentation or [aboutcookies.org](https://www.aboutcookies.org).
 
 ## Updates to this notice
 
-We may update this Cookie Notice from time to time to reflect changes in technology, legal requirements, or how we use cookies. The published date above indicates the most recent revision.
+We may update this Cookie Notice from time to time. The date at the top of this page reflects the most recent revision.
 
 ## Contact
 
-If you have questions or concerns about our use of cookies, contact us at  
-[privacy@example.com](mailto:privacy@example.com).
+If you have any questions about our use of cookies, please contact us at
+[admin@mesco.au](mailto:admin@mesco.au).

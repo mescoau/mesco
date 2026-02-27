@@ -1,50 +1,52 @@
 ---
 page: Terms
-pubDate: 2024-01-01
+pubDate: 2026-02-27
 ---
 
+These Terms and Conditions govern your use of the McPhee Engineering Systems Co (MESCo) website located at mesco.au (the "Website"). By accessing or using the Website, you agree to be bound by these Terms. If you do not agree, please do not use the Website.
 
+MESCo is a Western Australian business operating under the laws of Western Australia and the Commonwealth of Australia.
 
-By accessing or using the service, you agree to these Terms of Service and any related policies we reference. If you do not agree, do not use the service.
+## Use of this website
 
-## Using the service
-You agree to use the service in a lawful, respectful, and secure manner. You must not:
-- Violate applicable laws or regulations  
-- Interfere with or disrupt the service or other users  
-- Attempt to access systems, data, or accounts you are not authorized to use  
-- Circumvent or probe security or rate limits  
+You may use this Website for lawful purposes only. You agree not to:
 
-You are responsible for all activity that occurs under your account.
+- Use the Website in any way that breaches any applicable local, national, or international law or regulation
+- Transmit any unsolicited or unauthorised advertising or promotional material
+- Knowingly transmit any data or material that contains viruses, trojans, or other malicious or harmful code
+- Attempt to gain unauthorised access to any part of the Website or its related systems
 
-## Accounts and content
-You are responsible for maintaining the confidentiality of your account credentials. You retain ownership of any content you submit or upload.
+We reserve the right to restrict or terminate access to the Website at our discretion, without notice, if we believe these Terms have been breached.
 
-By submitting content, you grant us a limited, non-exclusive license to host, process, and display that content solely for the purpose of operating and improving the service.
+## Intellectual property
 
-You may not upload content that is illegal, harmful, infringing, or otherwise violates the rights of others.
+All content on this Website — including text, graphics, logos, and images — is the property of McPhee Engineering Systems Co or its content suppliers and is protected under Australian copyright law. You may not reproduce, distribute, or otherwise use any content from this Website without our prior written consent, except as permitted by law.
 
-## Payments and subscriptions
-If the service includes paid features, fees are billed in advance and are non-refundable unless required by law or explicitly stated otherwise. Prices, billing cycles, and features may change, and we will provide notice when material changes affect you.
+## Accuracy of information
 
-Failure to pay may result in suspension or termination of access to paid features.
+We endeavour to keep the information on this Website current and accurate. However, we make no representations or warranties of any kind, express or implied, about the completeness, accuracy, reliability, or suitability of the information on the Website. Any reliance you place on such information is at your own risk.
 
-## Changes to the service
-We may modify, suspend, or discontinue any part of the service at any time. We will make reasonable efforts to provide advance notice when changes materially impact functionality, but we are not obligated to maintain specific features indefinitely.
+The content of this Website is for general information purposes only and does not constitute professional engineering, legal, or other advice.
 
-## Availability and reliability
-We aim to provide a reliable service, but uptime is not guaranteed. The service may be unavailable due to maintenance, updates, or factors outside our control. You are responsible for backing up any data you rely on.
+## Third-party links
 
-## Termination
-We may suspend or terminate access to the service if you violate these terms or misuse the service. You may stop using the service at any time.
+This Website may contain links to external websites. These links are provided for your convenience only. We have no control over the content of those sites and accept no responsibility for them or for any loss or damage that may arise from your use of them.
 
-## Disclaimers and limitation of liability
-The service is provided “as is” and “as available.” To the maximum extent permitted by law, we disclaim all warranties, express or implied.
+## Limitation of liability
 
-We are not liable for indirect, incidental, or consequential damages, or for loss of data, profits, or business arising from use of the service.
+To the maximum extent permitted by law, McPhee Engineering Systems Co excludes all liability for any loss or damage (including direct, indirect, incidental, or consequential loss) arising out of or in connection with your use of, or inability to use, this Website or its content.
+
+Nothing in these Terms limits or excludes any rights or guarantees you may have under the Australian Consumer Law or other applicable legislation that cannot be excluded.
+
+## Changes to these terms
+
+We may update these Terms from time to time. The date at the top of this page reflects the most recent revision. Continued use of the Website after any changes constitutes your acceptance of the updated Terms.
 
 ## Governing law
-These terms are governed by the laws of our principal place of business, unless local consumer protection laws require otherwise.
+
+These Terms are governed by and construed in accordance with the laws of Western Australia. Any disputes arising under these Terms will be subject to the exclusive jurisdiction of the courts of Western Australia.
 
 ## Contact
-Questions about these terms can be sent to  
-[support@example.com](mailto:support@example.com).
+
+If you have any questions about these Terms, please contact us at
+[admin@mesco.au](mailto:admin@mesco.au).
