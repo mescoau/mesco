@@ -7,7 +7,7 @@ import Kicker from "@/components/fundations/elements/Kicker.astro";
 import Button from "@/components/fundations/elements/Button.astro";
 import Wrapper from "@/components/fundations/containers/Wrapper.astro";
 // Config
-import { link } from "@/config/site";
+import { link, siteConfig } from "@/config/site";
 const contactDetails = [
   {
     label: "Location",
@@ -20,8 +20,8 @@ const contactDetails = [
   },
   {
     label: "Email",
-    value: ["admin@mesco.au", "kyriah@mesco.au"],
-    href: ["mailto:admin@mesco.au", "mailto:kyriah@mesco.au"],
+    value: [siteConfig.email],
+    href: [`mailto:${siteConfig.email}`],
   },
   {
     label: "Office hours",
@@ -36,7 +36,7 @@ const contactDetails = [
     class="py-8 lg:py-0 lg:border-x lg:border-brand-gold"
   >
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-y-8 gap-x-20">
-      <div class="bg-accent-900 p-8 lg:-mt-26 z-10 relative overflow-hidden">
+      <div class="bg-accent-900 p-8 lg:-mt-26 z-10 relative overflow-hidden lg:border lg:border-brand-gold">
         <div class="relative flex flex-col justify-between h-full">
           <Logo class="h-12 w-fit text-white" />
           <div>

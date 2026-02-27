@@ -47,7 +47,7 @@ export const GET: APIRoute = async () => {
       `${base}/`,
       `McPhee Engineering Systems (MESCo) is a Western Australian engineering systems consultancy. We bridge the gap between design intent and site delivery with structured, audit-ready project systems. Our services cover the full project lifecycle — from mobilisation to close-out — ensuring systems are built, maintained and traceable.
 
-Contact: admin@mesco.au | +61 409 729 303 | Perth, WA`
+Contact: ${siteConfig.email} | +61 409 729 303 | Perth, WA`
     )
   );
 
@@ -99,7 +99,7 @@ MESCo combines deep field experience with management systems expertise to delive
       `${base}${link("/contact")}`,
       `Get in touch with MESCo to scope systems and support for your next project.
 
-- **Email:** admin@mesco.au, kyriah@mesco.au
+- **Email:** ${siteConfig.email}
 - **Phone:** +61 409 729 303
 - **Location:** Perth, WA
 - **Office hours:** Monday–Friday, 8:00–17:00 (AWST)`

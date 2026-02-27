@@ -24,8 +24,8 @@ export const orgSchema = {
   image: `${siteConfig.url}/default.jpg`,
   description:
     "A Western Australian engineering systems consultancy specialising in structured project systems, QA/QC frameworks, HSE compliance, and ISO audit support for construction and resources projects.",
-  email: "admin@mesco.au",
-  telephone: "+61409729303",
+  email: siteConfig.email,
+  telephone: siteConfig.phone.replace(/[^\d+]/g, ""),
   address: {
     "@type": "PostalAddress",
     addressLocality: "Perth",
@@ -34,9 +34,9 @@ export const orgSchema = {
   },
   contactPoint: {
     "@type": "ContactPoint",
-    telephone: "+61409729303",
+    telephone: siteConfig.phone.replace(/[^\d+]/g, ""),
     contactType: "customer service",
-    email: "admin@mesco.au",
+    email: siteConfig.email,
     availableLanguage: "English",
     hoursAvailable: {
       "@type": "OpeningHoursSpecification",

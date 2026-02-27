@@ -47,7 +47,6 @@ We may update this Privacy Policy from time to time. The date at the top of this
 
 ## Contact
 
-If you have any questions or concerns about this Privacy Policy or how we handle your personal information, please contact us at
-[admin@mesco.au](mailto:admin@mesco.au).
+If you have any questions or concerns about this Privacy Policy or how we handle your personal information, please visit our [contact page](/contact).
 
 If you believe we have not handled your personal information appropriately, you may also lodge a complaint with the Office of the Australian Information Commissioner (OAIC) at [oaic.gov.au](https://www.oaic.gov.au).

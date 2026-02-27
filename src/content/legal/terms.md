@@ -48,5 +48,4 @@ These Terms are governed by and construed in accordance with the laws of Western
 
 ## Contact
 
-If you have any questions about these Terms, please contact us at
-[admin@mesco.au](mailto:admin@mesco.au).
+If you have any questions about these Terms, please visit our [contact page](/contact).

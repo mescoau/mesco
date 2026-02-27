@@ -13,7 +13,9 @@
  */
 export const siteConfig = {
   url: "https://mesco.pages.dev",
-  trailingSlash: false,
+  email: "kyriah@mesco.au",
+  phone: "+61 431 308 396",
+  trailingSlash: true,
 } as const;
 
 /**
