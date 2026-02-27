@@ -43,6 +43,7 @@ const linkSections: LinkSection[] = [
     links: [
       { label: "Case Studies", href: link("/case-studies") },
       { label: "Services", href: link("/services") },
+      { label: "For LLMs", href: link("/for-llms") },
       { label: "Brand Assets", href: link("/brand") },
       { label: "Privacy", href: link("/legal/privacy") },
       { label: "Terms", href: link("/legal/terms") },
@@ -108,7 +109,7 @@ const contactDetails = {
     variant="standard"
     class="relative pt-8 pb-12 lg:border-x lg:border-brand-gold space-y-12 z-10"
   >
-    <div class="grid gap-x-8 sm:grid-cols-2 lg:grid-cols-4 gap-y-24">
+    <div class="grid gap-x-8 sm:grid-cols-2 lg:grid-cols-3 gap-y-24">
       {
         linkSections.map((section) => (
           <div>
