@@ -50,7 +50,7 @@ const services = [
 <section>
   <Wrapper variant="standard" class="py-24 lg:border-x lg:border-brand-gold">
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-      <div>
+      <div class="lg:col-start-1 lg:row-start-1">
         <Kicker class="text-accent-600">Get in touch</Kicker>
         <Text
           tag="h2"
@@ -117,7 +117,7 @@ const services = [
           }
         </div>
       </div>
-      <div class="">
+      <div class="lg:row-span-2">
       <form action="https://tardis.withers.co/api/forms/mesco" method="POST" class="bg-accent-950 lg:border lg:border-brand-gold p-8">
         <input type="hidden" name="_redirect" value="/thank-you" />
         <Text
@@ -239,6 +239,17 @@ const services = [
           Submit
         </Button>
       </form>
+    </div>
+    <!-- Map: 3rd grid child → col-1 row-2 on desktop, last on mobile (DOM order) -->
+    <div class="lg:col-start-1 lg:row-start-2 overflow-hidden">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14924789.093978079!2d110.31617433833357!3d-24.03996964721959!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2a392a2e89f384d1%3A0x6e0e4adf3200a399!2sWestern%20Australia!5e0!3m2!1sen!2sau!4v1772187475777!5m2!1sen!2sau"
+        class="w-full h-120 lg:h-160 border-0"
+        allowfullscreen
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="MESCo location – Western Australia"
+      ></iframe>
     </div>
   </Wrapper>
 </section>

@@ -25,29 +25,43 @@ const navLinks = [
 ---
 
 <nav
-  class={`fixed w-full top-0 z-50 transition-colors duration-300 border-b border-brand-gold ${isTransparent ? "" : "bg-white"}`}
+  class={`fixed w-full top-0 z-50 transition-all duration-300 border-b border-brand-gold ${isTransparent ? "" : "bg-white/80 backdrop-blur-xl"}`}
   data-nav
   data-swap={isTransparent ? "true" : "false"}
 >
   <Wrapper variant="standard" class="relative lg:border-x lg:border-brand-gold">
-    <div class="py-4 grid grid-cols-2 lg:grid-cols-4 items-center">
+    <div class="py-4 grid grid-cols-2 lg:grid-cols-[1fr_auto_1fr] items-center gap-x-6">
       <a
         href="/"
         aria-label="Home"
         data-logo
-        class={`focus:outline-none text-2xl font-medium flex items-center gap-2   ${isTransparent ? "text-white" : "text-base-800"}`}
+        class={`focus:outline-none text-2xl font-medium flex items-center gap-2 ${isTransparent ? "text-white" : "text-base-800"}`}
       >
         <span class="sr-only">Home</span>
         <AnimatedLogo class="h-12 transition-all duration-300" data-nav-logo />
       </a>
+
+      <!-- Desktop liquid glass nav pill -->
       <div
-        class="hidden lg:flex items-center justify-between gap-4 py-4 px-6 outline outline-white/10 rounded-full bg-white/5 backdrop-blur-sm lg:col-span-2"
+        class="hidden lg:flex items-center gap-1 py-1.5 px-1.5 rounded-full relative
+          bg-white/10 backdrop-blur-2xl
+          border border-white/20
+          shadow-[inset_0_1px_0_rgba(255,255,255,0.25),0_2px_12px_rgba(0,0,0,0.08)]"
+        data-glass-nav
       >
+        <!-- Gliding hover pill -->
+        <span
+          class="absolute rounded-full pointer-events-none opacity-0"
+          style="transition: left 180ms cubic-bezier(0.4,0,0.2,1), top 180ms cubic-bezier(0.4,0,0.2,1), width 180ms cubic-bezier(0.4,0,0.2,1), height 180ms cubic-bezier(0.4,0,0.2,1), opacity 150ms ease; backdrop-filter: blur(8px); background: rgba(255,255,255,0.22); box-shadow: inset 0 1px 0 rgba(255,255,255,0.4);"
+          data-hover-pill
+          aria-hidden="true"
+        ></span>
+
         {
           navLinks.map((l) => (
             <a
               href={l.href}
-              class={`text-sm transition ${isTransparent ? "text-white " : "text-base-800"}`}
+              class={`relative z-10 text-sm px-4 py-1.5 rounded-full transition-colors duration-150 ${isTransparent ? "text-white" : "text-base-800"}`}
               data-primary-link
             >
               {l.label}
@@ -55,7 +69,8 @@ const navLinks = [
           ))
         }
       </div>
-      <div class="hidden lg:flex gap-2 items-center ml-auto">
+
+      <div class="hidden lg:flex gap-2 items-center justify-end">
         <Search />
         <Button
           isLink
@@ -171,14 +186,17 @@ const navLinks = [
         }
       });
       updateIcons();
+
       // Scroll background + link colors + logo size
       const navEl = document.querySelector("[data-nav]");
       const logoEl = document.querySelector("[data-logo]");
       const navLogo = document.querySelector("[data-nav-logo]");
       const primaryLinks = document.querySelectorAll("[data-primary-link]");
-      // Swap between light and dark text classes
-      // Only enable color swap on the homepage
+      const glassNav = document.querySelector("[data-glass-nav]");
+      const hoverPill = glassNav ? glassNav.querySelector("[data-hover-pill]") : null;
+
       const enableScrollSwap = navEl && navEl.dataset.swap === "true";
+
       const swapColor = (el, scrolled) => {
         if (!el) return;
         el.classList.remove("text-white", "text-base-800");
@@ -189,28 +207,84 @@ const navLinks = [
         navLogo.classList.toggle("h-12", !scrolled);
         navLogo.classList.toggle("h-8", scrolled);
       };
+      // Update hover pill style for dark (over image) vs light (over white) backgrounds
+      const updatePillTheme = (isDark) => {
+        if (!hoverPill) return;
+        if (isDark) {
+          hoverPill.style.background = "rgba(255,255,255,0.22)";
+          hoverPill.style.boxShadow = "inset 0 1px 0 rgba(255,255,255,0.4)";
+        } else {
+          hoverPill.style.background = "rgba(0,0,0,0.07)";
+          hoverPill.style.boxShadow = "inset 0 1px 0 rgba(255,255,255,0.6)";
+        }
+      };
+      // Update glass nav container for dark vs light
+      const updateGlassTheme = (isDark) => {
+        if (!glassNav) return;
+        if (isDark) {
+          glassNav.style.background = "rgba(255,255,255,0.1)";
+          glassNav.style.borderColor = "rgba(255,255,255,0.2)";
+          glassNav.style.boxShadow =
+            "inset 0 1px 0 rgba(255,255,255,0.25), 0 2px 12px rgba(0,0,0,0.08)";
+        } else {
+          glassNav.style.background = "rgba(0,0,0,0.04)";
+          glassNav.style.borderColor = "rgba(0,0,0,0.08)";
+          glassNav.style.boxShadow =
+            "inset 0 1px 0 rgba(255,255,255,0.8), 0 2px 12px rgba(0,0,0,0.04)";
+        }
+      };
+
       const handleScroll = () => {
         const scrolled = window.scrollY > 0;
-        // Logo shrinks on all pages
         shrinkLogo(scrolled);
         if (!enableScrollSwap) return;
-        if (navEl) navEl.classList.toggle("bg-white", scrolled);
+        if (navEl) {
+          navEl.classList.toggle("bg-white/80", scrolled);
+          navEl.classList.toggle("backdrop-blur-xl", scrolled);
+        }
+        const isDark = !scrolled;
         swapColor(logoEl, scrolled);
         primaryLinks.forEach((el) => swapColor(el, scrolled));
-        // Mobile icons
         swapColor(burger, scrolled);
         swapColor(close, scrolled);
+        updatePillTheme(isDark);
+        updateGlassTheme(isDark);
       };
-      // Always listen for scroll (logo shrink works on all pages)
+
       window.addEventListener("scroll", handleScroll);
-      handleScroll(); // Initialize state on load
+      handleScroll();
+
       if (!enableScrollSwap) {
-        // Force dark variant on non-home pages
-        if (navEl) navEl.classList.add("bg-white");
+        if (navEl) navEl.classList.add("bg-white/80", "backdrop-blur-xl");
         swapColor(logoEl, true);
         primaryLinks.forEach((el) => swapColor(el, true));
         swapColor(burger, true);
         swapColor(close, true);
+        updatePillTheme(false);
+        updateGlassTheme(false);
+      }
+
+      // Hover pill animation
+      if (glassNav && hoverPill) {
+        const links = glassNav.querySelectorAll("a[data-primary-link]");
+
+        links.forEach((link) => {
+          link.addEventListener("mouseenter", () => {
+            const containerRect = glassNav.getBoundingClientRect();
+            const linkRect = link.getBoundingClientRect();
+            hoverPill.style.left =
+              linkRect.left - containerRect.left + "px";
+            hoverPill.style.top =
+              linkRect.top - containerRect.top + "px";
+            hoverPill.style.width = linkRect.width + "px";
+            hoverPill.style.height = linkRect.height + "px";
+            hoverPill.style.opacity = "1";
+          });
+        });
+
+        glassNav.addEventListener("mouseleave", () => {
+          hoverPill.style.opacity = "0";
+        });
       }
     });
   </script>
