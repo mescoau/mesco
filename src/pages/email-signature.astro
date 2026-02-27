@@ -1,0 +1,206 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+import Text from "@/components/fundations/elements/Text.astro";
+import { siteConfig } from "@/config/site";
+
+const siteUrl = siteConfig.url;
+const logoUrl = `${siteUrl}/mesco_email_sig.png`;
+
+const disclaimer =
+  "Disclaimer: This email and any attachments are confidential and may contain legally privileged information intended only for the addressee. If you are not the intended recipient, any review, use, distribution, or copying is strictly prohibited. If you have received this message in error, please notify the sender immediately and delete all copies. McPhee Engineering Systems Co (MESCo) accepts no liability for any damage caused by this email or attachments, including viruses or corruption of data.";
+
+const defaults = {
+  name: "Kyriah McPhee",
+  title: "Director – Engineering Systems",
+  email: "kyriah@mesco.au",
+  phone: "0431 308 396",
+};
+---
+
+<BaseLayout
+  hideFooter={true}
+  seoTitle="Email Signature Generator"
+  seoDescription="Internal tool to generate MESCo email signatures."
+>
+  <Fragment slot="head">
+    <meta name="robots" content="noindex, nofollow" />
+  </Fragment>
+
+  <section class="py-16 lg:py-24">
+    <Wrapper variant="standard" class="lg:border-x lg:border-brand-gold">
+      <div class="max-w-3xl mx-auto">
+
+        <div class="mb-10">
+          <Text tag="h1" variant="displayMD" class="font-medium tracking-tight">
+            Email Signature Generator
+          </Text>
+          <Text tag="p" variant="textBase" class="text-base-600 mt-2">
+            Fill in your details — the preview and code update live.
+          </Text>
+        </div>
+
+        <!-- Form -->
+        <div class="grid gap-4 sm:grid-cols-2">
+          <label class="flex flex-col gap-1.5">
+            <span class="text-sm font-medium text-base-700">Name</span>
+            <input
+              id="sig-name"
+              type="text"
+              value={defaults.name}
+              class="border border-base-200 rounded-lg px-4 py-2.5 text-sm text-base-900 focus:outline-none focus:ring-2 focus:ring-brand-gold/30 focus:border-brand-gold transition"
+            />
+          </label>
+          <label class="flex flex-col gap-1.5">
+            <span class="text-sm font-medium text-base-700">Title</span>
+            <input
+              id="sig-title"
+              type="text"
+              value={defaults.title}
+              class="border border-base-200 rounded-lg px-4 py-2.5 text-sm text-base-900 focus:outline-none focus:ring-2 focus:ring-brand-gold/30 focus:border-brand-gold transition"
+            />
+          </label>
+          <label class="flex flex-col gap-1.5">
+            <span class="text-sm font-medium text-base-700">Email address</span>
+            <input
+              id="sig-email"
+              type="email"
+              value={defaults.email}
+              class="border border-base-200 rounded-lg px-4 py-2.5 text-sm text-base-900 focus:outline-none focus:ring-2 focus:ring-brand-gold/30 focus:border-brand-gold transition"
+            />
+          </label>
+          <label class="flex flex-col gap-1.5">
+            <span class="text-sm font-medium text-base-700">Phone</span>
+            <input
+              id="sig-phone"
+              type="text"
+              value={defaults.phone}
+              class="border border-base-200 rounded-lg px-4 py-2.5 text-sm text-base-900 focus:outline-none focus:ring-2 focus:ring-brand-gold/30 focus:border-brand-gold transition"
+            />
+          </label>
+        </div>
+
+        <!-- Preview -->
+        <div class="mt-10">
+          <div class="flex items-center justify-between mb-3">
+            <div>
+              <Text tag="h2" variant="displayXS" class="font-medium">Preview</Text>
+              <Text tag="p" variant="textXS" class="text-base-500 mt-0.5">
+                Paste directly into your email app to insert as a formatted signature.
+              </Text>
+            </div>
+            <button
+              id="copy-formatted"
+              class="shrink-0 inline-flex items-center gap-2 text-sm font-medium text-white bg-accent-900 hover:bg-accent-800 transition rounded-lg px-4 py-2.5"
+            >
+              Copy signature
+            </button>
+          </div>
+          <div
+            id="sig-preview"
+            class="border border-base-200 rounded-xl p-8 bg-white overflow-auto min-h-24"
+          >
+          </div>
+        </div>
+
+        <!-- HTML Code -->
+        <div class="mt-8">
+          <div class="flex items-center justify-between mb-3">
+            <div>
+              <Text tag="h2" variant="displayXS" class="font-medium">HTML Code</Text>
+              <Text tag="p" variant="textXS" class="text-base-500 mt-0.5">
+                For email apps that accept an HTML signature (e.g. Thunderbird, Outlook settings).
+              </Text>
+            </div>
+            <button
+              id="copy-html"
+              class="shrink-0 inline-flex items-center gap-2 text-sm font-medium border border-base-200 text-base-700 hover:bg-base-50 transition rounded-lg px-4 py-2.5"
+            >
+              Copy HTML
+            </button>
+          </div>
+          <pre
+            id="sig-html"
+            class="bg-base-50 border border-base-200 rounded-xl p-4 text-xs font-mono whitespace-pre-wrap break-all overflow-auto max-h-72 text-base-700"
+          ></pre>
+        </div>
+
+      </div>
+    </Wrapper>
+  </section>
+</BaseLayout>
+
+<script define:vars={{ logoUrl, siteUrl, disclaimer, defaults }}>
+  function generateHTML(name, title, email, phone) {
+    const tel = phone.replace(/\s/g, "");
+    return `<table cellpadding="0" cellspacing="0" border="0" role="presentation" style="font-family:Arial,Helvetica,sans-serif;border-collapse:collapse;">
+  <tr>
+    <td style="padding:0 24px 0 0;vertical-align:top;">
+      <a href="${siteUrl}" target="_blank" rel="noopener" style="display:block;text-decoration:none;border:none;">
+        <img src="${logoUrl}" alt="MESCo – McPhee Engineering Systems" width="200" height="71" border="0" style="display:block;border:0;outline:none;text-decoration:none;" />
+      </a>
+    </td>
+    <td style="padding:0 0 0 24px;border-left:2px solid #c4a245;vertical-align:top;">
+      <p style="margin:0 0 2px 0;font-family:Arial,Helvetica,sans-serif;font-size:14px;font-weight:bold;color:#0d2d5e;line-height:1.4;">${name} | ${title}</p>
+      <p style="margin:0 0 2px 0;font-family:Arial,Helvetica,sans-serif;font-size:13px;color:#555555;line-height:1.4;">McPhee Engineering Systems Co (MESCo)</p>
+      <p style="margin:0 0 10px 0;font-family:Arial,Helvetica,sans-serif;font-size:13px;color:#555555;line-height:1.4;">E: <a href="mailto:${email}" style="color:#0d2d5e;text-decoration:none;">${email}</a>&nbsp;&nbsp;|&nbsp;&nbsp;Ph: <a href="tel:${tel}" style="color:#0d2d5e;text-decoration:none;">${phone}</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="${siteUrl}" target="_blank" rel="noopener" style="color:#0d2d5e;text-decoration:none;">${siteUrl.replace(/^https?:\/\//, "")}</a></p>
+      <p style="margin:0 0 16px 0;font-family:Arial,Helvetica,sans-serif;font-size:12px;font-style:italic;color:#777777;line-height:1.4;">Built from experience. Delivered with intent.</p>
+      <p style="margin:0;font-family:Arial,Helvetica,sans-serif;font-size:10px;color:#999999;max-width:480px;line-height:1.5;">${disclaimer}</p>
+    </td>
+  </tr>
+</table>`;
+  }
+
+  function getValues() {
+    return {
+      name: document.getElementById("sig-name").value,
+      title: document.getElementById("sig-title").value,
+      email: document.getElementById("sig-email").value,
+      phone: document.getElementById("sig-phone").value,
+    };
+  }
+
+  function update() {
+    const { name, title, email, phone } = getValues();
+    const html = generateHTML(name, title, email, phone);
+    document.getElementById("sig-preview").innerHTML = html;
+    document.getElementById("sig-html").textContent = html;
+  }
+
+  ["sig-name", "sig-title", "sig-email", "sig-phone"].forEach((id) => {
+    document.getElementById(id)?.addEventListener("input", update);
+  });
+
+  document.getElementById("copy-formatted")?.addEventListener("click", async () => {
+    const { name, title, email, phone } = getValues();
+    const html = generateHTML(name, title, email, phone);
+    const plain = `${name} | ${title}\nMcPhee Engineering Systems Co (MESCo)\nE: ${email}  |  Ph: ${phone}  |  ${siteUrl}\nBuilt from experience. Delivered with intent.\n\n${disclaimer}`;
+    const btn = document.getElementById("copy-formatted");
+    try {
+      await navigator.clipboard.write([
+        new ClipboardItem({
+          "text/html": new Blob([html], { type: "text/html" }),
+          "text/plain": new Blob([plain], { type: "text/plain" }),
+        }),
+      ]);
+    } catch {
+      await navigator.clipboard.writeText(plain);
+    }
+    const orig = btn.textContent;
+    btn.textContent = "Copied!";
+    setTimeout(() => (btn.textContent = orig), 2000);
+  });
+
+  document.getElementById("copy-html")?.addEventListener("click", async () => {
+    const { name, title, email, phone } = getValues();
+    const html = generateHTML(name, title, email, phone);
+    await navigator.clipboard.writeText(html);
+    const btn = document.getElementById("copy-html");
+    const orig = btn.textContent;
+    btn.textContent = "Copied!";
+    setTimeout(() => (btn.textContent = orig), 2000);
+  });
+
+  // Initial render
+  update();
+</script>
