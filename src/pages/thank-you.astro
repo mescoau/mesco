@@ -4,6 +4,7 @@ import Wrapper from "@/components/fundations/containers/Wrapper.astro";
 import Text from "@/components/fundations/elements/Text.astro";
 import Button from "@/components/fundations/elements/Button.astro";
 import Logo from "@/components/assets/Logo.astro";
+import { link } from "@/config/site";
 ---
 
 <BaseLayout
@@ -32,13 +33,13 @@ import Logo from "@/components/assets/Logo.astro";
         </Text>
 
         <div class="mt-12 flex flex-col sm:flex-row gap-3">
-          <Button isLink size="base" variant="muted" href="/case-studies">
+          <Button isLink size="base" variant="muted" href={link("/case-studies")}>
             Case Studies
           </Button>
-          <Button isLink size="base" variant="default" href="/services">
+          <Button isLink size="base" variant="default" href={link("/services")}>
             Our Services
           </Button>
-          <Button isLink size="base" variant="default" href="/about">
+          <Button isLink size="base" variant="default" href={link("/about")}>
             About MESCo
           </Button>
         </div>

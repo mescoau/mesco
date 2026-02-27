@@ -2,7 +2,10 @@ import { defineConfig } from "astro/config";
 import tailwindcss from "@tailwindcss/vite";
 import sitemap from "@astrojs/sitemap";
 import mdx from "@astrojs/mdx";
+import { siteConfig } from "./src/config/site.ts";
 export default defineConfig({
+  site: siteConfig.url,
+  trailingSlash: siteConfig.trailingSlash ? "always" : "never",
   vite: {
     plugins: [tailwindcss()],
   },
@@ -17,7 +20,6 @@ export default defineConfig({
     skipInline: false,
     drafts: true,
   },
-  site: "https://mesco.com",
   integrations: [
     tailwindcss(),
     sitemap({

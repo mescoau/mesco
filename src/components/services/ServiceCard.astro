@@ -4,9 +4,11 @@ import { Image } from "astro:assets";
 // Fundations
 import Text from "@/components/fundations/elements/Text.astro";
 import UnderlinedLink from "@/components/fundations/elements/UnderlinedLink.astro";
+// Config
+import { link } from "@/config/site";
 // Content
 const { title, description, url, image } = {
-  url: "/services/" + Astro.props.service.slug,
+  url: link("/services/" + Astro.props.service.slug),
   title: Astro.props.service.data.title,
   description: Astro.props.service.data.description,
   image: Astro.props.service.data.image.url,

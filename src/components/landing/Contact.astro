@@ -6,6 +6,8 @@ import Text from "@/components/fundations/elements/Text.astro";
 import Kicker from "@/components/fundations/elements/Kicker.astro";
 import Button from "@/components/fundations/elements/Button.astro";
 import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+// Config
+import { link } from "@/config/site";
 const contactDetails = [
   {
     label: "Location",
@@ -104,7 +106,7 @@ const contactDetails = [
           isLink
           size="base"
           variant="muted"
-          href="/contact"
+          href={link("/contact")}
           class="w-fit mt-8"
         >
           Send us a message

@@ -5,6 +5,8 @@ import Logo from "@/components/assets/Logo.astro";
 import Text from "@/components/fundations/elements/Text.astro";
 import Button from "@/components/fundations/elements/Button.astro";
 import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+// Config
+import { link } from "@/config/site";
 type LinkItem = {
   label: string;
   href: string;
@@ -19,32 +21,32 @@ const linkSections: LinkSection[] = [
   {
     title: "Company",
     links: [
-      { label: "About", href: "/about" },
-      { label: "Industries", href: "/industries" },
-      { label: "Team", href: "/team" },
-      { label: "Contact", href: "/contact" },
+      { label: "About", href: link("/about") },
+      { label: "Industries", href: link("/industries") },
+      { label: "Team", href: link("/team") },
+      { label: "Contact", href: link("/contact") },
     ],
   },
   {
     title: "Services",
     links: [
-      { label: "Project Start-Up Services", href: "/services/project-start-up-services" },
-      { label: "Automated Engineering Systems", href: "/services/automated-engineering-systems-and-qaqc-frameworks" },
-      { label: "Engineering Administration", href: "/services/engineering-administration-and-project-support" },
-      { label: "HSE Systems", href: "/services/health-safety-and-environmental-systems" },
-      { label: "ISO Systems & Audit Support", href: "/services/iso-systems-and-audit-support" },
-      { label: "Project Close-Out Services", href: "/services/project-close-out-services" },
+      { label: "Project Start-Up Services", href: link("/services/project-start-up-services") },
+      { label: "Automated Engineering Systems", href: link("/services/automated-engineering-systems-and-qaqc-frameworks") },
+      { label: "Engineering Administration", href: link("/services/engineering-administration-and-project-support") },
+      { label: "HSE Systems", href: link("/services/health-safety-and-environmental-systems") },
+      { label: "ISO Systems & Audit Support", href: link("/services/iso-systems-and-audit-support") },
+      { label: "Project Close-Out Services", href: link("/services/project-close-out-services") },
     ],
   },
   {
     title: "Resources",
     links: [
-      { label: "Case Studies", href: "/case-studies" },
-      { label: "Services", href: "/services" },
-      { label: "Brand Assets", href: "/brand" },
-      { label: "Privacy", href: "/legal/privacy" },
-      { label: "Terms", href: "/legal/terms" },
-      { label: "Cookies", href: "/legal/cookies" },
+      { label: "Case Studies", href: link("/case-studies") },
+      { label: "Services", href: link("/services") },
+      { label: "Brand Assets", href: link("/brand") },
+      { label: "Privacy", href: link("/legal/privacy") },
+      { label: "Terms", href: link("/legal/terms") },
+      { label: "Cookies", href: link("/legal/cookies") },
     ],
   },
 ];

@@ -9,6 +9,8 @@ import Button from "@/components/fundations/elements/Button.astro";
 import Wrapper from "@/components/fundations/containers/Wrapper.astro";
 // Components
 import ServiceCard from "@/components/services/ServiceCard.astro";
+// Config
+import { link } from "@/config/site";
 // Content
 import { getCollection } from "astro:content";
 const { frontmatter } = Astro.props;
@@ -92,7 +94,7 @@ const latestServices = allServices
               isLink
               size="xs"
               variant="muted"
-              href="/services"
+              href={link("/services")}
               class="w-fit"
             >
               See all services

@@ -5,6 +5,8 @@ import Logo from "@/components/assets/Logo.astro";
 import Text from "@/components/fundations/elements/Text.astro";
 import Button from "@/components/fundations/elements/Button.astro";
 import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+// Config
+import { link } from "@/config/site";
 // Components
 import ProjectCard from "@/components/projects/ProjectCard.astro";
 // Content
@@ -41,7 +43,7 @@ projects.sort((a, b) => {
           isLink
           size="xs"
           variant="muted"
-          href="/projects"
+          href={link("/projects")}
           class="mt-8 w-fit">See all projects</Button
         >
       </div>

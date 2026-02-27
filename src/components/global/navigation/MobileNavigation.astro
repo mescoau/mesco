@@ -2,6 +2,8 @@
 // Fundations
 import Button from "@/components/fundations/elements/Button.astro";
 import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+// Config
+import { link } from "@/config/site";
 interface NavLink {
   label: string;
   href: string;
@@ -34,14 +36,14 @@ const { navLinks } = Astro.props;
       <div class="space-y-2 mt-12">
         <Button
           isLink
-          href="/contact"
+          href={link("/contact")}
           size="sm"
           variant="default"
           class="w-full"
         >
           Contact MESCo
         </Button>
-        <Button isLink href="/case-studies" size="sm" variant="muted" class="w-full">
+        <Button isLink href={link("/case-studies")} size="sm" variant="muted" class="w-full">
           View Case Studies
         </Button>
       </div>

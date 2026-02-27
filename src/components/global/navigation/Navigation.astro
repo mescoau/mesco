@@ -9,16 +9,18 @@ import Wrapper from "@/components/fundations/containers/Wrapper.astro";
 // Components
 import Search from "@/components/global/Search.astro";
 import MobileNavigation from "@/components/global/navigation/MobileNavigation.astro";
+// Config
+import { link } from "@/config/site";
 // Allow pages/layouts to opt-in to transparent behavior; default is solid
 const { transparent } = Astro.props as { transparent?: boolean };
 const isTransparent = !!transparent;
 const navLinks = [
-  { label: "About", href: "/about" },
-  { label: "Values", href: "/values" },
-  { label: "Services", href: "/services" },
-  { label: "Case Studies", href: "/case-studies" },
-  { label: "Industries", href: "/industries" },
-  { label: "Team", href: "/team" },
+  { label: "About", href: link("/about") },
+  { label: "Values", href: link("/values") },
+  { label: "Services", href: link("/services") },
+  { label: "Case Studies", href: link("/case-studies") },
+  { label: "Industries", href: link("/industries") },
+  { label: "Team", href: link("/team") },
 ];
 ---
 
@@ -59,7 +61,7 @@ const navLinks = [
           isLink
           size="xs"
           variant="muted"
-          href="/contact"
+          href={link("/contact")}
           class="hidden lg:flex"
         >
           Contact MESCo

@@ -2,6 +2,7 @@
 import Text from "@/components/fundations/elements/Text.astro";
 import Kicker from "@/components/fundations/elements/Kicker.astro";
 import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+import { link } from "@/config/site";
 const services = [
   {
     title: "Project Start-Up Services",
@@ -66,7 +67,7 @@ const services = [
     >
       {
         services.map((service) => (
-          <a href={`/services/${service.slug}`} class="group block h-full">
+          <a href={link(`/services/${service.slug}`)} class="group block h-full">
             <div class="h-full flex flex-col justify-between p-6 bg-base-50 rounded-lg hover:bg-accent-50 transition-colors duration-300">
               <div>
                 <Text

@@ -3,6 +3,8 @@
 import Text from "@/components/fundations/elements/Text.astro";
 import Button from "@/components/fundations/elements/Button.astro";
 import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+// Config
+import { link } from "@/config/site";
 // Components
 import TeamCard from "@/components/team/TeamCard.astro";
 // Content
@@ -28,7 +30,7 @@ allTeam.sort((a, b) => {
             Meet our team
           </Text>
         </div>
-        <Button isLink size="xs" variant="muted" href="/team" class="w-fit">
+        <Button isLink size="xs" variant="muted" href={link("/team")} class="w-fit">
           All team
         </Button>
       </div>

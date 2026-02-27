@@ -9,6 +9,8 @@ import Wrapper from "@/components/fundations/containers/Wrapper.astro";
 // Components
 import ProjectCardSmall from "@/components/projects/ProjectCardSmall.astro";
 import Button from "@/components/fundations/elements/Button.astro";
+// Config
+import { link } from "@/config/site";
 // Content
 import { getCollection } from "astro:content";
 const { frontmatter } = Astro.props;
@@ -124,7 +126,7 @@ const latestProjects = allProjects
               isLink
               size="xs"
               variant="muted"
-              href="/case-studies"
+              href={link("/case-studies")}
               class="w-fit"
             >
               See all case studies
