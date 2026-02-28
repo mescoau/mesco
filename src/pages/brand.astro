@@ -54,8 +54,15 @@ const downloadAssets = [
   { format: "JPG",  variant: "White on banner",     colourspace: "RGB",  useCase: "Banners / signage",      file: "mesco_jpg_white-on-banner.jpg"     },
   { format: "PNG",  variant: "Blue on white",       colourspace: "RGB",  useCase: "Social media profile",   file: "mesco_png_social_blue-on-white.png"},
   { format: "PNG",  variant: "White on blue",       colourspace: "RGB",  useCase: "Social media profile",   file: "mesco_png_social_white-on-blue.png"},
-  { format: "PNG",  variant: "Profile picture",     colourspace: "RGB",  useCase: "Profile picture",        file: "mesco_profile_pic.png"             },
-  { format: "SVG",  variant: "Profile picture",     colourspace: "RGB",  useCase: "Profile picture",        file: "mesco_profile_pic.svg"             },
+  { format: "PNG",  variant: "Profile picture",                      colourspace: "RGB",  useCase: "Profile picture",           file: "mesco_profile_pic.png"              },
+  { format: "SVG",  variant: "Profile picture",                      colourspace: "RGB",  useCase: "Profile picture",           file: "mesco_profile_pic.svg"              },
+  { format: "JPG",  variant: "Profile picture",                      colourspace: "RGB",  useCase: "Profile picture",           file: "mesco_profile_pic.jpg"              },
+  { format: "EPS",  variant: "Profile picture",                      colourspace: "CMYK", useCase: "Print / profile picture",   file: "mesco_profile_pic.eps"              },
+  { format: "PNG",  variant: "Profile pic — Blue M (transparent)",   colourspace: "RGB",  useCase: "Profile picture / overlay", file: "mesco_profile_pic_transparent.png"  },
+  { format: "SVG",  variant: "Profile pic — Blue M (transparent)",   colourspace: "RGB",  useCase: "Profile picture / overlay", file: "mesco_profile_pic_transparent.svg"  },
+  { format: "EPS",  variant: "Profile pic — Blue M (transparent)",   colourspace: "CMYK", useCase: "Print / overlay",           file: "mesco_profile_pic_transparent.eps"  },
+  { format: "PNG",  variant: "Profile pic — Blue M on white",        colourspace: "RGB",  useCase: "Profile picture",           file: "mesco_profile_pic_white.png"        },
+  { format: "JPG",  variant: "Profile pic — Blue M on white",        colourspace: "RGB",  useCase: "Profile picture",           file: "mesco_profile_pic_white.jpg"        },
   { format: "PDF",  variant: "CMYK",                colourspace: "CMYK", useCase: "Print / press-ready",    file: "mesco_pdf_cmyk.pdf"                },
   { format: "PDF",  variant: "RGB",                 colourspace: "RGB",  useCase: "Print / digital",        file: "mesco_pdf_rgb.pdf"                 },
   { format: "AI",   variant: "CMYK",                colourspace: "CMYK", useCase: "Print / Illustrator",    file: "mesco_ai_cmyk.ai"                  },
@@ -106,12 +113,6 @@ const downloadAssets = [
             On dark
           </Text>
           <AnimatedLogo class="h-20 w-auto text-white" id="logo-dark" />
-          <button
-            id="replay-dark"
-            class="mt-2 text-sm text-brand-gold border border-brand-gold/30 rounded-full px-4 py-2 hover:bg-brand-gold/10 transition"
-          >
-            Replay animation
-          </button>
         </div>
 
         <!-- Light background -->
@@ -120,12 +121,6 @@ const downloadAssets = [
             On light
           </Text>
           <AnimatedLogo class="h-20 w-auto text-accent-500" id="logo-light" />
-          <button
-            id="replay-light"
-            class="mt-2 text-sm text-brand-gold border border-brand-gold/30 rounded-full px-4 py-2 hover:bg-brand-gold/10 transition"
-          >
-            Replay animation
-          </button>
         </div>
 
         <!-- Profile picture -->
@@ -134,6 +129,54 @@ const downloadAssets = [
             Profile picture
           </Text>
           <img src="/brand/mesco_profile_pic.png" alt="MESCo profile picture" class="h-20 w-20 rounded-full object-cover" />
+        </div>
+      </div>
+
+      <!-- Profile picture variants -->
+      <div class="mt-8">
+        <Text tag="h3" variant="textSM" class="font-medium uppercase text-base-500 tracking-widest mb-4">
+          Profile Picture Variants
+        </Text>
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+
+          <!-- White M on blue -->
+          <div class="bg-accent-500 rounded-xl p-8 flex flex-col items-center gap-4">
+            <Text tag="p" variant="textXS" class="text-accent-300 uppercase tracking-widest text-center">
+              White M on Blue
+            </Text>
+            <img src="/brand/mesco_profile_pic.png" alt="MESCo profile picture — white M on blue" class="h-16 w-16 rounded-lg object-cover" />
+          </div>
+
+          <!-- Blue M on transparent -->
+          <div
+            class="rounded-xl p-8 flex flex-col items-center gap-4"
+            style="background-image:linear-gradient(45deg,#d1d5db 25%,transparent 25%),linear-gradient(-45deg,#d1d5db 25%,transparent 25%),linear-gradient(45deg,transparent 75%,#d1d5db 75%),linear-gradient(-45deg,transparent 75%,#d1d5db 75%);background-size:16px 16px;background-position:0 0,0 8px,8px -8px,-8px 0;background-color:#f9fafb;"
+          >
+            <Text tag="p" variant="textXS" class="text-base-600 uppercase tracking-widest text-center bg-white/70 px-2 py-0.5 rounded">
+              Blue M (transparent)
+            </Text>
+            <img src="/brand/mesco_profile_pic_transparent.png" alt="MESCo profile picture — blue M, transparent background" class="h-16 w-16 object-contain" />
+          </div>
+
+          <!-- Blue M on white -->
+          <div class="bg-white border border-base-200 rounded-xl p-8 flex flex-col items-center gap-4">
+            <Text tag="p" variant="textXS" class="text-base-400 uppercase tracking-widest text-center">
+              Blue M on White
+            </Text>
+            <img src="/brand/mesco_profile_pic_white.png" alt="MESCo profile picture — blue M on white" class="h-16 w-16 rounded-lg object-cover" />
+          </div>
+
+          <!-- Social (full logo) -->
+          <div class="bg-base-100 border border-base-200 rounded-xl p-8 flex flex-col items-center gap-4">
+            <Text tag="p" variant="textXS" class="text-base-400 uppercase tracking-widest text-center">
+              Social (full logo)
+            </Text>
+            <div class="flex items-center gap-3">
+              <img src="/brand/mesco_png_social_blue-on-white.png" alt="MESCo social logo — blue on white" class="h-14 w-14 rounded object-cover border border-base-200" />
+              <img src="/brand/mesco_png_social_white-on-blue.png" alt="MESCo social logo — white on blue" class="h-14 w-14 rounded object-cover" />
+            </div>
+          </div>
+
         </div>
       </div>
 
@@ -393,6 +436,8 @@ const downloadAssets = [
               { label: "AI RGB",    file: "mesco_ai_rgb.ai"     },
               { label: "EPS CMYK",  file: "mesco_eps_cmyk.eps"  },
               { label: "EPS RGB",   file: "mesco_eps_rgb.eps"   },
+              { label: "Profile pic EPS (white M)", file: "mesco_profile_pic.eps" },
+              { label: "Profile pic EPS (blue M, transparent)", file: "mesco_profile_pic_transparent.eps" },
               { label: "PNG Blue (banner)",  file: "mesco_png_blue-on-banner.png"  },
               { label: "PNG White (banner)", file: "mesco_png_white-on-banner.png" },
               { label: "JPG Blue (banner)",  file: "mesco_jpg_blue-on-banner.jpg"  },
@@ -414,14 +459,19 @@ const downloadAssets = [
 
         <!-- Social media -->
         <div class="bg-accent-600 rounded-xl p-6 flex flex-col gap-4">
-          <Text tag="h3" variant="textBase" class="font-medium text-white">Social Media</Text>
-          <Text tag="p" variant="textXS" class="text-accent-300">Profile picture formats for social platforms.</Text>
+          <Text tag="h3" variant="textBase" class="font-medium text-white">Social & Profile</Text>
+          <Text tag="p" variant="textXS" class="text-accent-300">Profile picture and social logo formats.</Text>
           <div class="flex flex-col gap-2 mt-auto">
             {[
-              { label: "Blue on white", file: "mesco_png_social_blue-on-white.png" },
-              { label: "White on blue", file: "mesco_png_social_white-on-blue.png" },
-              { label: "Profile picture (PNG)", file: "mesco_profile_pic.png" },
-              { label: "Profile picture (SVG)", file: "mesco_profile_pic.svg" },
+              { label: "Social — Blue on white", file: "mesco_png_social_blue-on-white.png" },
+              { label: "Social — White on blue", file: "mesco_png_social_white-on-blue.png" },
+              { label: "Profile pic — White M (PNG)", file: "mesco_profile_pic.png" },
+              { label: "Profile pic — White M (SVG)", file: "mesco_profile_pic.svg" },
+              { label: "Profile pic — White M (JPG)", file: "mesco_profile_pic.jpg" },
+              { label: "Profile pic — Blue M, transparent (PNG)", file: "mesco_profile_pic_transparent.png" },
+              { label: "Profile pic — Blue M, transparent (SVG)", file: "mesco_profile_pic_transparent.svg" },
+              { label: "Profile pic — Blue M on white (PNG)", file: "mesco_profile_pic_white.png" },
+              { label: "Profile pic — Blue M on white (JPG)", file: "mesco_profile_pic_white.jpg" },
             ].map((a) => (
               <a
                 href={`/brand/${a.file}`}
@@ -468,18 +518,6 @@ const downloadAssets = [
 </BaseLayout>
 
 <script is:inline>
-  // Replay logo animation
-  document.querySelectorAll('[id^="replay-"]').forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const container = btn.closest('div');
-      const svg = container.querySelector('svg');
-      if (!svg) return;
-      svg.classList.remove('logo-animate');
-      void svg.offsetWidth;
-      svg.classList.add('logo-animate');
-    });
-  });
-
   // Copy hex to clipboard
   document.querySelectorAll('[data-copy]').forEach((btn) => {
     btn.addEventListener('click', () => {
