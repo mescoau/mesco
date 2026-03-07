@@ -6,7 +6,7 @@ description: >
   bypass at Hope Downs 1, delivering a clean close-out package with all tests
   passed on first submission.
 client: WSP on behalf of Rio Tinto
-location: Hope Downs 1 – Bedded Hilltop (BHT), WA
+location: Hope Downs 1 – Bedded Hilltop (BHT), WA (Pilbara)
 duration: 3 months
 scope: Construction of temporary MAR bypass (LME04), sealed pavement, tie-ins to existing MAR, drainage, culvert installation, tunnel laydown access
 category: Mining & Resources
