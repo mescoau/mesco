@@ -30,7 +30,7 @@ const steps = [
 <section class="bg-accent-950">
   <Wrapper variant="standard" class="py-24 lg:border-x lg:border-brand-gold">
     <div class="max-w-3xl">
-      <Text class="text-accent-100" variant="displayLG">Where MESCo Fits In</Kicker>
+      <Text class="text-brand-gold" variant="displayLG">Where MESCo Fits In</Text>
       <Text
         tag="h2"
         variant="displayMD"
@@ -47,7 +47,7 @@ const steps = [
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12 lg:mt-24">
       {
         steps.map((step, i) => (
-          <div class="p-8 rounded bg-accent-900 relative">
+          <div class={`p-8 rounded bg-accent-900 relative ${i === 1 ? "ring-2 ring-brand-gold" : ""}`}>
             <Text
               tag="span"
               variant="displayXL"

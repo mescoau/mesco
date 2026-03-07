@@ -28,7 +28,7 @@ Her approach balances technical rigour with site-based reality, producing system
 
 ## Qualifications
 
-- Bachelor of Engineering (Honours) — Civil (First Class, Central Queensland University)
+- Bachelor of Civil Engineering (First Class Honours) — Civil (First Class, Central Queensland University)
 - Diploma of Professional Practice (Engineering)
 - AFPA Sprayed Sealing Design
 - Standard 11 — Surface & Underground Induction
