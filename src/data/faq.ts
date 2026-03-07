@@ -12,12 +12,12 @@ export const faqs: FaqItem[] = [
   {
     question: "What details should I share about my project or systems?",
     answer:
-      "A short description of the project, its location, key stakeholders, and any existing WHS or quality systems helps us point you to the right support.",
+      "Provide a brief overview of your project, including scope, location, key stakeholders, applicable standards or specifications, and any existing WHS or QA/QC processes. This helps us understand your requirements and provide the most appropriate engineering support.",
   },
   {
-    question: "Do you support both new builds and existing projects?",
+    question: "Do you support both greenfield and brownfield projects?",
     answer:
-      "Yes. We help set up systems for new projects and also improve or formalise documentation and processes on live jobs.",
+      "Yes. We work across both greenfield and brownfield projects — establishing frameworks for new developments and improving or formalising QA, documentation, and delivery processes within active operations.",
   },
   {
     question: "Can we schedule an on-site or office visit?",
@@ -27,7 +27,7 @@ export const faqs: FaqItem[] = [
   {
     question: "What regions does MESCo support?",
     answer:
-      "MESCo primarily supports Australian projects, with a focus on major metropolitan and infrastructure corridors. Discuss your location with us and we can confirm fit.",
+      "MESCo supports projects Australia-wide, across metropolitan, regional, and remote locations. Get in touch to discuss your project requirements and delivery approach.",
   },
   {
     question: "How do you approach pricing for MESCo services?",

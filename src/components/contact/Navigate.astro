@@ -13,7 +13,7 @@ const cards = [
     cta: "Explore all services",
   },
   {
-    title: "Case studies",
+    title: "Case Studies",
     description:
       "Explore MESCo project case studies and the systems behind each outcome.",
     href: "/case-studies",
@@ -32,7 +32,7 @@ const cards = [
 <section class="bg-accent-950 border-y border-brand-gold">
   <Wrapper variant="standard" class="py-24 lg:py-48 lg:border-x lg:border-brand-gold">
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
-      <Kicker class="text-base-300">Navigate</Kicker>
+      <Kicker class="text-brand-gold">Navigate</Kicker>
       <Text
         tag="h2"
         variant="displayLG"
@@ -47,7 +47,7 @@ const cards = [
     >
       {
         cards.map((card) => (
-          <div>
+          <a href={card.href} class="group flex flex-col">
             <div>
               <Text tag="h3" variant="textLG" class="font-medium text-base-100">
                 {card.title}
@@ -60,10 +60,10 @@ const cards = [
                 {card.description}
               </Text>
             </div>
-            <UnderlinedLink variant="light" href={card.href} class="mt-12">
+            <span class="mt-12 inline-block text-sm font-medium text-white border-b border-white/40 pb-0.5 group-hover:border-brand-gold group-hover:text-brand-gold transition-colors duration-200">
               {card.cta}
-            </UnderlinedLink>
-          </div>
+            </span>
+          </a>
         ))
       }
     </div>
