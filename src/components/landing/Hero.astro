@@ -1,9 +1,16 @@
 ---
+import { getImage } from "astro:assets";
 // Fundations
 import Text from "@/components/fundations/elements/Text.astro";
 import Kicker from "@/components/fundations/elements/Kicker.astro";
 import Wrapper from "@/components/fundations/containers/Wrapper.astro";
 import heroFallback from "@/images/failsafe-hero.jpg";
+const heroDesktopFallback = await getImage({
+  src: heroFallback,
+  width: 1280,
+  format: "webp",
+  quality: 30,
+});
 const stats = [
   { value: "Systems-first", label: "Approach from mobilisation to close-out" },
   { value: "Audit-ready", label: "Documentation and compliance" },
@@ -12,23 +19,23 @@ const stats = [
 ];
 ---
 
-<section class="relative min-h-[80dvh] flex flex-col lg:border-b lg:border-brand-gold">
-  <div class="absolute inset-0 z-0">
+<section class="relative min-h-[80dvh] flex flex-col bg-accent-950 lg:border-b lg:border-brand-gold">
+  <div
+    class="absolute inset-0 z-0 hero-fallback"
+    style={`--hero-fallback-image: url('${heroDesktopFallback.src}')`}
+  >
     <video
       data-hero-video
-      autoplay
       muted
       playsinline
       webkit-playsinline
-      preload="auto"
+      preload="none"
       aria-hidden="true"
       disablepictureinpicture
       controlslist="nodownload noplaybackrate noremoteplayback"
-      class="size-full object-cover"
-      poster={heroFallback.src}
-    >
-      <source src="/hero.mp4" type="video/mp4" />
-    </video>
+      class="size-full object-cover opacity-0 transition-opacity duration-500"
+      data-src="/hero.mp4"
+    ></video>
     <div
       aria-hidden="true"
       class="absolute pointer-events-none inset-0 bg-accent-950/60"
@@ -81,21 +88,17 @@ const stats = [
   </div>
 </section>
 <style is:inline>
+  @media (min-width: 1024px) {
+    .hero-fallback {
+      background-image: var(--hero-fallback-image);
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+  }
+
   video[data-hero-video]::-webkit-media-controls-start-playback-button {
     display: none !important;
     -webkit-appearance: none;
   }
 </style>
-<script is:inline>
-  if (typeof window !== "undefined") {
-    const video = document.querySelector("video[data-hero-video]");
-    if (video) {
-      video.muted = true;
-      video.playsInline = true;
-      const playPromise = video.play();
-      if (playPromise !== undefined) {
-        playPromise.catch(() => {});
-      }
-    }
-  }
-</script>

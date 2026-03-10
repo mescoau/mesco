@@ -1,5 +1,4 @@
 ---
-import AnimatedLogo from "@/components/assets/AnimatedLogo.astro";
 // Icons
 import Close from "@/components/fundations/icons/Close.astro";
 import Burger from "@/components/fundations/icons/Burger.astro";
@@ -38,7 +37,20 @@ const navLinks = [
         class={`focus:outline-none text-2xl font-medium flex items-center gap-2 ${isTransparent ? "text-white" : "text-base-800"}`}
       >
         <span class="sr-only">Home</span>
-        <AnimatedLogo class="h-12 transition-all duration-300" data-nav-logo />
+        <img
+          src={isTransparent ? "/brand/mesco_svg_white.svg" : "/brand/mesco_svg_blue.svg"}
+          alt=""
+          aria-hidden="true"
+          width="719"
+          height="270"
+          loading="eager"
+          decoding="async"
+          class="h-12 w-auto transition-all duration-300"
+          data-nav-logo
+          data-logo-image
+          data-dark-src="/brand/mesco_svg_white.svg"
+          data-light-src="/brand/mesco_svg_blue.svg"
+        />
       </a>
 
       <!-- Desktop liquid glass nav pill -->
@@ -108,184 +120,4 @@ const navLinks = [
     <!-- Mobile Menu -->
     <MobileNavigation navLinks={navLinks} />
   </Wrapper>
-  <script is:inline>
-    window.addEventListener("DOMContentLoaded", () => {
-      // Mobile menu toggle logic
-      const menuButton = document.querySelector("[data-menu-button]");
-      const burger = menuButton
-        ? menuButton.querySelector("[data-burger]")
-        : null;
-      const close = menuButton
-        ? menuButton.querySelector("[data-close]")
-        : null;
-      const mobileMenu = document.getElementById("mobile-menu");
-      // Icon toggle
-      const updateIcons = () => {
-        if (!menuButton || !burger || !close) return;
-        const expanded = menuButton.getAttribute("aria-expanded") === "true";
-        burger.style.setProperty(
-          "--burger-display",
-          expanded ? "none" : "block"
-        );
-        close.style.setProperty("--close-display", expanded ? "block" : "none");
-      };
-      const openMenu = () => {
-        if (!menuButton || !mobileMenu) return;
-        menuButton.setAttribute("aria-expanded", "true");
-        mobileMenu.classList.remove(
-          "max-h-0",
-          "opacity-0",
-          "-translate-y-2",
-          "pointer-events-none"
-        );
-        mobileMenu.classList.add(
-          "max-h-screen",
-          "opacity-100",
-          "translate-y-0",
-          "pointer-events-auto"
-        );
-        updateIcons();
-      };
-      const closeMenu = () => {
-        if (!menuButton || !mobileMenu) return;
-        menuButton.setAttribute("aria-expanded", "false");
-        mobileMenu.classList.add(
-          "max-h-0",
-          "opacity-0",
-          "-translate-y-2",
-          "pointer-events-none"
-        );
-        mobileMenu.classList.remove(
-          "max-h-screen",
-          "opacity-100",
-          "translate-y-0",
-          "pointer-events-auto"
-        );
-        updateIcons();
-      };
-      const toggleMenu = () => {
-        const expanded = menuButton.getAttribute("aria-expanded") === "true";
-        expanded ? closeMenu() : openMenu();
-      };
-      if (menuButton) menuButton.addEventListener("click", toggleMenu);
-      // Click outside to close
-      document.addEventListener("click", (e) => {
-        const target = e.target;
-        if (!mobileMenu.contains(target) && !menuButton.contains(target)) {
-          const expanded = menuButton.getAttribute("aria-expanded") === "true";
-          if (expanded) closeMenu();
-        }
-      });
-      // Escape to close
-      document.addEventListener("keydown", (e) => {
-        if (
-          e.key === "Escape" &&
-          menuButton.getAttribute("aria-expanded") === "true"
-        ) {
-          closeMenu();
-        }
-      });
-      updateIcons();
-
-      // Scroll background + link colors + logo size
-      const navEl = document.querySelector("[data-nav]");
-      const logoEl = document.querySelector("[data-logo]");
-      const navLogo = document.querySelector("[data-nav-logo]");
-      const primaryLinks = document.querySelectorAll("[data-primary-link]");
-      const glassNav = document.querySelector("[data-glass-nav]");
-      const hoverPill = glassNav ? glassNav.querySelector("[data-hover-pill]") : null;
-
-      const enableScrollSwap = navEl && navEl.dataset.swap === "true";
-
-      const swapColor = (el, scrolled) => {
-        if (!el) return;
-        el.classList.remove("text-white", "text-base-800");
-        el.classList.add(scrolled ? "text-base-800" : "text-white");
-      };
-      const shrinkLogo = (scrolled) => {
-        if (!navLogo) return;
-        navLogo.classList.toggle("h-12", !scrolled);
-        navLogo.classList.toggle("h-8", scrolled);
-      };
-      // Update hover pill style for dark (over image) vs light (over white) backgrounds
-      const updatePillTheme = (isDark) => {
-        if (!hoverPill) return;
-        if (isDark) {
-          hoverPill.style.background = "rgba(255,255,255,0.22)";
-          hoverPill.style.boxShadow = "inset 0 1px 0 rgba(255,255,255,0.4)";
-        } else {
-          hoverPill.style.background = "rgba(0,0,0,0.07)";
-          hoverPill.style.boxShadow = "inset 0 1px 0 rgba(255,255,255,0.6)";
-        }
-      };
-      // Update glass nav container for dark vs light
-      const updateGlassTheme = (isDark) => {
-        if (!glassNav) return;
-        if (isDark) {
-          glassNav.style.background = "rgba(255,255,255,0.1)";
-          glassNav.style.borderColor = "rgba(255,255,255,0.2)";
-          glassNav.style.boxShadow =
-            "inset 0 1px 0 rgba(255,255,255,0.25), 0 2px 12px rgba(0,0,0,0.08)";
-        } else {
-          glassNav.style.background = "rgba(0,0,0,0.04)";
-          glassNav.style.borderColor = "rgba(0,0,0,0.08)";
-          glassNav.style.boxShadow =
-            "inset 0 1px 0 rgba(255,255,255,0.8), 0 2px 12px rgba(0,0,0,0.04)";
-        }
-      };
-
-      const handleScroll = () => {
-        const scrolled = window.scrollY > 0;
-        shrinkLogo(scrolled);
-        if (!enableScrollSwap) return;
-        if (navEl) {
-          navEl.classList.toggle("bg-white/80", scrolled);
-          navEl.classList.toggle("backdrop-blur-xl", scrolled);
-        }
-        const isDark = !scrolled;
-        swapColor(logoEl, scrolled);
-        primaryLinks.forEach((el) => swapColor(el, scrolled));
-        swapColor(burger, scrolled);
-        swapColor(close, scrolled);
-        updatePillTheme(isDark);
-        updateGlassTheme(isDark);
-      };
-
-      window.addEventListener("scroll", handleScroll);
-      handleScroll();
-
-      if (!enableScrollSwap) {
-        if (navEl) navEl.classList.add("bg-white/80", "backdrop-blur-xl");
-        swapColor(logoEl, true);
-        primaryLinks.forEach((el) => swapColor(el, true));
-        swapColor(burger, true);
-        swapColor(close, true);
-        updatePillTheme(false);
-        updateGlassTheme(false);
-      }
-
-      // Hover pill animation
-      if (glassNav && hoverPill) {
-        const links = glassNav.querySelectorAll("a[data-primary-link]");
-
-        links.forEach((link) => {
-          link.addEventListener("mouseenter", () => {
-            const containerRect = glassNav.getBoundingClientRect();
-            const linkRect = link.getBoundingClientRect();
-            hoverPill.style.left =
-              linkRect.left - containerRect.left + "px";
-            hoverPill.style.top =
-              linkRect.top - containerRect.top + "px";
-            hoverPill.style.width = linkRect.width + "px";
-            hoverPill.style.height = linkRect.height + "px";
-            hoverPill.style.opacity = "1";
-          });
-        });
-
-        glassNav.addEventListener("mouseleave", () => {
-          hoverPill.style.opacity = "0";
-        });
-      }
-    });
-  </script>
 </nav>

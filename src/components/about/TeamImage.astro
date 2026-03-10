@@ -1,0 +1,19 @@
+---
+import { Image } from "astro:assets";
+import teamImage from "@/images/assets/sydney-highway.jpg";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+---
+
+<section>
+  <Wrapper variant="paddingless" class="lg:border-x lg:border-brand-gold">
+    <Image
+      width={1420}
+      height={1420}
+      src={teamImage}
+      alt="Sydney highway infrastructure"
+      decoding="async"
+      loading="lazy"
+      class="size-full object-cover max-h-160 lg:border-b lg:border-t lg:border-brand-gold"
+    />
+  </Wrapper>
+</section>

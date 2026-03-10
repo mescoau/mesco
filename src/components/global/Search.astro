@@ -1,57 +1,8 @@
 ---
-// Fundations
 import Button from "@/components/fundations/elements/Button.astro";
 // Icons
 import Close from "@/components/fundations/icons/Close.astro";
 import SearchIcon from "@/components/fundations/icons/Search.astro";
-import { getCollection } from "astro:content";
-import { link } from "@/config/site";
-
-const [services, projects, team, legal] = await Promise.all([
-  getCollection("services"),
-  getCollection("projects"),
-  getCollection("team"),
-  getCollection("legal"),
-]);
-
-const searchItems = [
-  ...services.map((item) => ({
-    type: "Service",
-    title: item.data.title,
-    description: item.data.excerpt ?? item.data.description,
-    meta: item.data.highlights?.join(", "),
-    url: link(`/services/${item.slug}`),
-  })),
-  ...projects.map((item) => ({
-    type: "Case Study",
-    title: item.data.title,
-    description: item.data.description,
-    meta: [
-      item.data.client,
-      item.data.location,
-      item.data.category,
-      item.data.duration,
-    ]
-      .filter(Boolean)
-      .join(" • "),
-    url: link(`/case-studies/${item.slug}`),
-  })),
-  ...team.map((item) => ({
-    type: "Team",
-    title: item.data.name,
-    description: item.data.bio,
-    meta: item.data.role,
-    url: link(`/team/${item.slug}`),
-  })),
-  ...legal.map((item) => ({
-    type: "Legal",
-    title: item.data.page,
-    description:
-      item.data.pubDate?.toISOString?.().split("T")[0] || "Legal notice",
-    date: item.data.pubDate,
-    url: link(`/legal/${item.slug}`),
-  })),
-];
 ---
 
 <div class="relative">
@@ -65,196 +16,274 @@ const searchItems = [
   >
     <SearchIcon slot="icon" size="base" />
   </Button>
-
-  <div
-    id="searchModal"
-    class="fixed inset-0 z-50 hidden overflow-y-auto bg-black/30 backdrop-blur-sm"
-    role="dialog"
-    aria-modal="true"
-  >
-    <div class="min-h-screen px-4 py-8 text-center">
-      <div
-        class="relative inline-block w-full max-w-3xl mt-12 mb-8 text-left align-middle lg:mt-24 transition-all transform"
-      >
-        <div class="rounded-xl bg-accent-950 outline-white/10 shadow-2xl">
-          <div class="flex items-start justify-between gap-4 px-6 pt-6">
-            <div>
-              <p class="text-sm uppercase text-base-400 font-medium">Search</p>
-              <h2 class="text-white text-xl font-medium tracking-tight mt-12">
-                Find what you need
-              </h2>
-              <p class="text-base-300 text-sm">
-                Services, case studies, team, and legal pages.
-              </p>
-            </div>
-            <Button
-              iconOnly
-              size="sm"
-              variant="muted"
-              type="button"
-              id="closeSearch"
-              aria-label="Close search"
-            >
-              <Close slot="icon" size="base" />
-            </Button>
-          </div>
-          <div class="p-6 pt-4 space-y-4">
-            <div class="relative">
-              <span
-                class="absolute left-4 top-1/2 -translate-y-1/2 text-accent-400"
-              >
-                <SearchIcon size="sm" />
-              </span>
-              <input
-                type="text"
-                id="searchInput"
-                placeholder="Search by title, role, service, or location..."
-                class="w-full rounded border-brand-gold/15 bg-accent-950 px-12 pr-4 py-3 h-12 text-white focus:border-brand-gold focus:ring-2 focus:ring-brand-gold duration-300 transition-all focus:border-transparent focus:outline-none placeholder-base-500"
-              />
-            </div>
-            <div
-              id="searchResults"
-              class="w-full mt-1 overflow-hidden overflow-y-auto rounded-lg max-h-100 divide-y divide-white/5 bg-accent-900 outline outline-white/10 backdrop-blur scrollbar-hide"
-            >
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 </div>
 
-<script is:inline define:vars={{ searchItems }}>
-  window.addEventListener("load", () => {
+<script>
+  const initSearch = () => {
     const searchButton = document.getElementById("searchButton");
-    const searchModal = document.getElementById("searchModal");
-    const searchInput = document.getElementById("searchInput");
-    const searchResults = document.getElementById("searchResults");
-    const closeSearch = document.getElementById("closeSearch");
-
-    const fuse = new Fuse(searchItems, {
-      keys: ["title", "description", "meta", "type"],
-      threshold: 0.3,
-      includeMatches: true,
-    });
-
-    searchResults.classList.add("hidden");
-
-    function openSearch(e) {
-      e.preventDefault();
-      e.stopPropagation();
-      searchModal.classList.remove("hidden");
-      document.body.style.overflow = "hidden";
-      setTimeout(() => searchInput.focus(), 100);
-      renderResults([]);
+    if (!searchButton) {
+      return;
     }
 
-    function closeSearchModal(e) {
-      if (e) {
-        e.preventDefault();
-        e.stopPropagation();
+    let searchIndexPromise;
+    let fuse;
+    let searchModal;
+    let searchInput;
+    let searchResults;
+    let closeSearch;
+
+    const ensureModal = () => {
+      if (searchModal && searchInput && searchResults && closeSearch) {
+        return;
       }
-      searchModal.classList.add("hidden");
-      document.body.style.overflow = "";
-      searchInput.value = "";
-      searchResults.innerHTML = "";
-      searchResults.classList.add("hidden");
-    }
 
-    function renderResults(results) {
-      if (!searchInput.value.trim()) {
-        searchResults.innerHTML = `
-          <div class="p-4 text-sm text-base-300">
-            Start typing to search services, case studies, team, and legal content.
+      document.body.insertAdjacentHTML(
+        "beforeend",
+        `
+          <div
+            id="searchModal"
+            class="fixed inset-0 z-50 hidden overflow-y-auto bg-black/30 backdrop-blur-sm"
+            role="dialog"
+            aria-modal="true"
+          >
+            <div class="min-h-screen px-4 py-8 text-center">
+              <div class="relative inline-block w-full max-w-3xl mt-12 mb-8 text-left align-middle lg:mt-24 transition-all transform">
+                <div class="rounded-xl bg-accent-950 outline-white/10 shadow-2xl">
+                  <div class="flex items-start justify-between gap-4 px-6 pt-6">
+                    <div>
+                      <p class="text-sm uppercase text-base-400 font-medium">Search</p>
+                      <h2 class="text-white text-xl font-medium tracking-tight mt-12">Find what you need</h2>
+                      <p class="text-base-300 text-sm">Services, case studies, team, and legal pages.</p>
+                    </div>
+                    <button
+                      type="button"
+                      id="closeSearch"
+                      aria-label="Close search"
+                      class="flex justify-center text-center font-medium items-center duration-500 ease-in-out transition-colors focus:outline focus:outline-offset-2 text-base-900 bg-base-100 hover:bg-base-200 focus:outline-base-300 size-9 text-base rounded-lg"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-plus size-5">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                        <path d="M18 6l-12 12"></path>
+                        <path d="M6 6l12 12"></path>
+                      </svg>
+                    </button>
+                  </div>
+                  <div class="p-6 pt-4 space-y-4">
+                    <div class="relative">
+                      <span class="absolute left-4 top-1/2 -translate-y-1/2 text-accent-400">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-plus size-4">
+                          <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                          <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"></path>
+                          <path d="M21 21l-6 -6"></path>
+                        </svg>
+                      </span>
+                      <input
+                        type="text"
+                        id="searchInput"
+                        placeholder="Search by title, role, service, or location..."
+                        class="w-full rounded border-brand-gold/15 bg-accent-950 px-12 pr-4 py-3 h-12 text-white focus:border-brand-gold focus:ring-2 focus:ring-brand-gold duration-300 transition-all focus:border-transparent focus:outline-none placeholder-base-500"
+                      />
+                    </div>
+                    <div
+                      id="searchResults"
+                      class="w-full mt-1 overflow-hidden overflow-y-auto rounded-lg max-h-100 divide-y divide-white/5 bg-accent-900 outline outline-white/10 backdrop-blur scrollbar-hide"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-        `;
-        searchResults.classList.remove("hidden");
+        `
+      );
+
+      searchModal = document.getElementById("searchModal");
+      searchInput = document.getElementById("searchInput");
+      searchResults = document.getElementById("searchResults");
+      closeSearch = document.getElementById("closeSearch");
+
+      if (!searchModal || !searchInput || !searchResults || !closeSearch) {
+        return;
+      }
+
+      closeSearch.addEventListener("click", closeSearchModal);
+      closeSearch.addEventListener("touchend", closeSearchModal);
+
+      searchInput.addEventListener("input", async (event) => {
+        const value = event.target.value.trim();
+
+        if (!value) {
+          renderResults([]);
+          return;
+        }
+
+        try {
+          await ensureSearchIndex();
+          renderResults(fuse ? fuse.search(value) : []);
+        } catch (error) {
+          console.error(error);
+          showMessage("Search is temporarily unavailable.");
+        }
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && !searchModal.classList.contains("hidden")) {
+          closeSearchModal();
+        }
+      });
+
+      searchModal.addEventListener("click", (event) => {
+        const modalContent = event.target.closest(".inline-block");
+        if (!modalContent) {
+          closeSearchModal(event);
+        }
+      });
+    };
+
+    const showMessage = (message) => {
+      if (!searchResults) {
+        return;
+      }
+
+      searchResults.innerHTML = `<div class="p-4 text-sm text-base-300">${message}</div>`;
+      searchResults.classList.remove("hidden");
+    };
+
+    const renderResults = (results) => {
+      if (!searchInput || !searchResults) {
+        return;
+      }
+
+      if (!searchInput.value.trim()) {
+        showMessage(
+          "Start typing to search services, case studies, team, and legal content."
+        );
         return;
       }
 
       if (results.length === 0) {
-        searchResults.innerHTML = `
-          <div>
-            <div class="p-4 text-sm text-base-300">
-              No matches found. Try a different keyword.
-            </div>
-          </div>
-        `;
-        searchResults.classList.remove("hidden");
+        showMessage("No matches found. Try a different keyword.");
         return;
       }
 
       searchResults.innerHTML = results
         .map(
           (result) => `
-          <div class="relative block p-4 duration-200 hover:bg-accent-950 bg-accent-900 text-white">
-            <a href="${result.item.url}" class="absolute inset-0 z-10"></a>
-            <div class="flex items-center gap-2 text-xs uppercase  text-base-300">
-              <span>${result.item.type}</span>
+            <div class="relative block p-4 duration-200 hover:bg-accent-950 bg-accent-900 text-white">
+              <a href="${result.item.url}" class="absolute inset-0 z-10"></a>
+              <div class="flex items-center gap-2 text-xs uppercase text-base-300">
+                <span>${result.item.type}</span>
+                ${
+                  result.item.date
+                    ? `<span class="text-base-400">• ${new Date(
+                        result.item.date
+                      ).toLocaleDateString("en-US", {
+                        year: "numeric",
+                        month: "short",
+                        day: "2-digit",
+                      })}</span>`
+                    : ""
+                }
+              </div>
+              <h3 class="block mt-2 text-lg font-medium text-white">
+                ${result.item.title}
+              </h3>
               ${
-                result.item.date
-                  ? `<span class="text-base-400">
-                      • ${new Date(result.item.date).toLocaleDateString(
-                        "en-US",
-                        {
-                          year: "numeric",
-                          month: "short",
-                          day: "2-digit",
-                        }
-                      )}
-                    </span>`
+                result.item.description
+                  ? `<p class="block text-xs text-base-300 mt-2">${result.item.description}</p>`
+                  : ""
+              }
+              ${
+                result.item.meta
+                  ? `<p class="block text-[11px] text-base-400 mt-1">${result.item.meta}</p>`
                   : ""
               }
             </div>
-            <h3 class="block mt-2 text-lg font-medium  text-white">
-              ${result.item.title}
-            </h3>
-            ${
-              result.item.description
-                ? `<p class="block text-xs text-base-300 mt-2">
-                    ${result.item.description}
-                  </p>`
-                : ""
-            }
-            ${
-              result.item.meta
-                ? `<p class="block text-[11px] text-base-400 mt-1">
-                    ${result.item.meta}
-                  </p>`
-                : ""
-            }
-          </div>
-        `
+          `
         )
         .join("");
 
       searchResults.classList.remove("hidden");
-    }
+    };
+
+    const ensureSearchIndex = async () => {
+      if (!searchIndexPromise) {
+        searchIndexPromise = Promise.all([
+          import("fuse.js"),
+          fetch("/search-index.json").then((response) => {
+            if (!response.ok) {
+              throw new Error("Failed to load search index");
+            }
+            return response.json();
+          }),
+        ]).then(([{ default: Fuse }, searchItems]) => {
+          fuse = new Fuse(searchItems, {
+            keys: ["title", "description", "meta", "type"],
+            threshold: 0.3,
+            includeMatches: true,
+          });
+
+          return fuse;
+        });
+      }
+
+      return searchIndexPromise;
+    };
+
+    const openSearch = async (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      ensureModal();
+
+      if (!searchModal || !searchInput) {
+        return;
+      }
+
+      searchModal.classList.remove("hidden");
+      document.body.style.overflow = "hidden";
+      searchInput.disabled = true;
+      searchInput.placeholder = "Loading search…";
+      showMessage("Loading search index…");
+
+      try {
+        await ensureSearchIndex();
+        searchInput.disabled = false;
+        searchInput.placeholder =
+          "Search by title, role, service, or location...";
+        window.setTimeout(() => searchInput.focus(), 100);
+        renderResults([]);
+      } catch (error) {
+        console.error(error);
+        searchInput.disabled = false;
+        searchInput.placeholder =
+          "Search by title, role, service, or location...";
+        showMessage("Search is temporarily unavailable.");
+      }
+    };
+
+    const closeSearchModal = (event) => {
+      if (!searchModal || !searchInput || !searchResults) {
+        return;
+      }
+
+      if (event) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+
+      searchModal.classList.add("hidden");
+      document.body.style.overflow = "";
+      searchInput.value = "";
+      searchResults.innerHTML = "";
+      searchResults.classList.add("hidden");
+    };
 
     searchButton.addEventListener("click", openSearch);
     searchButton.addEventListener("touchend", openSearch);
-    closeSearch.addEventListener("click", closeSearchModal);
-    closeSearch.addEventListener("touchend", closeSearchModal);
+  };
 
-    searchInput.addEventListener("input", (e) => {
-      const value = e.target.value.trim();
-      const results = value ? fuse.search(value) : [];
-      renderResults(results);
-    });
-
-    // Close on escape key
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape" && !searchModal.classList.contains("hidden")) {
-        closeSearchModal();
-      }
-    });
-
-    // NEW: Click outside modal content to close
-    searchModal.addEventListener("click", (e) => {
-      const modalContent = e.target.closest(".inline-block");
-      if (!modalContent) {
-        closeSearchModal(e);
-      }
-    });
-  });
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initSearch, { once: true });
+  } else {
+    initSearch();
+  }
 </script>

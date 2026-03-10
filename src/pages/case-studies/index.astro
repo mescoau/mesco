@@ -6,7 +6,6 @@ import Kicker from "@/components/fundations/elements/Kicker.astro";
 import Wrapper from "@/components/fundations/containers/Wrapper.astro";
 // Components
 import ProjectCardSmall from "@/components/projects/ProjectCardSmall.astro";
-import KeenSliderProjectCard from "@/components/fundations/scripts/KeenSliderProjectCard.astro";
 // Content
 import { getCollection } from "astro:content";
 const projects = await getCollection("projects");
@@ -53,5 +52,4 @@ projects.sort((a, b) => {
       </div>
     </Wrapper>
   </section>
-  <KeenSliderProjectCard />
 </BaseLayout>
