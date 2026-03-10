@@ -53,7 +53,7 @@ const latestServices = allServices
   <Fragment slot="head">
     <SchemaOrg schema={serviceSchema} />
   </Fragment>
-  <section class="bg-accent-800">
+  <section class="bg-brand-blue">
     <Wrapper
       variant="standard"
       class="py-12 pt-48 lg:border-x lg:border-brand-gold"
@@ -88,15 +88,28 @@ const latestServices = allServices
 
   <section>
     <Wrapper variant="paddingless" class="lg:border-x lg:border-brand-gold">
-      <Image
-        width={1400}
-        height={1400}
-        loading="lazy"
-        decoding="async"
-        src={frontmatter.image.url}
-        alt={frontmatter.image.alt || frontmatter.title}
-        class="object-cover object-center w-full max-h-120"
-      />
+      {frontmatter.video ? (
+        <video
+          autoplay
+          muted
+          loop
+          playsinline
+          poster={typeof frontmatter.image.url === "string" ? frontmatter.image.url : frontmatter.image.url.src}
+          class="object-cover object-center w-full max-h-144"
+        >
+          <source src={frontmatter.video} type="video/mp4" />
+        </video>
+      ) : (
+        <Image
+          width={1400}
+          height={1400}
+          loading="lazy"
+          decoding="async"
+          src={frontmatter.image.url}
+          alt={frontmatter.image.alt || frontmatter.title}
+          class="object-cover object-center w-full max-h-144"
+        />
+      )}
     </Wrapper>
   </section>
   <Wrapper variant="standard" class="py-12 lg:border-x lg:border-brand-gold">

@@ -38,6 +38,9 @@
         "featured": {
           "type": "boolean"
         },
+        "video": {
+          "type": "string"
+        },
         "$schema": {
           "type": "string"
         }

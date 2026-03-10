@@ -39,6 +39,7 @@ const services = defineCollection({
       }),
       highlights: z.array(z.string()).optional(),
       featured: z.boolean().optional(),
+      video: z.string().optional(),
     }),
 });
 
