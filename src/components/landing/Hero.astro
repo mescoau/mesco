@@ -130,7 +130,8 @@ const stats = [
         localStorage.setItem(STORAGE_KEY, active ? '1' : '0');
       };
 
-      updateState(localStorage.getItem(STORAGE_KEY) === '1');
+      const forceOn = new URLSearchParams(location.search).has('mobile-bg');
+      updateState(forceOn || localStorage.getItem(STORAGE_KEY) === '1');
       toggle.addEventListener('click', () => {
         updateState(!section.hasAttribute('data-mobile-media'));
       });
