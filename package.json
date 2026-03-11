@@ -13,6 +13,7 @@
   "dependencies": {
     "@astrojs/check": "^0.9.6",
     "@astrojs/mdx": "^4.3.13",
+    "@astrojs/partytown": "^2.1.5",
     "@astrojs/rss": "^4.0.15",
     "@astrojs/sitemap": "^3.7.0",
     "@astrolib/seo": "^1.0.0-beta.8",
