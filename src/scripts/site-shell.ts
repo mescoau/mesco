@@ -2,14 +2,15 @@ const canEnhanceBackgroundVideo = () => {
   const reducedMotion = window.matchMedia(
     "(prefers-reduced-motion: reduce)"
   ).matches;
-  const largeScreen = window.matchMedia("(min-width: 1024px)").matches;
+  // To restrict video to desktop only, add this check and include it in the return:
+  // const largeScreen = window.matchMedia("(min-width: 1024px)").matches;
   const connection = navigator.connection;
   const saveData = connection?.saveData;
   const slowConnection = ["slow-2g", "2g", "3g"].includes(
     connection?.effectiveType ?? ""
   );
 
-  return largeScreen && !reducedMotion && !saveData && !slowConnection;
+  return !reducedMotion && !saveData && !slowConnection;
 };
 
 const hydrateVideo = (video: HTMLVideoElement | null) => {
