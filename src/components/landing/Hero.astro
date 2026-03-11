@@ -19,7 +19,7 @@ const stats = [
 ];
 ---
 
-<section class="relative min-h-[80dvh] flex flex-col bg-accent-950 lg:border-b lg:border-brand-gold">
+<section data-hero-section class="relative min-h-[80dvh] flex flex-col bg-accent-950 lg:border-b lg:border-brand-gold">
   <div
     class="absolute inset-0 z-0 hero-fallback"
     style={`--hero-fallback-image: url('${heroDesktopFallback.src}')`}
@@ -87,9 +87,69 @@ const stats = [
     </div>
   </div>
 </section>
+
+<!-- Mobile media toggle: visible only below lg, for performance testing -->
+<button
+  id="hero-mobile-toggle"
+  class="lg:hidden fixed bottom-4 right-4 z-50 bg-brand-gold text-accent-950 text-xs font-semibold px-3 py-2 rounded-full shadow-lg"
+  aria-label="Toggle mobile background media"
+>
+  Show BG
+</button>
+
+<script>
+  const section = document.querySelector<HTMLElement>('[data-hero-section]');
+  const video = document.querySelector<HTMLVideoElement>('video[data-hero-video]');
+  const toggle = document.getElementById('hero-mobile-toggle');
+
+  if (toggle && section) {
+    const STORAGE_KEY = 'hero-mobile-media';
+    const isDesktop = window.matchMedia('(min-width: 1024px)').matches;
+
+    if (!isDesktop) {
+      const updateState = (active: boolean) => {
+        if (active) {
+          section.setAttribute('data-mobile-media', '');
+          toggle.textContent = 'Hide BG';
+          if (video && !video.dataset.loaded) {
+            const source = document.createElement('source');
+            source.src = video.dataset.src ?? '';
+            source.type = 'video/mp4';
+            video.append(source);
+            video.dataset.loaded = 'true';
+            video.addEventListener('playing', () => {
+              video.classList.remove('opacity-0');
+            }, { once: true });
+            video.load();
+            video.play().catch(() => {});
+          }
+        } else {
+          section.removeAttribute('data-mobile-media');
+          toggle.textContent = 'Show BG';
+        }
+        localStorage.setItem(STORAGE_KEY, active ? '1' : '0');
+      };
+
+      updateState(localStorage.getItem(STORAGE_KEY) === '1');
+      toggle.addEventListener('click', () => {
+        updateState(!section.hasAttribute('data-mobile-media'));
+      });
+    }
+  }
+</script>
+
 <style is:inline>
   @media (min-width: 1024px) {
     .hero-fallback {
+      background-image: var(--hero-fallback-image);
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+  }
+
+  @media (max-width: 1023px) {
+    [data-mobile-media] .hero-fallback {
       background-image: var(--hero-fallback-image);
       background-position: center;
       background-repeat: no-repeat;
