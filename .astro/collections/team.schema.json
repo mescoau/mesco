@@ -48,6 +48,21 @@
             "additionalProperties": false
           }
         },
+        "birthday": {
+          "type": "string"
+        },
+        "hatX": {
+          "type": "number"
+        },
+        "hatY": {
+          "type": "number"
+        },
+        "hatRotate": {
+          "type": "number"
+        },
+        "hatSize": {
+          "type": "number"
+        },
         "$schema": {
           "type": "string"
         }

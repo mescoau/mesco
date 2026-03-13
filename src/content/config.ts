@@ -17,6 +17,11 @@ const team = defineCollection({
           })
         )
         .optional(),
+      birthday: z.string().optional(),   // "MM-DD"
+      hatX: z.number().optional(),        // % from left (default 50)
+      hatY: z.number().optional(),        // % from top (default 0)
+      hatRotate: z.number().optional(),   // degrees rotation (default 0)
+      hatSize: z.number().optional(),     // % of container width (default 15)
     }),
 });
 const legal = defineCollection({

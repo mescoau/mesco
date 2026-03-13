@@ -6,6 +6,11 @@ bio: >
   With a decade of experience spanning civil construction, mining, and
   infrastructure projects across Western Australia, Queensland, and New Zealand,
   Kyriah leads MESCo's engineering and quality systems portfolio.
+birthday: "01-01"
+hatX: 60
+hatY: 13
+hatRotate: 18
+hatSize: 45
 image:
   url: "/src/images/kyriah.png"
   alt: "Kyriah McPhee — Director, Engineering Systems"

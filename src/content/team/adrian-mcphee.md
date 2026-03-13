@@ -9,6 +9,11 @@ bio: >
 image:
   url: "/src/images/adrian.png"
   alt: "Adrian McPhee — Director, HSE & Compliance Systems"
+birthday: "03-14"
+hatX: 40
+hatY: 10
+hatRotate: 325
+hatSize: 45
 socials:
   - label: Email
     href: "mailto:adrian@mesco.au"
