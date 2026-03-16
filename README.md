@@ -2,8 +2,8 @@
 
 **McPhee Engineering Systems Co (MESCo)** — [mesco.au](https://mesco.au)
 
-Custom website designed and built by **Josh Withers** of **[Unpopular](https://unpopular.au)**.
-For technical questions, contact Josh Withers [josh@jwithers.co](mailto:josh@joshwithers.au).
+Custom website designed and built by **Josh Withers** of **[The Internet](https://theinternet.com.au)**.
+For technical questions, contact Josh Withers [josh@withers.co](mailto:josh@withers.co).
 
 ---
 
