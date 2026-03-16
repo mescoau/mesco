@@ -8,170 +8,99 @@
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
-    background: #04203e;
+    background: #020a14;
     overflow: hidden;
     width: 100vw;
     height: 100vh;
     font-family: 'Courier New', monospace;
+    perspective: 600px;
+    perspective-origin: 50% 50%;
   }
 
-  /* Starfield background */
-  .stars {
+  /* Warp starfield - stars fly from center outward */
+  .starfield {
     position: fixed;
     inset: 0;
     z-index: 0;
   }
 
-  .star {
+  .warp-star {
     position: absolute;
+    left: 50%;
+    top: 50%;
     width: 2px;
     height: 2px;
     background: white;
     border-radius: 50%;
-    animation: twinkle var(--dur) ease-in-out infinite alternate;
+    animation: warpOut var(--dur) linear infinite;
+    animation-delay: var(--del);
     opacity: 0;
   }
 
-  @keyframes twinkle {
-    0% { opacity: 0; transform: scale(0.5); }
-    100% { opacity: var(--max-o, 0.8); transform: scale(1.2); }
+  @keyframes warpOut {
+    0% {
+      opacity: 0;
+      transform: translate(-50%, -50%) translate(0px, 0px) scale(0.3);
+    }
+    5% {
+      opacity: 0.8;
+    }
+    70% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+      transform: translate(-50%, -50%) translate(var(--tx), var(--ty)) scale(3);
+      width: var(--streak, 2px);
+      height: 2px;
+    }
   }
 
-  /* Main bouncing logo - DVD screensaver style */
-  .bouncer {
+  /* Logos flying toward us from the distance */
+  .asteroid {
     position: fixed;
+    left: 50%;
+    top: 50%;
     z-index: 10;
-    animation:
-      bounceX 11.3s linear infinite alternate,
-      bounceY 7.7s linear infinite alternate;
+    opacity: 0;
+    animation: flyToward var(--dur) linear infinite;
+    animation-delay: var(--del);
   }
 
-  .bouncer svg {
-    width: 280px;
-    height: auto;
-    filter: drop-shadow(0 0 20px rgba(190, 155, 72, 0.4));
-    animation: spinGlow 6s ease-in-out infinite;
+  .asteroid svg {
+    filter: drop-shadow(0 0 8px rgba(190, 155, 72, 0.4));
   }
 
-  @keyframes bounceX {
-    0% { left: 5%; }
-    100% { left: calc(100% - 300px); }
-  }
-
-  @keyframes bounceY {
-    0% { top: 10%; }
-    100% { top: calc(100% - 160px); }
-  }
-
-  @keyframes spinGlow {
-    0%, 100% {
-      filter: drop-shadow(0 0 20px rgba(190, 155, 72, 0.4));
-      transform: rotate(0deg) scale(1);
+  @keyframes flyToward {
+    0% {
+      opacity: 0;
+      transform: translate(-50%, -50%) translate(var(--sx), var(--sy)) scale(0.05) rotate(var(--rot-start, 0deg));
     }
-    25% {
-      filter: drop-shadow(0 0 40px rgba(190, 155, 72, 0.8));
-      transform: rotate(5deg) scale(1.05);
+    10% {
+      opacity: 0.3;
     }
-    50% {
-      filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.5));
-      transform: rotate(0deg) scale(1.1);
+    40% {
+      opacity: 0.7;
     }
     75% {
-      filter: drop-shadow(0 0 40px rgba(190, 155, 72, 0.8));
-      transform: rotate(-5deg) scale(1.05);
+      opacity: 1;
     }
-  }
-
-  /* Second bouncer - smaller, different timing */
-  .bouncer-2 {
-    position: fixed;
-    z-index: 8;
-    animation:
-      bounceX2 9.1s linear infinite alternate,
-      bounceY2 13.3s linear infinite alternate;
-  }
-
-  .bouncer-2 svg {
-    width: 120px;
-    height: auto;
-    opacity: 0.5;
-    animation: spinSlow 20s linear infinite;
-  }
-
-  @keyframes bounceX2 {
-    0% { left: 60%; }
-    100% { left: 10%; }
-  }
-
-  @keyframes bounceY2 {
-    0% { top: 70%; }
-    100% { top: 5%; }
-  }
-
-  @keyframes spinSlow {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-  }
-
-  /* Third bouncer - M icon only */
-  .bouncer-3 {
-    position: fixed;
-    z-index: 7;
-    animation:
-      bounceX3 15.7s linear infinite alternate,
-      bounceY3 8.9s linear infinite alternate;
-  }
-
-  .bouncer-3 svg {
-    width: 80px;
-    height: 80px;
-    opacity: 0.35;
-    animation: pulse 3s ease-in-out infinite;
-  }
-
-  @keyframes bounceX3 {
-    0% { left: 30%; }
-    100% { left: calc(100% - 100px); }
-  }
-
-  @keyframes bounceY3 {
-    0% { top: 80%; }
-    100% { top: 3%; }
-  }
-
-  @keyframes pulse {
-    0%, 100% { transform: scale(1); opacity: 0.35; }
-    50% { transform: scale(1.3); opacity: 0.6; }
-  }
-
-  /* Diagonal streak lines */
-  .streak {
-    position: fixed;
-    width: 1px;
-    background: linear-gradient(to bottom, transparent, rgba(190, 155, 72, 0.3), transparent);
-    z-index: 1;
-    animation: streak var(--s-dur) linear infinite;
-    transform: rotate(25deg);
-    opacity: 0;
-  }
-
-  @keyframes streak {
-    0% { opacity: 0; top: -20%; }
-    10% { opacity: 1; }
-    90% { opacity: 1; }
-    100% { opacity: 0; top: 120%; }
+    100% {
+      opacity: 0;
+      transform: translate(-50%, -50%) translate(var(--ex), var(--ey)) scale(var(--end-scale, 2.5)) rotate(var(--rot-end, 360deg));
+    }
   }
 
   /* Center text */
   .center-text {
     position: fixed;
-    z-index: 20;
+    z-index: 30;
     bottom: 40px;
     left: 50%;
     transform: translateX(-50%);
     text-align: center;
     color: white;
-    animation: fadeInOut 4s ease-in-out infinite alternate;
+    animation: textPulse 4s ease-in-out infinite alternate;
   }
 
   .center-text h2 {
@@ -190,65 +119,44 @@
     opacity: 0.5;
   }
 
-  @keyframes fadeInOut {
-    0% { opacity: 0.4; }
+  @keyframes textPulse {
+    0% { opacity: 0.5; }
     100% { opacity: 1; }
   }
 
-  /* Floating gold particles */
-  .particle {
+  /* Subtle radial warp glow at center */
+  .warp-glow {
     position: fixed;
-    width: 4px;
-    height: 4px;
-    background: #be9b48;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 120px;
+    height: 120px;
     border-radius: 50%;
-    z-index: 2;
-    opacity: 0;
-    animation: floatUp var(--p-dur) ease-in-out infinite;
-    animation-delay: var(--p-del);
+    background: radial-gradient(circle, rgba(190, 155, 72, 0.08) 0%, transparent 70%);
+    z-index: 1;
+    animation: glowPulse 3s ease-in-out infinite alternate;
   }
 
-  @keyframes floatUp {
-    0% { opacity: 0; transform: translateY(0) scale(0); }
-    20% { opacity: 0.8; transform: translateY(-30px) scale(1); }
-    80% { opacity: 0.6; transform: translateY(-150px) scale(0.8); }
-    100% { opacity: 0; transform: translateY(-200px) scale(0); }
+  @keyframes glowPulse {
+    0% { width: 80px; height: 80px; opacity: 0.5; }
+    100% { width: 200px; height: 200px; opacity: 1; }
   }
 
-  /* Pipe screensaver-style borders */
-  .pipe {
-    position: fixed;
-    z-index: 3;
-    background: linear-gradient(90deg, transparent, #be9b48, transparent);
-    opacity: 0.15;
-  }
-
-  .pipe-h {
-    height: 1px;
-    animation: pipeH 8s linear infinite;
-  }
-
-  .pipe-v {
-    width: 1px;
-    background: linear-gradient(180deg, transparent, #be9b48, transparent);
-    animation: pipeV 10s linear infinite;
-  }
-
-  @keyframes pipeH {
-    0% { left: -30%; width: 30%; }
-    100% { left: 100%; width: 30%; }
-  }
-
-  @keyframes pipeV {
-    0% { top: -30%; height: 30%; }
-    100% { top: 100%; height: 30%; }
-  }
-
-  /* Scanline overlay for retro feel */
-  .scanlines {
+  /* Vignette */
+  .vignette {
     position: fixed;
     inset: 0;
     z-index: 50;
+    pointer-events: none;
+    background: radial-gradient(ellipse at center, transparent 30%, rgba(0, 0, 0, 0.6) 100%);
+  }
+
+  /* Scanlines */
+  .scanlines {
+    position: fixed;
+    inset: 0;
+    z-index: 51;
     pointer-events: none;
     background: repeating-linear-gradient(
       0deg,
@@ -258,105 +166,91 @@
       rgba(0, 0, 0, 0.03) 4px
     );
   }
-
-  /* Vignette */
-  .vignette {
-    position: fixed;
-    inset: 0;
-    z-index: 49;
-    pointer-events: none;
-    background: radial-gradient(ellipse at center, transparent 50%, rgba(0, 0, 0, 0.4) 100%);
-  }
 </style>
 </head>
 <body>
 
-<!-- Scanlines & Vignette -->
 <div class="scanlines"></div>
 <div class="vignette"></div>
+<div class="warp-glow"></div>
+<div class="starfield" id="starfield"></div>
+<div id="asteroids"></div>
 
-<!-- Starfield -->
-<div class="stars" id="stars"></div>
-
-<!-- Streaks -->
-<div class="streak" style="left: 15%; height: 200px; --s-dur: 4s; animation-delay: 0s;"></div>
-<div class="streak" style="left: 45%; height: 300px; --s-dur: 5.5s; animation-delay: 1.2s;"></div>
-<div class="streak" style="left: 70%; height: 250px; --s-dur: 3.8s; animation-delay: 2.8s;"></div>
-<div class="streak" style="left: 88%; height: 180px; --s-dur: 6s; animation-delay: 0.5s;"></div>
-<div class="streak" style="left: 30%; height: 220px; --s-dur: 4.5s; animation-delay: 3.5s;"></div>
-
-<!-- Pipes -->
-<div class="pipe pipe-h" style="top: 20%; animation-delay: 0s;"></div>
-<div class="pipe pipe-h" style="top: 55%; animation-delay: 3s;"></div>
-<div class="pipe pipe-h" style="top: 80%; animation-delay: 6s;"></div>
-<div class="pipe pipe-v" style="left: 25%; animation-delay: 1s;"></div>
-<div class="pipe pipe-v" style="left: 65%; animation-delay: 4s;"></div>
-<div class="pipe pipe-v" style="left: 90%; animation-delay: 7s;"></div>
-
-<!-- Gold particles -->
-<div class="particle" style="left: 10%; bottom: 10%; --p-dur: 5s; --p-del: 0s;"></div>
-<div class="particle" style="left: 25%; bottom: 5%; --p-dur: 4s; --p-del: 1s;"></div>
-<div class="particle" style="left: 40%; bottom: 15%; --p-dur: 6s; --p-del: 0.5s;"></div>
-<div class="particle" style="left: 55%; bottom: 8%; --p-dur: 4.5s; --p-del: 2s;"></div>
-<div class="particle" style="left: 70%; bottom: 12%; --p-dur: 5.5s; --p-del: 1.5s;"></div>
-<div class="particle" style="left: 85%; bottom: 6%; --p-dur: 3.8s; --p-del: 3s;"></div>
-<div class="particle" style="left: 50%; bottom: 20%; --p-dur: 7s; --p-del: 0.8s;"></div>
-<div class="particle" style="left: 15%; bottom: 25%; --p-dur: 4.2s; --p-del: 2.5s;"></div>
-
-<!-- Main bouncing logo (full MESCO) -->
-<div class="bouncer">
-  <svg viewBox="0 0 719.4 210" xmlns="http://www.w3.org/2000/svg">
-    <rect fill="#be9b48" x="10.72" y="194.81" width="697.43" height="6.67"/>
-    <path fill="#ffffff" d="M171.83,171.34h-36.5v-95.76l-31.77,75.71h-24.79l-31.77-75.71v95.76H11.4V13.61h41.69l38.76,87.88L130.37,13.61h41.46v157.73Z"/>
-    <path fill="#ffffff" d="M302.98,13.61v32.45h-71.2v28.62h57.01v32h-57.01v32.22h71.2v32.45h-108.61V13.61h108.61Z"/>
-    <path fill="#ffffff" d="M400.78,49.44c0-3.38-1.13-4.28-4.28-4.28h-32.45c-3.15,0-4.28.9-4.28,4.28v14.64c0,3.61,1.35,4.73,6.31,5.86l41.91,10.14c20.96,5.18,32.45,11.04,32.45,32.45v27.72c0,20.95-10.14,31.09-31.1,31.09h-56.33c-20.96,0-31.1-10.14-31.1-31.09v-20.73h36.95v16c0,3.16,1.13,4.28,4.28,4.28h35.6c3.15,0,4.28-1.13,4.28-4.28v-16.45c0-3.61-1.58-4.73-6.31-5.86l-41.91-10.14c-20.95-5.18-32.45-11.04-32.45-32.45v-25.91c0-21.18,10.14-31.09,31.1-31.09h53.18c20.96,0,31.1,9.91,31.1,31.09v18.93h-36.95v-14.2Z"/>
-    <path fill="#ffffff" d="M495.43,171.34c-20.95,0-31.09-10.14-31.09-31.09V44.71c0-21.18,10.36-31.09,31.32-31.09h56.33c20.96,0,30.87,9.91,30.87,31.09v27.49h-37.4v-21.86c0-3.38-1.13-4.28-4.28-4.28h-35.15c-3.15,0-4.28.9-4.28,4.28v84.27c0,3.16,1.13,4.28,4.28,4.28h35.15c3.15,0,4.28-1.13,4.28-4.28v-22.08h37.4v27.72c0,20.95-10.14,31.09-31.09,31.09h-56.33Z"/>
-    <path fill="#ffffff" d="M678.4,49.66c19.83,0,29.07,9.24,29.07,29.07v63.54c0,19.83-9.24,29.07-29.07,29.07h-46.64c-19.83,0-29.07-9.24-29.07-29.07v-63.54c0-19.83,9.24-29.07,29.07-29.07h46.64ZM672.32,83.69c0-3.6-1.35-4.73-4.73-4.73h-25.01c-3.38,0-4.73,1.13-4.73,4.73v53.63c0,3.38,1.35,4.73,4.73,4.73h25.01c3.38,0,4.73-1.35,4.73-4.73v-53.63Z"/>
-  </svg>
-</div>
-
-<!-- Second bouncer (full logo, smaller, spinning) -->
-<div class="bouncer-2">
-  <svg viewBox="0 0 719.4 210" xmlns="http://www.w3.org/2000/svg">
-    <rect fill="#be9b48" x="10.72" y="194.81" width="697.43" height="6.67"/>
-    <path fill="#ffffff" d="M171.83,171.34h-36.5v-95.76l-31.77,75.71h-24.79l-31.77-75.71v95.76H11.4V13.61h41.69l38.76,87.88L130.37,13.61h41.46v157.73Z"/>
-    <path fill="#ffffff" d="M302.98,13.61v32.45h-71.2v28.62h57.01v32h-57.01v32.22h71.2v32.45h-108.61V13.61h108.61Z"/>
-    <path fill="#ffffff" d="M400.78,49.44c0-3.38-1.13-4.28-4.28-4.28h-32.45c-3.15,0-4.28.9-4.28,4.28v14.64c0,3.61,1.35,4.73,6.31,5.86l41.91,10.14c20.96,5.18,32.45,11.04,32.45,32.45v27.72c0,20.95-10.14,31.09-31.1,31.09h-56.33c-20.96,0-31.1-10.14-31.1-31.09v-20.73h36.95v16c0,3.16,1.13,4.28,4.28,4.28h35.6c3.15,0,4.28-1.13,4.28-4.28v-16.45c0-3.61-1.58-4.73-6.31-5.86l-41.91-10.14c-20.95-5.18-32.45-11.04-32.45-32.45v-25.91c0-21.18,10.14-31.09,31.1-31.09h53.18c20.96,0,31.1,9.91,31.1,31.09v18.93h-36.95v-14.2Z"/>
-    <path fill="#ffffff" d="M495.43,171.34c-20.95,0-31.09-10.14-31.09-31.09V44.71c0-21.18,10.36-31.09,31.32-31.09h56.33c20.96,0,30.87,9.91,30.87,31.09v27.49h-37.4v-21.86c0-3.38-1.13-4.28-4.28-4.28h-35.15c-3.15,0-4.28.9-4.28,4.28v84.27c0,3.16,1.13,4.28,4.28,4.28h35.15c3.15,0,4.28-1.13,4.28-4.28v-22.08h37.4v27.72c0,20.95-10.14,31.09-31.09,31.09h-56.33Z"/>
-    <path fill="#ffffff" d="M678.4,49.66c19.83,0,29.07,9.24,29.07,29.07v63.54c0,19.83-9.24,29.07-29.07,29.07h-46.64c-19.83,0-29.07-9.24-29.07-29.07v-63.54c0-19.83,9.24-29.07,29.07-29.07h46.64ZM672.32,83.69c0-3.6-1.35-4.73-4.73-4.73h-25.01c-3.38,0-4.73,1.13-4.73,4.73v53.63c0,3.38,1.35,4.73,4.73,4.73h25.01c3.38,0,4.73-1.35,4.73-4.73v-53.63Z"/>
-  </svg>
-</div>
-
-<!-- Third bouncer (M icon only) -->
-<div class="bouncer-3">
-  <svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">
-    <path fill="#ffffff" d="M113.48,113.032L97.86,113.032L97.86,72.056L84.266,104.451L73.66,104.451L60.065,72.056L60.065,113.032L44.831,113.032L44.831,45.542L62.668,45.542L79.252,83.143L95.739,45.542L113.48,45.542L113.48,113.032Z"/>
-    <rect fill="#be9b48" x="44" y="118" width="70" height="2.5" rx="1"/>
-  </svg>
-</div>
-
-<!-- Coming soon text -->
 <div class="center-text">
   <h2>Coming Soon</h2>
-  <p>mesco.com.au</p>
+  <p>mesco.au</p>
 </div>
 
-<!-- Generate stars with inline script -->
 <script>
 (function() {
-  var stars = document.getElementById('stars');
-  for (var i = 0; i < 120; i++) {
+  // The M logo SVG as a template
+  var logoFull = '<svg viewBox="0 0 719.4 210" xmlns="http://www.w3.org/2000/svg" width="VAR_W">' +
+    '<rect fill="#be9b48" x="10.72" y="194.81" width="697.43" height="6.67"/>' +
+    '<path fill="#fff" d="M171.83,171.34h-36.5v-95.76l-31.77,75.71h-24.79l-31.77-75.71v95.76H11.4V13.61h41.69l38.76,87.88L130.37,13.61h41.46v157.73Z"/>' +
+    '<path fill="#fff" d="M302.98,13.61v32.45h-71.2v28.62h57.01v32h-57.01v32.22h71.2v32.45h-108.61V13.61h108.61Z"/>' +
+    '<path fill="#fff" d="M400.78,49.44c0-3.38-1.13-4.28-4.28-4.28h-32.45c-3.15,0-4.28.9-4.28,4.28v14.64c0,3.61,1.35,4.73,6.31,5.86l41.91,10.14c20.96,5.18,32.45,11.04,32.45,32.45v27.72c0,20.95-10.14,31.09-31.1,31.09h-56.33c-20.96,0-31.1-10.14-31.1-31.09v-20.73h36.95v16c0,3.16,1.13,4.28,4.28,4.28h35.6c3.15,0,4.28-1.13,4.28-4.28v-16.45c0-3.61-1.58-4.73-6.31-5.86l-41.91-10.14c-20.95-5.18-32.45-11.04-32.45-32.45v-25.91c0-21.18,10.14-31.09,31.1-31.09h53.18c20.96,0,31.1,9.91,31.1,31.09v18.93h-36.95v-14.2Z"/>' +
+    '<path fill="#fff" d="M495.43,171.34c-20.95,0-31.09-10.14-31.09-31.09V44.71c0-21.18,10.36-31.09,31.32-31.09h56.33c20.96,0,30.87,9.91,30.87,31.09v27.49h-37.4v-21.86c0-3.38-1.13-4.28-4.28-4.28h-35.15c-3.15,0-4.28.9-4.28,4.28v84.27c0,3.16,1.13,4.28,4.28,4.28h35.15c3.15,0,4.28-1.13,4.28-4.28v-22.08h37.4v27.72c0,20.95-10.14,31.09-31.09,31.09h-56.33Z"/>' +
+    '<path fill="#fff" d="M678.4,49.66c19.83,0,29.07,9.24,29.07,29.07v63.54c0,19.83-9.24,29.07-29.07,29.07h-46.64c-19.83,0-29.07-9.24-29.07-29.07v-63.54c0-19.83,9.24-29.07,29.07-29.07h46.64ZM672.32,83.69c0-3.6-1.35-4.73-4.73-4.73h-25.01c-3.38,0-4.73,1.13-4.73,4.73v53.63c0,3.38,1.35,4.73,4.73,4.73h25.01c3.38,0,4.73-1.35,4.73-4.73v-53.63Z"/>' +
+    '</svg>';
+
+  var logoM = '<svg viewBox="0 0 160 130" xmlns="http://www.w3.org/2000/svg" width="VAR_W">' +
+    '<path fill="#fff" d="M113.48,103.032L97.86,103.032L97.86,62.056L84.266,94.451L73.66,94.451L60.065,62.056L60.065,103.032L44.831,103.032L44.831,35.542L62.668,35.542L79.252,73.143L95.739,35.542L113.48,35.542L113.48,103.032Z"/>' +
+    '<rect fill="#be9b48" x="44" y="108" width="70" height="3" rx="1.5"/>' +
+    '</svg>';
+
+  // Warp stars - emanate from center
+  var sf = document.getElementById('starfield');
+  for (var i = 0; i < 150; i++) {
     var star = document.createElement('div');
-    star.className = 'star';
-    star.style.left = Math.random() * 100 + '%';
-    star.style.top = Math.random() * 100 + '%';
-    star.style.setProperty('--dur', (2 + Math.random() * 4) + 's');
-    star.style.setProperty('--max-o', (0.3 + Math.random() * 0.7).toFixed(2));
-    star.style.animationDelay = (Math.random() * 5) + 's';
-    star.style.width = (1 + Math.random() * 2) + 'px';
-    star.style.height = star.style.width;
-    stars.appendChild(star);
+    star.className = 'warp-star';
+    var angle = Math.random() * Math.PI * 2;
+    var dist = 600 + Math.random() * 1200;
+    var tx = Math.cos(angle) * dist;
+    var ty = Math.sin(angle) * dist;
+    var dur = 1.5 + Math.random() * 2.5;
+    var streak = Math.abs(tx) > Math.abs(ty) ? '6px' : '2px';
+    star.style.setProperty('--tx', tx + 'px');
+    star.style.setProperty('--ty', ty + 'px');
+    star.style.setProperty('--dur', dur + 's');
+    star.style.setProperty('--del', (-Math.random() * dur) + 's');
+    star.style.setProperty('--streak', streak);
+    sf.appendChild(star);
   }
+
+  // Flying logo asteroids
+  var container = document.getElementById('asteroids');
+  var configs = [
+    // [duration, delay, startX, startY, endX, endY, endScale, rotStart, rotEnd, type, width]
+    [6,   0,    20,   -10,   -900,  600,   4,    0,    180,  'full', 180],
+    [8,   -2,   -30,  15,    800,   -700,  3.5,  10,   -200, 'full', 150],
+    [5,   -1,   50,   30,    -1200, -500,  5,    -15,  270,  'm',    80],
+    [7,   -3.5, -15,  -40,   600,   900,   3,    20,   -150, 'full', 200],
+    [9,   -5,   40,   -20,   1100,  -400,  4.5,  -5,   320,  'm',    60],
+    [4.5, -0.5, -50,  25,    -700,  -800,  6,    30,   -280, 'm',    50],
+    [10,  -7,   10,   50,    -500,  1000,  3,    -20,  190,  'full', 120],
+    [6.5, -4,   -40,  -30,   900,   600,   4,    15,   -240, 'm',    70],
+    [7.5, -1.5, 60,   10,    -1000, 300,   3.5,  -10,  160,  'full', 160],
+    [5.5, -6,   -20,  -50,   400,   -900,  5,    25,   -300, 'm',    45],
+    [8.5, -3,   30,   40,    -800,  700,   3,    -30,  220,  'full', 130],
+    [11,  -8,   -60,  -15,   1200,  -300,  2.5,  5,    -130, 'm',    90],
+  ];
+
+  configs.forEach(function(c) {
+    var el = document.createElement('div');
+    el.className = 'asteroid';
+    var svg = c[9] === 'full' ? logoFull : logoM;
+    el.innerHTML = svg.replace('VAR_W', c[10]);
+    el.style.setProperty('--dur', c[0] + 's');
+    el.style.setProperty('--del', c[1] + 's');
+    el.style.setProperty('--sx', c[2] + 'px');
+    el.style.setProperty('--sy', c[3] + 'px');
+    el.style.setProperty('--ex', c[4] + 'px');
+    el.style.setProperty('--ey', c[5] + 'px');
+    el.style.setProperty('--end-scale', c[6]);
+    el.style.setProperty('--rot-start', c[7] + 'deg');
+    el.style.setProperty('--rot-end', c[8] + 'deg');
+    container.appendChild(el);
+  });
 })();
 </script>
 
