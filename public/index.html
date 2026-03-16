@@ -65,10 +65,82 @@
     opacity: 0;
     animation: flyToward var(--dur) linear infinite;
     animation-delay: var(--del);
+    cursor: crosshair;
   }
 
   .asteroid svg {
     filter: drop-shadow(0 0 8px rgba(190, 155, 72, 0.4));
+    pointer-events: auto;
+  }
+
+  /* Zapped state */
+  .asteroid.zapped {
+    animation: none !important;
+    pointer-events: none;
+  }
+
+  .asteroid.zapped svg {
+    animation: zapFlash 0.15s ease-out 3;
+  }
+
+  .asteroid.zapped::after {
+    content: '';
+    position: absolute;
+    inset: -20px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(190,155,72,0.6) 0%, rgba(255,255,255,0.3) 30%, transparent 70%);
+    animation: zapRing 0.4s ease-out forwards;
+  }
+
+  @keyframes zapFlash {
+    0% { filter: drop-shadow(0 0 8px rgba(190, 155, 72, 0.4)) brightness(1); }
+    50% { filter: drop-shadow(0 0 30px rgba(255, 255, 255, 1)) brightness(3); }
+    100% { filter: drop-shadow(0 0 8px rgba(190, 155, 72, 0.4)) brightness(1); }
+  }
+
+  @keyframes zapRing {
+    0% { transform: scale(0.5); opacity: 1; }
+    100% { transform: scale(3); opacity: 0; }
+  }
+
+  /* Debris particles */
+  .debris {
+    position: fixed;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    z-index: 15;
+    pointer-events: none;
+    animation: debrisFly var(--d-dur) ease-out forwards;
+  }
+
+  @keyframes debrisFly {
+    0% { opacity: 1; transform: translate(0, 0) scale(1); }
+    100% { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(0); }
+  }
+
+  /* Score counter */
+  .score {
+    position: fixed;
+    top: 20px;
+    right: 24px;
+    z-index: 30;
+    color: #be9b48;
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    opacity: 0;
+    transition: opacity 0.5s;
+  }
+
+  .score.visible {
+    opacity: 1;
+  }
+
+  .score span {
+    color: white;
+    font-size: 18px;
+    margin-left: 6px;
   }
 
   @keyframes flyToward {
@@ -176,6 +248,8 @@
 <div class="starfield" id="starfield"></div>
 <div id="asteroids"></div>
 
+<div class="score" id="score">Zapped<span id="score-num">0</span></div>
+
 <div class="center-text">
   <h2>Coming Soon</h2>
   <p>mesco.au</p>
@@ -235,6 +309,76 @@
     [11,  -8,   -60,  -15,   1200,  -300,  2.5,  5,    -130, 'm',    90],
   ];
 
+  var score = 0;
+  var scoreEl = document.getElementById('score');
+  var scoreNum = document.getElementById('score-num');
+
+  function spawnDebris(x, y) {
+    var colors = ['#be9b48', '#ffffff', '#d4b96a', '#6b9fd4', '#fff8e0'];
+    for (var d = 0; d < 12; d++) {
+      var p = document.createElement('div');
+      p.className = 'debris';
+      var angle = (d / 12) * Math.PI * 2 + (Math.random() - 0.5) * 0.5;
+      var dist = 60 + Math.random() * 120;
+      p.style.left = x + 'px';
+      p.style.top = y + 'px';
+      p.style.background = colors[Math.floor(Math.random() * colors.length)];
+      p.style.width = (2 + Math.random() * 5) + 'px';
+      p.style.height = p.style.width;
+      p.style.setProperty('--dx', (Math.cos(angle) * dist) + 'px');
+      p.style.setProperty('--dy', (Math.sin(angle) * dist) + 'px');
+      p.style.setProperty('--d-dur', (0.4 + Math.random() * 0.5) + 's');
+      document.body.appendChild(p);
+      (function(el) {
+        setTimeout(function() { el.remove(); }, 1000);
+      })(p);
+    }
+  }
+
+  function zapAsteroid(el, e) {
+    if (el.classList.contains('zapped')) return;
+
+    // Get current visual position
+    var rect = el.getBoundingClientRect();
+    var cx = rect.left + rect.width / 2;
+    var cy = rect.top + rect.height / 2;
+
+    // Freeze in place
+    var computed = getComputedStyle(el);
+    var transform = computed.transform;
+    el.classList.add('zapped');
+    el.style.opacity = '1';
+    el.style.transform = transform;
+    el.style.left = '0';
+    el.style.top = '0';
+    el.style.transform = 'translate(' + cx + 'px, ' + cy + 'px) translate(-50%, -50%)';
+
+    // Spawn debris
+    spawnDebris(cx, cy);
+
+    // Update score
+    score++;
+    scoreNum.textContent = score;
+    scoreEl.classList.add('visible');
+
+    // Shrink and vanish
+    setTimeout(function() {
+      el.style.transition = 'opacity 0.3s, transform 0.3s';
+      el.style.opacity = '0';
+      el.style.transform = 'translate(' + cx + 'px, ' + cy + 'px) translate(-50%, -50%) scale(0)';
+    }, 450);
+
+    // Respawn after a delay
+    setTimeout(function() {
+      el.classList.remove('zapped');
+      el.style.transition = '';
+      el.style.opacity = '';
+      el.style.transform = '';
+      el.style.left = '';
+      el.style.top = '';
+    }, 3000 + Math.random() * 2000);
+  }
+
   configs.forEach(function(c) {
     var el = document.createElement('div');
     el.className = 'asteroid';
@@ -249,6 +393,13 @@
     el.style.setProperty('--end-scale', c[6]);
     el.style.setProperty('--rot-start', c[7] + 'deg');
     el.style.setProperty('--rot-end', c[8] + 'deg');
+
+    el.addEventListener('click', function(e) { zapAsteroid(el, e); });
+    el.addEventListener('touchstart', function(e) {
+      e.preventDefault();
+      zapAsteroid(el, e);
+    }, { passive: false });
+
     container.appendChild(el);
   });
 })();
