@@ -46,10 +46,13 @@ import Wrapper from "@/components/fundations/containers/Wrapper.astro";
   </Wrapper>
   <Wrapper variant="paddingless" class="lg:border-x lg:border-brand-gold">
     <Image
-      width={1420}
-      height={1420}
       src={heroImage}
       alt="MESCo team on site"
+      width={heroImage.width}
+      height={heroImage.height}
+      widths={[480, 768, 1024, 1420]}
+      sizes="100vw"
+      formats={["avif", "webp"]}
       decoding="async"
       loading="lazy"
       class="size-full object-cover max-h-120 lg:border-b lg:border-t lg:border-brand-gold"

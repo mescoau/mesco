@@ -43,6 +43,7 @@ const serviceSchema = [
 const latestServices = allServices
   .filter((service) => service.data.title !== frontmatter.title)
   .slice(0, 2);
+const heroImage = frontmatter.image.url;
 ---
 
 <BaseLayout
@@ -94,6 +95,7 @@ const latestServices = allServices
           muted
           loop
           playsinline
+          preload="metadata"
           poster={typeof frontmatter.image.url === "string" ? frontmatter.image.url : frontmatter.image.url.src}
           class="object-cover object-center w-full max-h-144"
         >
@@ -101,12 +103,16 @@ const latestServices = allServices
         </video>
       ) : (
         <Image
-          width={1400}
-          height={1400}
-          loading="lazy"
-          decoding="async"
-          src={frontmatter.image.url}
+          src={heroImage}
           alt={frontmatter.image.alt || frontmatter.title}
+          width={heroImage.width}
+          height={heroImage.height}
+          widths={[480, 768, 1024, 1400]}
+          sizes="100vw"
+          formats={["avif", "webp"]}
+          loading="eager"
+          fetchpriority="high"
+          decoding="async"
           class="object-cover object-center w-full max-h-144"
         />
       )}

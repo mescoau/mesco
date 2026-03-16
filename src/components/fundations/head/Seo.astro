@@ -1,6 +1,4 @@
 ---
-import { AstroSeo } from "@astrolib/seo";
-
 const { title, description } = Astro.props as {
   title?: string;
   description?: string;
@@ -20,22 +18,16 @@ const siteName = "McPhee Engineering Systems (MESCo)";
 const url = Astro.url?.href ?? "";
 ---
 
-<AstroSeo
-  title={finalTitle}
-  description={finalDescription}
-  canonical={url || undefined}
-  openGraph={{
-    url: url || undefined,
-    title: finalTitle,
-    description: finalDescription,
-    site_name: siteName,
-    type: "website",
-    locale: "en_AU",
-    images: [
-      {
-        url: "/default.jpg",
-        alt: siteName,
-      },
-    ],
-  }}
-/>
+<title>{finalTitle}</title>
+<meta name="description" content={finalDescription} />
+{url && <link rel="canonical" href={url} />}
+
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content={finalTitle} />
+<meta property="og:description" content={finalDescription} />
+<meta property="og:site_name" content={siteName} />
+<meta property="og:locale" content="en_AU" />
+{url && <meta property="og:url" content={url} />}
+<meta property="og:image" content="/default.jpg" />
+<meta property="og:image:alt" content={siteName} />

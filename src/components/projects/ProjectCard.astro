@@ -26,8 +26,11 @@ const { title, description, url, image, meta } = {
   <Image
     src={image}
     alt={title}
-    width={800}
-    height={700}
+    width={image.width}
+    height={image.height}
+    widths={[360, 480, 640, 800]}
+    sizes="(min-width: 1024px) 42rem, 100vw"
+    formats={["avif", "webp"]}
     loading="lazy"
     decoding="async"
     class="object-cover object-center w-full aspect-4/3 rounded"
@@ -46,7 +49,6 @@ const { title, description, url, image, meta } = {
       href={url}
       variant="dark"
       title={`View project: ${title}`}
-      aria-label={`View project: ${title}`}
       class="mt-4"
     >
       View project

@@ -52,6 +52,7 @@ services.sort((a, b) => {
 
   <section>
     <Wrapper variant="standard" class="py-24 lg:border-x lg:border-brand-gold">
+      <Text tag="h2" variant="textXL" class="sr-only">All services</Text>
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-8 gap-y-24">
         {services.map((service) => <ServiceCard service={service} />)}
       </div>

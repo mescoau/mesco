@@ -18,7 +18,7 @@ const posterSrc = typeof image === "string" ? image : image.src;
 ---
 
 <article>
-  <a href={url} title={`View service: ${title}`} aria-label={`View service: ${title}`}>
+  <a href={url} title={`View service: ${title}`}>
     {video ? (
       <video
         autoplay
@@ -34,8 +34,11 @@ const posterSrc = typeof image === "string" ? image : image.src;
       <Image
         src={image}
         alt={title}
-        width={800}
-        height={700}
+        width={image.width}
+        height={image.height}
+        widths={[360, 480, 640, 800]}
+        sizes="(min-width: 1024px) 42rem, 100vw"
+        formats={["avif", "webp"]}
         loading="lazy"
         decoding="async"
         class="object-cover object-center w-full aspect-4/3 rounded"
@@ -53,7 +56,6 @@ const posterSrc = typeof image === "string" ? image : image.src;
       href={url}
       variant="dark"
       title={`View service: ${title}`}
-      aria-label={`View service: ${title}`}
       class="mt-4"
     >
       Read further</UnderlinedLink

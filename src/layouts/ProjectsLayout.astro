@@ -25,6 +25,7 @@ const latestProjects = allProjects
   .slice(0, 3);
 
 const pageUrl = `${siteConfig.url}${Astro.url.pathname}`;
+const coverImage = frontmatter.cover?.url;
 const projectSchema = [
   {
     "@type": "Article",
@@ -100,12 +101,16 @@ const projectSchema = [
         class="py-8 lg:border-x lg:border-brand-gold border-t border-brand-gold"
       >
         <Image
-          width={1400}
-          height={1400}
-          loading="lazy"
-          decoding="async"
-          src={frontmatter.cover.url}
+          src={coverImage}
           alt={frontmatter.cover.alt || frontmatter.title}
+          width={coverImage.width}
+          height={coverImage.height}
+          widths={[480, 768, 1024, 1400]}
+          sizes="100vw"
+          formats={["avif", "webp"]}
+          loading="eager"
+          fetchpriority="high"
+          decoding="async"
           class="object-cover object-center w-full max-h-120"
         />
       </Wrapper>
