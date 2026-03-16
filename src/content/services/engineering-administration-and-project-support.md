@@ -7,7 +7,7 @@ description: >
   team to follow.
 excerpt: Replace project chaos with structured, reliable support that keeps delivery on track.
 image:
-  url: "/src/images/services/management.png"
+  url: "/src/images/services/Engineering Administration & Project Support.jpg"
   alt: "Engineering administration and project support"
 highlights:
   - Daily QA/QC coordination and reporting

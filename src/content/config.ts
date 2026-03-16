@@ -49,13 +49,19 @@ const services = defineCollection({
 });
 
 const industries = defineCollection({
-  schema: () =>
+  schema: ({ image }) =>
     z.object({
       title: z.string(),
       description: z.string(),
       order: z.number().optional(),
       focus: z.string().optional(),
       typicalProjects: z.string().optional(),
+      image: z
+        .object({
+          url: image(),
+          alt: z.string(),
+        })
+        .optional(),
     }),
 });
 const projects = defineCollection({

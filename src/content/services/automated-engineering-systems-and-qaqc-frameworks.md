@@ -7,9 +7,8 @@ description: >
   eliminates repetitive data entry.
 excerpt: Replace spreadsheet chaos with traceable, reliable systems.
 image:
-  url: "./walking-staff.jpg"
+  url: "/src/images/services/Automated Engineering Systems & QAQC Frameworks.jpg"
   alt: "Automated QA/QC engineering systems"
-video: "/videos/walking-staff.mp4"
 highlights:
   - Digital lot registers with real-time tracking
   - Automated ITP, test record and NCR workflows

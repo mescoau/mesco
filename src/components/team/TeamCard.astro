@@ -3,20 +3,13 @@
 import { Image } from "astro:assets";
 // Fundations
 import Text from "@/components/fundations/elements/Text.astro";
-// Team
-import BirthdayHat from "@/components/team/BirthdayHat.astro";
 // Config
 import { link } from "@/config/site";
-const { url, name, image, role, birthday, hatX, hatY, hatRotate, hatSize } = {
+const { url, name, image, role } = {
   url: link("/team/" + Astro.props.post.slug),
   name: Astro.props.post.data.name,
   role: Astro.props.post.data.role,
   image: Astro.props.post.data.image.url,
-  birthday: Astro.props.post.data.birthday,
-  hatX: Astro.props.post.data.hatX,
-  hatY: Astro.props.post.data.hatY,
-  hatRotate: Astro.props.post.data.hatRotate,
-  hatSize: Astro.props.post.data.hatSize,
 };
 ---
 
@@ -28,7 +21,6 @@ const { url, name, image, role, birthday, hatX, hatY, hatRotate, hatSize } = {
     class="absolute inset-0 z-10"></a>
 
   <div class="relative rounded">
-    {birthday && <BirthdayHat birthday={birthday} hatX={hatX} hatY={hatY} hatRotate={hatRotate} hatSize={hatSize} />}
     <Image
       src={image}
       alt={name}

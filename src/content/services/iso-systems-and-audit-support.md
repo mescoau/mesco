@@ -7,7 +7,7 @@ description: >
   14001 certification.
 excerpt: Build systems that work on site.
 image:
-  url: "/src/images/services/interior.png"
+  url: "/src/images/services/ISO Systems & Audit Support.jpg"
   alt: "ISO systems and audit support"
 highlights:
   - ISO 9001, 45001, 14001 gap assessments

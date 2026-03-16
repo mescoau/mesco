@@ -1,5 +1,8 @@
 ---
 title: Infrastructure & Transport
+image:
+  url: ./infrastructure-and-transport.jpg
+  alt: Infrastructure and transport project
 description: >
   Infrastructure and transport projects involve complex coordination between
   multiple contractors, strict regulatory oversight and detailed specification

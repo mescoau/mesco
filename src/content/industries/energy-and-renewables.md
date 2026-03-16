@@ -1,5 +1,8 @@
 ---
 title: Energy & Renewables
+image:
+  url: ./energy-and-renewables.jpg
+  alt: Energy and renewables project
 description: >
   Energy and renewables projects rely on strict environmental compliance, robust
   safety certification and seamless integration with client management systems.

@@ -7,7 +7,7 @@ description: >
   acceptance criteria, and safe work summaries.
 excerpt: Visual, field-tested tools that simplify execution.
 image:
-  url: "/src/images/services/management.png"
+  url: "/src/images/services/Project Familiarisation & Delivery Tools.jpg"
   alt: "Project delivery tools and field guides"
 highlights:
   - Supervisor cheat sheets and work packs

@@ -7,7 +7,7 @@ description: >
   as-built documentation, and compliance certificates.
 excerpt: Verified, documented handover that passes audit on first submission.
 image:
-  url: "/src/images/services/interior.png"
+  url: "/src/images/services/Project Close-Out Services.jpg"
   alt: "Project close-out documentation and handover"
 highlights:
   - Master Defect Registers and ITP close-out verification

@@ -12,10 +12,10 @@
  *                       (must match the `trailingSlash` option in astro.config.mjs)
  */
 export const siteConfig = {
-  url: "https://mesco.pages.dev",
+  url: "https://mesco.au",
   email: "kyriah@mesco.au",
   phone: "+61 431 308 396",
-  trailingSlash: true,
+  trailingSlash: false,
 } as const;
 
 /**

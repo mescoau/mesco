@@ -119,8 +119,9 @@ const services = [
         </div>
       </div>
       <div class="lg:row-span-2">
-      <form action="https://tardis.withers.co/api/forms/mesco" method="POST" class="bg-accent-950 lg:border lg:border-brand-gold p-8">
-        <input type="hidden" name="_redirect" value="/thank-you" />
+      <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/thank-you" class="bg-accent-950 lg:border lg:border-brand-gold p-8">
+        <input type="hidden" name="form-name" value="contact" />
+        <p class="hidden"><label>Don't fill this out: <input name="bot-field" /></label></p>
         <Text
           tag="h3"
           variant="textLG"

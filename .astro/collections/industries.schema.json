@@ -19,6 +19,22 @@
         "typicalProjects": {
           "type": "string"
         },
+        "image": {
+          "type": "object",
+          "properties": {
+            "url": {
+              "type": "string"
+            },
+            "alt": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "url",
+            "alt"
+          ],
+          "additionalProperties": false
+        },
         "$schema": {
           "type": "string"
         }

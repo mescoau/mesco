@@ -7,7 +7,7 @@ description: >
   standards. Work under your systems and procedures.
 excerpt: Experienced support when you need it.
 image:
-  url: "/src/images/services/structural.png"
+  url: "/src/images/services/Short-Term Fill-Ins & Technical Support.jpg"
   alt: "Short-term engineering and systems support"
 highlights:
   - Site Engineers, HSE Advisors and Project Coordinators

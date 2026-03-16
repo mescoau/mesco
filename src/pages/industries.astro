@@ -4,6 +4,7 @@ import Text from "@/components/fundations/elements/Text.astro";
 import Kicker from "@/components/fundations/elements/Kicker.astro";
 import Wrapper from "@/components/fundations/containers/Wrapper.astro";
 import { getCollection } from "astro:content";
+import { Image } from "astro:assets";
 
 const industries = await getCollection("industries");
 industries.sort((a, b) => {
@@ -47,7 +48,17 @@ industries.sort((a, b) => {
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {
           industries.map((industry) => (
-            <article class="p-8 rounded bg-base-100 h-full flex flex-col gap-4 transition-colors duration-300 hover:bg-accent-200">
+            <article class="rounded bg-base-100 h-full flex flex-col transition-colors duration-300 hover:bg-accent-200 overflow-hidden">
+              {industry.data.image && (
+                <Image
+                  src={industry.data.image.url}
+                  alt={industry.data.image.alt}
+                  width={800}
+                  height={450}
+                  class="w-full h-48 object-cover"
+                />
+              )}
+              <div class="p-8 flex flex-col gap-4">
               <Text
                 tag="h2"
                 variant="textXL"
@@ -78,6 +89,7 @@ industries.sort((a, b) => {
                   </Text>
                 </div>
               )}
+              </div>
             </article>
           ))
         }

@@ -7,7 +7,7 @@ description: >
   packs, incident templates, and compliance checklists.
 excerpt: Audit-ready safety and environmental systems that work in the field.
 image:
-  url: "/src/images/services/structural.png"
+  url: "/src/images/services/Health, Safety & Environmental Systems.jpg"
   alt: "Health, safety and environmental compliance systems"
 highlights:
   - Project-specific WHSMPs and SWMSs

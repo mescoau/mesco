@@ -1,5 +1,8 @@
 ---
 title: Civil Construction
+image:
+  url: ./construction.jpg
+  alt: Civil construction site
 description: >
   Civil construction projects — earthworks, paving, concrete and structures —
   move fast and rely on clear, disciplined systems to stay on track. MESCo

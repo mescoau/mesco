@@ -7,7 +7,7 @@ description: >
   registers — all controlled, documented, ready to mobilise.
 excerpt: Move from blank page to fully mobilisation-ready.
 image:
-  url: "/src/images/services/preconstruction.png"
+  url: "/src/images/services/Project Start-Up Services.jpg"
   alt: "Project start-up systems and documentation"
 highlights:
   - Management plans and project procedures tailored to scope

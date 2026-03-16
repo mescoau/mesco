@@ -1,5 +1,8 @@
 ---
 title: Government Projects
+image:
+  url: ./government-projects.jpg
+  alt: Government infrastructure project
 description: >
   Government-led projects require detailed documentation, public accountability
   and strict compliance verification across every stage of delivery. MESCo

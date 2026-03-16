@@ -1,5 +1,8 @@
 ---
 title: Mining & Resources
+image:
+  url: ./resources-and-mining.jpg
+  alt: Mining and resources site
 description: >
   Mining and resources projects operate in tightly regulated environments where
   major clients expect ISO-aligned systems, rigorous HSE integration and
