@@ -9,7 +9,7 @@ For technical questions, contact Josh Withers [josh@withers.co](mailto:josh@with
 
 ## How this website works
 
-This website is built with **Astro**, a modern static site framework. Understanding two tools is all you need to work on it: **Node.js** and **Astro**.
+This website is built with **Astro 5**, a modern static site framework. Understanding two tools is all you need to work on it: **Node.js** and **Astro**.
 
 ### Node.js
 
