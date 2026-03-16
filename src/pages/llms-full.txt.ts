@@ -122,7 +122,7 @@ MESCo combines deep field experience with management systems expertise to delive
     parts.push(
       section(
         `Service: ${title}`,
-        `${base}${link("/services/" + service.slug)}`,
+        `${base}${link("/services/" + service.id)}`,
         `${meta}\n\n${service.body.trim()}`
       )
     );
@@ -152,7 +152,7 @@ MESCo combines deep field experience with management systems expertise to delive
     parts.push(
       section(
         `Case Study: ${title}`,
-        `${base}${link("/case-studies/" + project.slug)}`,
+        `${base}${link("/case-studies/" + project.id)}`,
         `${header}\n\n${project.body.trim()}`
       )
     );
@@ -171,7 +171,7 @@ MESCo combines deep field experience with management systems expertise to delive
     parts.push(
       section(
         `Team: ${name}`,
-        `${base}${link("/team/" + member.slug)}`,
+        `${base}${link("/team/" + member.id)}`,
         `${header}\n\n${member.body.trim()}`
       )
     );
@@ -182,7 +182,7 @@ MESCo combines deep field experience with management systems expertise to delive
     parts.push(
       section(
         doc.data.page,
-        `${base}${link("/legal/" + doc.slug)}`,
+        `${base}${link("/legal/" + doc.id)}`,
         doc.body.trim()
       )
     );

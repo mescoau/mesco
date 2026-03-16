@@ -41,7 +41,7 @@ export const GET: APIRoute = async () => {
 
   for (const service of services) {
     lines.push(
-      `- [${service.data.title}](${base}${link("/services/" + service.slug)}): ${service.data.description.trim()}`
+      `- [${service.data.title}](${base}${link("/services/" + service.id)}): ${service.data.description.trim()}`
     );
   }
 
@@ -53,7 +53,7 @@ export const GET: APIRoute = async () => {
       .join(", ");
     const suffix = meta ? ` (${meta})` : "";
     lines.push(
-      `- [${project.data.title}](${base}${link("/case-studies/" + project.slug)}): ${project.data.description.trim()}${suffix}`
+      `- [${project.data.title}](${base}${link("/case-studies/" + project.id)}): ${project.data.description.trim()}${suffix}`
     );
   }
 
@@ -62,7 +62,7 @@ export const GET: APIRoute = async () => {
   for (const member of team) {
     const bio = member.data.bio?.trim() ?? "";
     lines.push(
-      `- [${member.data.name}](${base}${link("/team/" + member.slug)})${member.data.role ? `, ${member.data.role}` : ""}${bio ? `: ${bio}` : ""}`
+      `- [${member.data.name}](${base}${link("/team/" + member.id)})${member.data.role ? `, ${member.data.role}` : ""}${bio ? `: ${bio}` : ""}`
     );
   }
 
@@ -75,7 +75,7 @@ export const GET: APIRoute = async () => {
   lines.push("", "## Legal", "");
 
   for (const doc of legal) {
-    lines.push(`- [${doc.data.page}](${base}${link("/legal/" + doc.slug)})`);
+    lines.push(`- [${doc.data.page}](${base}${link("/legal/" + doc.id)})`);
   }
 
   lines.push(

@@ -1,57 +1,52 @@
 {
-  "$ref": "#/definitions/services",
-  "definitions": {
-    "services": {
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "excerpt": {
+      "type": "string"
+    },
+    "image": {
       "type": "object",
       "properties": {
-        "title": {
+        "url": {
           "type": "string"
         },
-        "description": {
-          "type": "string"
-        },
-        "excerpt": {
-          "type": "string"
-        },
-        "image": {
-          "type": "object",
-          "properties": {
-            "url": {
-              "type": "string"
-            },
-            "alt": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "url",
-            "alt"
-          ],
-          "additionalProperties": false
-        },
-        "highlights": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "featured": {
-          "type": "boolean"
-        },
-        "video": {
-          "type": "string"
-        },
-        "$schema": {
+        "alt": {
           "type": "string"
         }
       },
       "required": [
-        "title",
-        "description",
-        "image"
+        "url",
+        "alt"
       ],
       "additionalProperties": false
+    },
+    "highlights": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "featured": {
+      "type": "boolean"
+    },
+    "video": {
+      "type": "string"
+    },
+    "$schema": {
+      "type": "string"
     }
   },
-  "$schema": "http://json-schema.org/draft-07/schema#"
+  "required": [
+    "title",
+    "description",
+    "image"
+  ],
+  "additionalProperties": false
 }

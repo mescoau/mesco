@@ -1,5 +1,9 @@
-import { defineCollection, z } from "astro:content";
+import { defineCollection } from "astro:content";
+import { z } from "astro/zod";
+import { glob } from "astro/loaders";
+
 const team = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/team" }),
   schema: ({ image }) =>
     z.object({
       name: z.string(),
@@ -24,7 +28,9 @@ const team = defineCollection({
       hatSize: z.number().optional(),     // % of container width (default 15)
     }),
 });
+
 const legal = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/legal" }),
   schema: () =>
     z.object({
       page: z.string(),
@@ -33,6 +39,7 @@ const legal = defineCollection({
 });
 
 const services = defineCollection({
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/services" }),
   schema: ({ image }) =>
     z.object({
       title: z.string(),
@@ -49,6 +56,7 @@ const services = defineCollection({
 });
 
 const industries = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/industries" }),
   schema: ({ image }) =>
     z.object({
       title: z.string(),
@@ -64,7 +72,9 @@ const industries = defineCollection({
         .optional(),
     }),
 });
+
 const projects = defineCollection({
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/projects" }),
   schema: ({ image }) =>
     z.object({
       title: z.string(),
@@ -102,6 +112,7 @@ const projects = defineCollection({
       featured: z.boolean().optional(),
     }),
 });
+
 export const collections = {
   team,
   legal,

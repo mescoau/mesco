@@ -24,7 +24,7 @@ export default defineConfig({
     tailwindcss(),
     sitemap({
       filter: (page) =>
-        !page.includes("/thank-you") && !page.includes("/email-signature"),
+        !page.includes("/thank-you") && !page.includes("/signature"),
     }),
     mdx(),
   ],

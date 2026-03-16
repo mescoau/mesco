@@ -8,7 +8,7 @@ import UnderlinedLink from "@/components/fundations/elements/UnderlinedLink.astr
 import { link } from "@/config/site";
 // Content
 const { title, description, url, image, meta } = {
-  url: link("/case-studies/" + Astro.props.project.slug),
+  url: link("/case-studies/" + Astro.props.project.id),
   title: Astro.props.project.data.title,
   description: Astro.props.project.data.description,
   image: Astro.props.project.data.cover?.url,

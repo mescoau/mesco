@@ -15,7 +15,7 @@ export async function GET() {
       title: item.data.title,
       description: item.data.excerpt ?? item.data.description,
       meta: item.data.highlights?.join(", "),
-      url: link(`/services/${item.slug}`),
+      url: link(`/services/${item.id}`),
     })),
     ...projects.map((item) => ({
       type: "Case Study",
@@ -29,14 +29,14 @@ export async function GET() {
       ]
         .filter(Boolean)
         .join(" • "),
-      url: link(`/case-studies/${item.slug}`),
+      url: link(`/case-studies/${item.id}`),
     })),
     ...team.map((item) => ({
       type: "Team",
       title: item.data.name,
       description: item.data.bio,
       meta: item.data.role,
-      url: link(`/team/${item.slug}`),
+      url: link(`/team/${item.id}`),
     })),
     ...legal.map((item) => ({
       type: "Legal",
@@ -44,7 +44,7 @@ export async function GET() {
       description:
         item.data.pubDate?.toISOString?.().split("T")[0] || "Legal notice",
       date: item.data.pubDate,
-      url: link(`/legal/${item.slug}`),
+      url: link(`/legal/${item.id}`),
     })),
   ];
 

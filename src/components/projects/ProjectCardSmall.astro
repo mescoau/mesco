@@ -7,7 +7,7 @@ import ArrowUpRight from "@/components/fundations/icons/ArrowUpRight.astro";
 import { link } from "@/config/site";
 // Content
 const { title, description, url, category, location, year } = {
-  url: link("/case-studies/" + Astro.props.project.slug),
+  url: link("/case-studies/" + Astro.props.project.id),
   title: Astro.props.project.data.title,
   description: Astro.props.project.data.description,
   category: Astro.props.project.data.category,
