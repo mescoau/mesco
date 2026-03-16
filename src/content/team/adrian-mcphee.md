@@ -9,7 +9,7 @@ bio: >
 image:
   url: "/src/images/team/Adrian-cropped.jpg"
   alt: "Adrian McPhee — Director, HSE & Compliance Systems"
-birthday: "03-16"
+birthday: "03-14"
 hatX: 51
 hatY: 28
 hatRotate: 11
