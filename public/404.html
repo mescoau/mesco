@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>404 - Page Not Found | MESCO</title>
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #020a14;
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+    font-family: 'Courier New', monospace;
+    perspective: 600px;
+    perspective-origin: 50% 50%;
+  }
+
+  /* Warp starfield - stars fly from center outward */
+  .starfield {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+  }
+
+  .warp-star {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 2px;
+    height: 2px;
+    background: white;
+    border-radius: 50%;
+    animation: warpOut var(--dur) linear infinite;
+    animation-delay: var(--del);
+    opacity: 0;
+  }
+
+  @keyframes warpOut {
+    0% {
+      opacity: 0;
+      transform: translate(-50%, -50%) translate(0px, 0px) scale(0.3);
+    }
+    5% {
+      opacity: 0.8;
+    }
+    70% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+      transform: translate(-50%, -50%) translate(var(--tx), var(--ty)) scale(3);
+      width: var(--streak, 2px);
+      height: 2px;
+    }
+  }
+
+  /* Logos flying toward us from the distance */
+  .asteroid {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    z-index: 10;
+    opacity: 0;
+    animation: flyToward var(--dur) linear infinite;
+    animation-delay: var(--del);
+    cursor: crosshair;
+  }
+
+  .asteroid svg {
+    filter: drop-shadow(0 0 8px rgba(190, 155, 72, 0.4));
+    pointer-events: auto;
+  }
+
+  /* Zapped state */
+  .asteroid.zapped {
+    animation: none !important;
+    pointer-events: none;
+  }
+
+  .asteroid.zapped svg {
+    animation: zapFlash 0.15s ease-out 3;
+  }
+
+  .asteroid.zapped::after {
+    content: '';
+    position: absolute;
+    inset: -20px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(190,155,72,0.6) 0%, rgba(255,255,255,0.3) 30%, transparent 70%);
+    animation: zapRing 0.4s ease-out forwards;
+  }
+
+  @keyframes zapFlash {
+    0% { filter: drop-shadow(0 0 8px rgba(190, 155, 72, 0.4)) brightness(1); }
+    50% { filter: drop-shadow(0 0 30px rgba(255, 255, 255, 1)) brightness(3); }
+    100% { filter: drop-shadow(0 0 8px rgba(190, 155, 72, 0.4)) brightness(1); }
+  }
+
+  @keyframes zapRing {
+    0% { transform: scale(0.5); opacity: 1; }
+    100% { transform: scale(3); opacity: 0; }
+  }
+
+  /* Debris particles */
+  .debris {
+    position: fixed;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    z-index: 15;
+    pointer-events: none;
+    animation: debrisFly var(--d-dur) ease-out forwards;
+  }
+
+  @keyframes debrisFly {
+    0% { opacity: 1; transform: translate(0, 0) scale(1); }
+    100% { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(0); }
+  }
+
+  /* Score counter */
+  .score {
+    position: fixed;
+    top: 20px;
+    right: 24px;
+    z-index: 30;
+    color: #be9b48;
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    opacity: 0;
+    transition: opacity 0.5s;
+  }
+
+  .score.visible {
+    opacity: 1;
+  }
+
+  .score span {
+    color: white;
+    font-size: 18px;
+    margin-left: 6px;
+  }
+
+  @keyframes flyToward {
+    0% {
+      opacity: 0;
+      transform: translate(-50%, -50%) translate(var(--sx), var(--sy)) scale(0.05) rotate(var(--rot-start, 0deg));
+    }
+    10% {
+      opacity: 0.3;
+    }
+    40% {
+      opacity: 0.7;
+    }
+    75% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+      transform: translate(-50%, -50%) translate(var(--ex), var(--ey)) scale(var(--end-scale, 2.5)) rotate(var(--rot-end, 360deg));
+    }
+  }
+
+  /* Center text */
+  .center-text {
+    position: fixed;
+    z-index: 30;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    color: white;
+    animation: textPulse 4s ease-in-out infinite alternate;
+  }
+
+  .center-text h2 {
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: #be9b48;
+    margin-bottom: 8px;
+  }
+
+  .center-text .big-404 {
+    font-size: 72px;
+    font-weight: 700;
+    color: #be9b48;
+    letter-spacing: 12px;
+    line-height: 1;
+    margin-bottom: 12px;
+    opacity: 0.9;
+  }
+
+  .center-text p {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    opacity: 0.5;
+  }
+
+  .home-btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 28px;
+    border: 1px solid #be9b48;
+    color: #be9b48;
+    text-decoration: none;
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    transition: background 0.3s, color 0.3s;
+    cursor: pointer;
+  }
+
+  .home-btn:hover {
+    background: #be9b48;
+    color: #020a14;
+  }
+
+  @keyframes textPulse {
+    0% { opacity: 0.5; }
+    100% { opacity: 1; }
+  }
+
+  /* Subtle radial warp glow at center */
+  .warp-glow {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(190, 155, 72, 0.08) 0%, transparent 70%);
+    z-index: 1;
+    animation: glowPulse 3s ease-in-out infinite alternate;
+  }
+
+  @keyframes glowPulse {
+    0% { width: 80px; height: 80px; opacity: 0.5; }
+    100% { width: 200px; height: 200px; opacity: 1; }
+  }
+
+  /* Vignette */
+  .vignette {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    pointer-events: none;
+    background: radial-gradient(ellipse at center, transparent 30%, rgba(0, 0, 0, 0.6) 100%);
+  }
+
+  /* Scanlines */
+  .scanlines {
+    position: fixed;
+    inset: 0;
+    z-index: 51;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 0, 0, 0.03) 2px,
+      rgba(0, 0, 0, 0.03) 4px
+    );
+  }
+</style>
+</head>
+<body>
+
+<div class="scanlines"></div>
+<div class="vignette"></div>
+<div class="warp-glow"></div>
+<div class="starfield" id="starfield"></div>
+<div id="asteroids"></div>
+
+<div class="score" id="score">Zapped<span id="score-num">0</span></div>
+
+<div class="center-text">
+  <div class="big-404">404</div>
+  <h2>Page Not Found</h2>
+  <p>You've drifted into uncharted space</p>
+  <a href="/" class="home-btn">Return Home</a>
+</div>
+
+<script>
+(function() {
+  // The M logo SVG as a template
+  var logoFull = '<svg viewBox="0 0 719.4 210" xmlns="http://www.w3.org/2000/svg" width="VAR_W">' +
+    '<rect fill="#be9b48" x="10.72" y="194.81" width="697.43" height="6.67"/>' +
+    '<path fill="#fff" d="M171.83,171.34h-36.5v-95.76l-31.77,75.71h-24.79l-31.77-75.71v95.76H11.4V13.61h41.69l38.76,87.88L130.37,13.61h41.46v157.73Z"/>' +
+    '<path fill="#fff" d="M302.98,13.61v32.45h-71.2v28.62h57.01v32h-57.01v32.22h71.2v32.45h-108.61V13.61h108.61Z"/>' +
+    '<path fill="#fff" d="M400.78,49.44c0-3.38-1.13-4.28-4.28-4.28h-32.45c-3.15,0-4.28.9-4.28,4.28v14.64c0,3.61,1.35,4.73,6.31,5.86l41.91,10.14c20.96,5.18,32.45,11.04,32.45,32.45v27.72c0,20.95-10.14,31.09-31.1,31.09h-56.33c-20.96,0-31.1-10.14-31.1-31.09v-20.73h36.95v16c0,3.16,1.13,4.28,4.28,4.28h35.6c3.15,0,4.28-1.13,4.28-4.28v-16.45c0-3.61-1.58-4.73-6.31-5.86l-41.91-10.14c-20.95-5.18-32.45-11.04-32.45-32.45v-25.91c0-21.18,10.14-31.09,31.1-31.09h53.18c20.96,0,31.1,9.91,31.1,31.09v18.93h-36.95v-14.2Z"/>' +
+    '<path fill="#fff" d="M495.43,171.34c-20.95,0-31.09-10.14-31.09-31.09V44.71c0-21.18,10.36-31.09,31.32-31.09h56.33c20.96,0,30.87,9.91,30.87,31.09v27.49h-37.4v-21.86c0-3.38-1.13-4.28-4.28-4.28h-35.15c-3.15,0-4.28.9-4.28,4.28v84.27c0,3.16,1.13,4.28,4.28,4.28h35.15c3.15,0,4.28-1.13,4.28-4.28v-22.08h37.4v27.72c0,20.95-10.14,31.09-31.09,31.09h-56.33Z"/>' +
+    '<path fill="#fff" d="M678.4,49.66c19.83,0,29.07,9.24,29.07,29.07v63.54c0,19.83-9.24,29.07-29.07,29.07h-46.64c-19.83,0-29.07-9.24-29.07-29.07v-63.54c0-19.83,9.24-29.07,29.07-29.07h46.64ZM672.32,83.69c0-3.6-1.35-4.73-4.73-4.73h-25.01c-3.38,0-4.73,1.13-4.73,4.73v53.63c0,3.38,1.35,4.73,4.73,4.73h25.01c3.38,0,4.73-1.35,4.73-4.73v-53.63Z"/>' +
+    '</svg>';
+
+  var logoM = '<svg viewBox="0 0 160 130" xmlns="http://www.w3.org/2000/svg" width="VAR_W">' +
+    '<path fill="#fff" d="M113.48,103.032L97.86,103.032L97.86,62.056L84.266,94.451L73.66,94.451L60.065,62.056L60.065,103.032L44.831,103.032L44.831,35.542L62.668,35.542L79.252,73.143L95.739,35.542L113.48,35.542L113.48,103.032Z"/>' +
+    '<rect fill="#be9b48" x="44" y="108" width="70" height="3" rx="1.5"/>' +
+    '</svg>';
+
+  // Warp stars - emanate from center
+  var sf = document.getElementById('starfield');
+  for (var i = 0; i < 150; i++) {
+    var star = document.createElement('div');
+    star.className = 'warp-star';
+    var angle = Math.random() * Math.PI * 2;
+    var dist = 600 + Math.random() * 1200;
+    var tx = Math.cos(angle) * dist;
+    var ty = Math.sin(angle) * dist;
+    var dur = 1.5 + Math.random() * 2.5;
+    var streak = Math.abs(tx) > Math.abs(ty) ? '6px' : '2px';
+    star.style.setProperty('--tx', tx + 'px');
+    star.style.setProperty('--ty', ty + 'px');
+    star.style.setProperty('--dur', dur + 's');
+    star.style.setProperty('--del', (-Math.random() * dur) + 's');
+    star.style.setProperty('--streak', streak);
+    sf.appendChild(star);
+  }
+
+  // Flying logo asteroids
+  var container = document.getElementById('asteroids');
+  var configs = [
+    // [duration, delay, startX, startY, endX, endY, endScale, rotStart, rotEnd, type, width]
+    [6,   0,    20,   -10,   -900,  600,   4,    0,    180,  'full', 180],
+    [8,   -2,   -30,  15,    800,   -700,  3.5,  10,   -200, 'full', 150],
+    [5,   -1,   50,   30,    -1200, -500,  5,    -15,  270,  'm',    80],
+    [7,   -3.5, -15,  -40,   600,   900,   3,    20,   -150, 'full', 200],
+    [9,   -5,   40,   -20,   1100,  -400,  4.5,  -5,   320,  'm',    60],
+    [4.5, -0.5, -50,  25,    -700,  -800,  6,    30,   -280, 'm',    50],
+    [10,  -7,   10,   50,    -500,  1000,  3,    -20,  190,  'full', 120],
+    [6.5, -4,   -40,  -30,   900,   600,   4,    15,   -240, 'm',    70],
+    [7.5, -1.5, 60,   10,    -1000, 300,   3.5,  -10,  160,  'full', 160],
+    [5.5, -6,   -20,  -50,   400,   -900,  5,    25,   -300, 'm',    45],
+    [8.5, -3,   30,   40,    -800,  700,   3,    -30,  220,  'full', 130],
+    [11,  -8,   -60,  -15,   1200,  -300,  2.5,  5,    -130, 'm',    90],
+  ];
+
+  var score = 0;
+  var scoreEl = document.getElementById('score');
+  var scoreNum = document.getElementById('score-num');
+
+  function spawnDebris(x, y) {
+    var colors = ['#be9b48', '#ffffff', '#d4b96a', '#6b9fd4', '#fff8e0'];
+    for (var d = 0; d < 12; d++) {
+      var p = document.createElement('div');
+      p.className = 'debris';
+      var angle = (d / 12) * Math.PI * 2 + (Math.random() - 0.5) * 0.5;
+      var dist = 60 + Math.random() * 120;
+      p.style.left = x + 'px';
+      p.style.top = y + 'px';
+      p.style.background = colors[Math.floor(Math.random() * colors.length)];
+      p.style.width = (2 + Math.random() * 5) + 'px';
+      p.style.height = p.style.width;
+      p.style.setProperty('--dx', (Math.cos(angle) * dist) + 'px');
+      p.style.setProperty('--dy', (Math.sin(angle) * dist) + 'px');
+      p.style.setProperty('--d-dur', (0.4 + Math.random() * 0.5) + 's');
+      document.body.appendChild(p);
+      (function(el) {
+        setTimeout(function() { el.remove(); }, 1000);
+      })(p);
+    }
+  }
+
+  function zapAsteroid(el, e) {
+    if (el.classList.contains('zapped')) return;
+
+    // Get current visual position
+    var rect = el.getBoundingClientRect();
+    var cx = rect.left + rect.width / 2;
+    var cy = rect.top + rect.height / 2;
+
+    // Freeze in place
+    var computed = getComputedStyle(el);
+    var transform = computed.transform;
+    el.classList.add('zapped');
+    el.style.opacity = '1';
+    el.style.transform = transform;
+    el.style.left = '0';
+    el.style.top = '0';
+    el.style.transform = 'translate(' + cx + 'px, ' + cy + 'px) translate(-50%, -50%)';
+
+    // Spawn debris
+    spawnDebris(cx, cy);
+
+    // Update score
+    score++;
+    scoreNum.textContent = score;
+    scoreEl.classList.add('visible');
+
+    // Shrink and vanish
+    setTimeout(function() {
+      el.style.transition = 'opacity 0.3s, transform 0.3s';
+      el.style.opacity = '0';
+      el.style.transform = 'translate(' + cx + 'px, ' + cy + 'px) translate(-50%, -50%) scale(0)';
+    }, 450);
+
+    // Respawn after a delay
+    setTimeout(function() {
+      el.classList.remove('zapped');
+      el.style.transition = '';
+      el.style.opacity = '';
+      el.style.transform = '';
+      el.style.left = '';
+      el.style.top = '';
+    }, 3000 + Math.random() * 2000);
+  }
+
+  configs.forEach(function(c) {
+    var el = document.createElement('div');
+    el.className = 'asteroid';
+    var svg = c[9] === 'full' ? logoFull : logoM;
+    el.innerHTML = svg.replace('VAR_W', c[10]);
+    el.style.setProperty('--dur', c[0] + 's');
+    el.style.setProperty('--del', c[1] + 's');
+    el.style.setProperty('--sx', c[2] + 'px');
+    el.style.setProperty('--sy', c[3] + 'px');
+    el.style.setProperty('--ex', c[4] + 'px');
+    el.style.setProperty('--ey', c[5] + 'px');
+    el.style.setProperty('--end-scale', c[6]);
+    el.style.setProperty('--rot-start', c[7] + 'deg');
+    el.style.setProperty('--rot-end', c[8] + 'deg');
+
+    el.addEventListener('click', function(e) { zapAsteroid(el, e); });
+    el.addEventListener('touchstart', function(e) {
+      e.preventDefault();
+      zapAsteroid(el, e);
+    }, { passive: false });
+
+    container.appendChild(el);
+  });
+})();
+</script>
+
+</body>
+</html>
