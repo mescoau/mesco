@@ -11,7 +11,7 @@ duration: 5 months
 scope: Revetment wall rehabilitation, environmental management, QA/QC coordination, and compliance documentation
 category: Infrastructure & Transport
 cover:
-  url: "/src/images/revetment-wall/DJI_0142.JPG"
+  url: "/src/images/projects/20231012_105308.jpg"
   alt: "Revetment wall rehabilitation project"
 galleryDir: "/src/images/revetment-wall"
 metrics:

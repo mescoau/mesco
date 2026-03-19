@@ -24,8 +24,7 @@
       "required": [
         "url",
         "alt"
-      ],
-      "additionalProperties": false
+      ]
     },
     "socials": {
       "type": "array",
@@ -42,8 +41,7 @@
         "required": [
           "label",
           "href"
-        ],
-        "additionalProperties": false
+        ]
       }
     },
     "birthday": {
@@ -68,6 +66,5 @@
   "required": [
     "name",
     "image"
-  ],
-  "additionalProperties": false
+  ]
 }

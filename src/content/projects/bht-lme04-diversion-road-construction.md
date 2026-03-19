@@ -11,7 +11,7 @@ duration: 3 months
 scope: Construction of temporary MAR bypass (LME04), sealed pavement, tie-ins to existing MAR, drainage, culvert installation, tunnel laydown access
 category: Mining & Resources
 cover:
-  url: "/src/images/projects/3.png"
+  url: "/src/images/projects/BHT.jpg"
   alt: "Diversion road construction project"
 metrics:
   - label: "Duration"

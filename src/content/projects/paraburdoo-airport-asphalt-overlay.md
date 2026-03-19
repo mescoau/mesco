@@ -11,7 +11,7 @@ duration: 6 months
 scope: Asphalt overlay, QA/QC coordination, compliance verification
 category: Infrastructure & Transport
 cover:
-  url: "/src/images/paraburdoo-airport/WhatsApp Image 2025-10-27 at 05.44.04_dd560c4c.jpg"
+  url: "/src/images/projects/parabadoo.jpg"
   alt: "Airport asphalt overlay project"
 galleryDir: "/src/images/paraburdoo-airport"
 metrics:

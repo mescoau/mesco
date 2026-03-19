@@ -52,8 +52,7 @@
       "required": [
         "url",
         "alt"
-      ],
-      "additionalProperties": false
+      ]
     },
     "gallery": {
       "type": "array",
@@ -70,8 +69,7 @@
         "required": [
           "url",
           "alt"
-        ],
-        "additionalProperties": false
+        ]
       }
     },
     "galleryDir": {
@@ -92,8 +90,7 @@
         "required": [
           "label",
           "value"
-        ],
-        "additionalProperties": false
+        ]
       }
     },
     "featured": {
@@ -106,6 +103,5 @@
   "required": [
     "title",
     "description"
-  ],
-  "additionalProperties": false
+  ]
 }

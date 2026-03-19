@@ -24,8 +24,7 @@
       "required": [
         "url",
         "alt"
-      ],
-      "additionalProperties": false
+      ]
     },
     "highlights": {
       "type": "array",
@@ -47,6 +46,5 @@
     "title",
     "description",
     "image"
-  ],
-  "additionalProperties": false
+  ]
 }

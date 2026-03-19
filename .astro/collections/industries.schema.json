@@ -30,8 +30,7 @@
       "required": [
         "url",
         "alt"
-      ],
-      "additionalProperties": false
+      ]
     },
     "$schema": {
       "type": "string"
@@ -40,6 +39,5 @@
   "required": [
     "title",
     "description"
-  ],
-  "additionalProperties": false
+  ]
 }
