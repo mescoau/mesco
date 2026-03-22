@@ -28,20 +28,31 @@ const hydrateVideo = (video: HTMLVideoElement | null) => {
   video.append(source);
   video.dataset.loaded = "true";
 
-  video.addEventListener(
-    "playing",
-    () => {
-      video.classList.remove("opacity-0");
-    },
-    { once: true }
-  );
+  const reveal = () => video.classList.remove("opacity-0");
+
+  video.addEventListener("playing", reveal, { once: true });
 
   video.load();
 
-  const playPromise = video.play();
-  if (playPromise !== undefined) {
-    playPromise.catch(() => {});
-  }
+  const tryPlay = () => {
+    const playPromise = video.play();
+    if (playPromise !== undefined) {
+      playPromise.catch(() => {
+        // Autoplay blocked — retry on first user interaction
+        const retryOnInteraction = () => {
+          video.play().then(reveal).catch(() => {});
+          document.removeEventListener("touchstart", retryOnInteraction);
+          document.removeEventListener("click", retryOnInteraction);
+          document.removeEventListener("scroll", retryOnInteraction);
+        };
+        document.addEventListener("touchstart", retryOnInteraction, { once: true, passive: true });
+        document.addEventListener("click", retryOnInteraction, { once: true });
+        document.addEventListener("scroll", retryOnInteraction, { once: true, passive: true });
+      });
+    }
+  };
+
+  tryPlay();
 };
 
 const initNavigation = () => {
