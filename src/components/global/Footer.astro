@@ -179,7 +179,7 @@ const contactDetails = {
             © {new Date().getFullYear()} MESCo. All rights reserved.
           </Text>
           <Text tag="p" variant="textXS" class="text-base-400 credit-text">
-            Another Unpopular website on <a href="https://theinternet.com.au" target="_blank" rel="noopener noreferrer" class="credit-link">The Internet</a> by <a href="https://joshwithers.au" target="_blank" rel="noopener noreferrer" class="credit-link">Josh Withers</a>
+            Another <a href="https://unpopular.au" target="_blank" rel="noopener noreferrer" class="credit-link credit-link--unpopular">Unpopular</a> website on <a href="https://theinternet.com.au" target="_blank" rel="noopener noreferrer" class="credit-link">The Internet</a> by <a href="https://joshwithers.au" target="_blank" rel="noopener noreferrer" class="credit-link">Josh Withers</a>
           </Text>
         </div>
       </div>
@@ -210,8 +210,38 @@ const contactDetails = {
   .credit-text:hover .credit-link {
     @apply text-base-200;
   }
-  
+
   .credit-text:hover .credit-link:hover {
     @apply text-brand-gold;
+  }
+
+  .credit-text {
+    @apply transition-all duration-500;
+  }
+
+  .credit-text:hover {
+    @apply tracking-wide;
+  }
+
+  .credit-link {
+    @apply transition-all duration-300;
+  }
+
+  .credit-link:hover {
+    @apply drop-shadow-[0_0_6px_theme(colors.brand.gold/0.4)];
+  }
+
+  .credit-link--unpopular {
+    animation: subtle-pulse 4s ease-in-out infinite;
+  }
+
+  .credit-link--unpopular:hover {
+    animation: none;
+    @apply text-brand-gold;
+  }
+
+  @keyframes subtle-pulse {
+    0%, 100% { opacity: 0.7; }
+    50% { opacity: 1; }
   }
 </style>
