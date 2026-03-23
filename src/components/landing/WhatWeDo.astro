@@ -1,50 +1,26 @@
 ---
+import { Image } from "astro:assets";
+import { getCollection } from "astro:content";
 import Text from "@/components/fundations/elements/Text.astro";
 import Kicker from "@/components/fundations/elements/Kicker.astro";
 import Wrapper from "@/components/fundations/containers/Wrapper.astro";
 import { link } from "@/config/site";
-const services = [
-  {
-    title: "Project Start-Up Services",
-    outcome: "Project Ready Systems: Management plans, project procedures, QA/QC frameworks, lot registers, WHSMPs and risk registers — all controlled, documented, ready to mobilise.",
-    slug: "project-start-up-services",
-  },
-  {
-    title: "Automated Engineering Systems & QA/QC Frameworks",
-    outcome: "Controlled QA/QC Systems: Digital lot registers, ITPs, NCR and test workflows designed to connect design intent with site delivery — documented, accurate and fully traceable.",
-    slug: "automated-engineering-systems-and-qaqc-frameworks",
-  },
-  {
-    title: "Engineering Administration & Project Support",
-    outcome: "Structured Engineering Administration: Daily coordination, document control, ITP administration, lot tracking, test record management, QA reporting and close-out support.",
-    slug: "engineering-administration-and-project-support",
-  },
-  {
-    title: "Health, Safety & Environmental Systems",
-    outcome: "Integrated Safety: Integrated WHS and environmental frameworks aligned to ISO 45001 & 14001.",
-    slug: "health-safety-and-environmental-systems",
-  },
-  {
-    title: "ISO Systems & Audit Support",
-    outcome: "Proven Compliance: Gap assessments, internal audits, readiness reviews and automated action tracking.",
-    slug: "iso-systems-and-audit-support",
-  },
-  {
-    title: "Project Close-Out Services",
-    outcome: "Expert Handover: Digital MDRs, test record collation, turnover folders and structured close-out documentation.",
-    slug: "project-close-out-services",
-  },
-  {
-    title: "Short-Term Fill-Ins & Technical Support",
-    outcome: "Focused Capability: On-demand engineering, HSE, or advanced administration coverage using clear, efficient, and consistent work practices.",
-    slug: "short-term-fill-ins-and-technical-support",
-  },
-  {
-    title: "Project Familiarisation & Delivery Tools",
-    outcome: "Crew Clarity: Supervisor cheat sheets, work packs, lot boundary plans, and quality acceptance criteria.",
-    slug: "project-familiarisation-and-delivery-tools",
-  },
+
+const slugOrder = [
+  "project-start-up-services",
+  "automated-engineering-systems-and-qaqc-frameworks",
+  "engineering-administration-and-project-support",
+  "health-safety-and-environmental-systems",
+  "iso-systems-and-audit-support",
+  "project-close-out-services",
+  "short-term-fill-ins-and-technical-support",
+  "project-familiarisation-and-delivery-tools",
 ];
+
+const allServices = await getCollection("services");
+const services = slugOrder
+  .map((slug) => allServices.find((s) => s.id === slug))
+  .filter(Boolean);
 ---
 
 <section>
@@ -67,21 +43,30 @@ const services = [
     >
       {
         services.map((service) => (
-          <a href={link(`/services/${service.slug}`)} class="group block h-full">
-            <div class="h-full flex flex-col justify-between p-6 bg-base-100 rounded-lg hover:bg-accent-200 transition-colors duration-300">
+          <a href={link(`/services/${service.id}`)} class="group block h-full">
+            <div class="h-full flex flex-col justify-between bg-base-100 rounded-lg hover:bg-accent-200 transition-colors duration-300 overflow-hidden">
               <div>
-                <Text
-                  tag="h3"
-                  variant="textLG"
-                  class="text-accent-900 font-medium group-hover:text-accent-700"
-                >
-                  {service.title}
-                </Text>
-                <Text tag="p" variant="textSM" class="text-base-600 mt-2">
-                  {service.outcome}
-                </Text>
+                <Image
+                  src={service.data.image.url}
+                  alt={service.data.image.alt}
+                  width={400}
+                  height={250}
+                  class="w-full h-40 object-cover"
+                />
+                <div class="p-6">
+                  <Text
+                    tag="h3"
+                    variant="textLG"
+                    class="text-accent-900 font-medium group-hover:text-accent-700"
+                  >
+                    {service.data.title}
+                  </Text>
+                  <Text tag="p" variant="textSM" class="text-base-600 mt-2">
+                    {service.data.excerpt || service.data.description}
+                  </Text>
+                </div>
               </div>
-              <div class="mt-4 flex justify-end">
+              <div class="px-6 pb-6 flex justify-end">
                  <span class="text-brand-gold group-hover:translate-x-1 transition-transform duration-300">&rarr;</span>
               </div>
             </div>
