@@ -3,7 +3,7 @@
 **McPhee Engineering Systems Co (MESCo)** — [mesco.au](https://mesco.au)
 
 Custom website designed and built by **Josh Withers** of **[The Internet](https://theinternet.com.au)** and **[Unpopular](https://unpopular.au)** SEO.
-For technical questions, contact Josh Withers [josh@unpopular.au](mailto:josh@withers.co).
+For technical questions, contact Josh Withers [josh@withers.co](mailto:josh@withers.co).
 
 ---
 
@@ -479,12 +479,3 @@ You don't need to write code to update the website's content. Here's what to do 
 
 ### Update contact details
 Edit `src/config/site.ts` to change the email address or phone number. These values are used across the site (footer, contact page, schema.org data).
-
----
-
-## Architect
-
-**Josh Withers**
-[Unpopular](https://unpopular.au) — Perth, WA
-[josh@unpopular.au](mailto:josh@unpopular.au)
-[joshwithers.au](https://joshwithers.au)
