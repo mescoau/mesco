@@ -2,14 +2,14 @@
 
 **McPhee Engineering Systems Co (MESCo)** — [mesco.au](https://mesco.au)
 
-Custom website designed and built by **Josh Withers** of **[The Internet](https://theinternet.com.au)**.
-For technical questions, contact Josh Withers [josh@withers.co](mailto:josh@withers.co).
+Custom website designed and built by **Josh Withers** of **[The Internet](https://theinternet.com.au)** and **[Unpopular](https://unpopular.au)** SEO.
+For technical questions, contact Josh Withers [josh@unpopular.au](mailto:josh@withers.co).
 
 ---
 
 ## How this website works
 
-This website is built with **Astro 5**, a modern static site framework. Understanding two tools is all you need to work on it: **Node.js** and **Astro**.
+This website is built with **Astro 6**, a modern static site framework. Understanding two tools is all you need to work on it: **Node.js** and **Astro**.
 
 ### Node.js
 
@@ -34,7 +34,7 @@ Both should print a version number.
 
 Astro pages and components use `.astro` files, which look like HTML with a JavaScript frontmatter block at the top (between the `---` lines). Content is written in Markdown (`.md` files) inside `src/content/`.
 
-You do not need to understand Astro deeply to update content. The content collections (services, case studies, team, industries, legal) are all plain Markdown files with structured front matter — no code knowledge required to edit them.
+You do not need to understand Astro deeply to update content. The content collections (services, projects, team, industries, legal) are all plain Markdown files with structured front matter — no code knowledge required to edit them.
 
 ### The build process in plain English
 
@@ -62,12 +62,14 @@ Changes to source files will live-reload in the browser automatically.
 
 | Technology | Purpose |
 |---|---|
-| [Astro](https://astro.build) | Static site framework |
+| [Astro 6](https://astro.build) | Static site framework |
 | [Tailwind CSS v4](https://tailwindcss.com) | Utility-first styling (via Vite plugin) |
 | [@tailwindcss/forms](https://github.com/tailwindlabs/tailwindcss-forms) | Form element base styles |
+| [@tailwindcss/typography](https://github.com/tailwindlabs/tailwindcss-typography) | Prose/rich-text styling for Markdown content |
+| [Fuse.js](https://www.fusejs.io) | Client-side fuzzy search |
 | [@astrojs/mdx](https://docs.astro.build/en/guides/integrations-guide/mdx/) | MDX support for content |
 | [@astrojs/sitemap](https://docs.astro.build/en/guides/integrations-guide/sitemap/) | Auto-generated sitemap |
-| [@astrolib/seo](https://github.com/onwidget/astrolib/tree/main/packages/seo) | SEO meta tags |
+| TypeScript | Type-checking and IDE support |
 
 The site compiles to fully static HTML/CSS/JS — no server required, this is a static site.
 
@@ -78,23 +80,39 @@ The site compiles to fully static HTML/CSS/JS — no server required, this is a 
 ```
 /
 ├── public/
-│   ├── brand/          # Logo files and brand guidelines PDF (served at /brand/*)
-│   └── *.mp4           # Background video assets (hero, footer, etc.)
-│   └── favicons        # Browser favicon assets and default.jpg Opengraph image
+│   ├── brand/              # Logo files and brand guidelines PDF (served at /brand/*)
+│   ├── videos/             # Background video assets (hero, footer, etc.)
+│   ├── 404.html            # Interactive space-themed 404 page
+│   ├── favicons & icons    # favicon.ico, favicon.svg, apple-touch-icon.png, etc.
+│   ├── default.jpg         # Default Open Graph image
+│   ├── mesco_email_sig.png # Email signature image
+│   └── site.webmanifest    # PWA manifest
 ├── src/
-│   ├── components/     # Reusable UI components
-│   │   ├── assets/     # Logo, AnimatedLogo
-│   │   ├── contact/    # Contact page sections
-│   │   ├── fundations/ # Base elements (Button, Text, Kicker, Wrapper, icons)
-│   │   ├── global/     # Navigation, Footer
-│   │   └── landing/    # Homepage sections
-│   ├── content/        # Content collections (see below)
-│   ├── images/         # Images imported via Astro image processing
-│   ├── layouts/        # Page layout wrappers
-│   ├── pages/          # Routes (each file = a URL)
+│   ├── components/
+│   │   ├── about/          # About page sections (Hero, Expertise, Process, Certifications)
+│   │   ├── assets/         # Logo, AnimatedLogo
+│   │   ├── contact/        # Contact page sections (Form, FAQ, Hero, ReachOut, Navigate)
+│   │   ├── fundations/     # Base elements — containers, buttons, text, icons, head tags
+│   │   ├── global/         # Navigation, Footer, Search modal
+│   │   ├── landing/        # Homepage sections (Hero, Intro, WhatWeDo, Advantage, Contact)
+│   │   ├── projects/       # Project card components
+│   │   ├── services/       # Service card and principles components
+│   │   └── team/           # Team cards and birthday hat easter egg
+│   ├── config/
+│   │   ├── site.ts         # Site URL, email, phone, trailing slash config
+│   │   └── schema.ts       # Schema.org structured data (Organization, WebSite)
+│   ├── content/            # Content collections (see below)
+│   ├── content.config.ts   # Content collection schemas
+│   ├── data/
+│   │   └── faq.ts          # FAQ items for the contact page
+│   ├── images/             # Images imported via Astro image processing
+│   ├── layouts/            # Page layout wrappers (Base, Services, Projects, Team, Legal)
+│   ├── pages/              # Routes (each file = a URL)
+│   ├── scripts/
+│   │   └── site-shell.ts   # Video autoplay, scroll effects, interaction handling
 │   ├── styles/
-│   │   └── global.css  # Tailwind theme, CSS variables, font config
-│   └── types/          # TypeScript type definitions
+│   │   └── global.css      # Tailwind theme, CSS variables, font config
+│   └── types/              # TypeScript type definitions
 ├── astro.config.mjs
 ├── package.json
 └── tsconfig.json
@@ -116,17 +134,49 @@ Run from the project root:
 
 ---
 
+## Pages & Routes
+
+| Route | Source | Description |
+|---|---|---|
+| `/` | `pages/index.astro` | Homepage with hero, services overview, advantages |
+| `/about` | `pages/about.astro` | About MESCo — expertise, process, certifications |
+| `/values` | `pages/values.astro` | Company values |
+| `/services` | `pages/services/index.astro` | All services listing |
+| `/services/<slug>` | `pages/services/[...slug].astro` | Individual service detail pages |
+| `/case-studies` | `pages/case-studies/index.astro` | Case studies listing |
+| `/case-studies/<slug>` | `pages/case-studies/[...slug].astro` | Individual case study detail pages |
+| `/projects` | `pages/projects/index.astro` | Projects listing |
+| `/projects/<slug>` | `pages/projects/[...slug].astro` | Individual project detail pages |
+| `/team` | `pages/team/index.astro` | Team members listing |
+| `/team/<slug>` | `pages/team/[...slug].astro` | Individual team member profiles |
+| `/industries` | `pages/industries.astro` | Industries served |
+| `/contact` | `pages/contact.astro` | Contact form and FAQ |
+| `/brand` | `pages/brand.astro` | Brand assets and guidelines |
+| `/legal/<slug>` | `pages/legal/[...slug].astro` | Legal pages (privacy, terms, cookies) |
+| `/thank-you` | `pages/thank-you.astro` | Form submission success (excluded from sitemap) |
+| `/signature` | `pages/signature.astro` | Email signature generator (internal, noindex) |
+| `/for-llms` | `pages/for-llms.astro` | LLM-friendly content page |
+| `/llms.txt` | `pages/llms.txt.ts` | Plain-text content dump for LLM context |
+| `/llms-full.txt` | `pages/llms-full.txt.ts` | Extended LLM content dump |
+| `/search-index.json` | `pages/search-index.json.ts` | JSON search index for Fuse.js |
+| `/robots.txt` | `pages/robots.txt.ts` | Robots file with sitemap reference |
+| `/sitemap-index.xml` | Auto-generated | Sitemap (excludes /thank-you and /signature) |
+
+---
+
 ## Content Collections
 
 Content is managed via Astro Content Collections in `src/content/`. Each collection is a folder of Markdown files with a defined front matter schema.
 
-The schema is defined in `src/content/config.ts`.
+The schema is defined in `src/content.config.ts`.
 
 ---
 
 ### `services` — `src/content/services/`
 
 One file per service offering. Slug becomes the URL: `/services/<slug>`.
+
+**Current services:** Project Start-Up, Project Familiarisation & Delivery Tools, Automated Engineering Systems & QA/QC Frameworks, HSE Systems, ISO Systems & Audit Support, Engineering Administration & Project Support, Short-Term Fill-Ins, Project Close-Out.
 
 ```yaml
 ---
@@ -138,6 +188,7 @@ excerpt: Move from blank page to...     # string (optional) — short card tease
 image:
   url: "/src/images/services/file.png"  # image path (Astro image processing)
   alt: "Alt text for the image"         # string
+video: "https://example.com/video.mp4"  # string URL (optional) — hero video instead of image
 highlights:                             # string[] (optional) — bullet points shown on cards
   - Management plans and project procedures
   - QA/QC frameworks
@@ -150,7 +201,9 @@ Page body content in Markdown...
 
 ### `projects` — `src/content/projects/`
 
-One file per case study. Slug becomes the URL: `/case-studies/<slug>`.
+One file per case study. Slug becomes the URL: `/case-studies/<slug>` and `/projects/<slug>`.
+
+**Current projects:** Paraburdoo Airport Asphalt Overlay, BHT LME04 Diversion Road Construction, Northern Revetment Wall Rehabilitation.
 
 ```yaml
 ---
@@ -189,6 +242,8 @@ Page body content in Markdown...
 
 One file per team member. Slug becomes the URL: `/team/<slug>`.
 
+**Current team:** Adrian McPhee, Kyriah McPhee.
+
 ```yaml
 ---
 name: Adrian McPhee                     # string
@@ -196,13 +251,18 @@ role: Director, HSE & Compliance Systems  # string (optional)
 bio: >                                  # string (optional) — short bio for cards
   A safety and operations professional...
 image:
-  url: "/src/images/adrian.png"         # image path (Astro image processing)
+  url: "/src/images/team/adrian.png"    # image path (Astro image processing)
   alt: "Adrian McPhee — Director..."
 socials:                                # array (optional) — links shown on profile
   - label: Email
     href: "mailto:adrian@mesco.au"
   - label: LinkedIn
     href: "https://linkedin.com/in/..."
+birthday: "03-15"                       # string "MM-DD" (optional) — shows birthday hat on their page
+hatX: 50                                # number (optional) — hat X position
+hatY: 0                                 # number (optional) — hat Y position
+hatRotate: 0                            # number (optional) — hat rotation
+hatSize: 100                            # number (optional) — hat size
 ---
 
 Full profile content in Markdown...
@@ -214,6 +274,8 @@ Full profile content in Markdown...
 
 One file per industry. Rendered on the `/industries` page.
 
+**Current industries:** Civil Construction, Infrastructure & Transport, Resources & Mining, Energy & Renewables, Government Projects.
+
 ```yaml
 ---
 title: Civil Construction               # string
@@ -224,6 +286,9 @@ focus: >                                # string (optional) — "MESCo's focus" 
   Translating specifications into...
 typicalProjects: >                      # string (optional) — example project types
   Civil infrastructure works...
+image:                                  # object (optional) — industry image
+  url: "/src/images/assets/example.jpg"
+  alt: "Description"
 ---
 ```
 
@@ -243,6 +308,89 @@ pubDate: 2026-02-27                     # date — last updated date (YYYY-MM-DD
 
 Full legal text in Markdown...
 ```
+
+---
+
+## Site Configuration
+
+Central configuration lives in two files:
+
+### `src/config/site.ts`
+
+Controls core site settings used across pages and components:
+
+```typescript
+siteConfig = {
+  url: "https://mesco.au",       // Site URL (used in sitemap, meta tags, canonical links)
+  email: "kyriah@mesco.au",      // Primary contact email
+  phone: "+61 431 308 396",      // Primary contact phone
+  trailingSlash: false,          // URL style — no trailing slashes
+}
+```
+
+If the domain changes, update the `url` here — it propagates everywhere automatically.
+
+### `src/config/schema.ts`
+
+Schema.org structured data (JSON-LD) for search engines. Defines the organization as a `ProfessionalService` with service descriptions, contact details, and operating hours (Mon–Fri, 08:00–17:00).
+
+---
+
+## Features
+
+### Search
+
+The site includes a **client-side search** powered by [Fuse.js](https://www.fusejs.io). A search icon in the navigation opens a modal where users can search across all services, projects, team members, and legal pages.
+
+- The search index is generated at build time as `/search-index.json`
+- Fuzzy matching with a threshold of 0.3 — users don't need to type exact titles
+- Results display as cards with type labels, titles, descriptions, and metadata
+
+### Email Signature Generator
+
+An internal tool at `/signature` (not indexed by search engines) that generates formatted HTML email signatures for MESCo staff. Enter a name, title, email, and phone number to generate a signature that can be copied and pasted into email clients.
+
+### LLM Content Endpoints
+
+The site publishes its content in plain-text format for AI tools and large language models:
+
+- `/llms.txt` — Summary of all content, organised by section
+- `/llms-full.txt` — Full content of every page
+- `/for-llms` — Human-readable page linking to the above
+
+### Video Handling
+
+Hero and footer sections support background video. The site intelligently handles autoplay:
+
+- Respects `prefers-reduced-motion` user preferences
+- Skips video on slow connections (2G/3G) or when data-saver is enabled
+- Lazy-loads video sources for performance
+- Retries playback on first user interaction if autoplay was blocked
+
+### Brand & Style Guide
+
+The site includes a comprehensive brand reference page at `/brand` for affiliates, designers, printing partners, and vehicle wrap suppliers. It covers:
+
+- **Logo** — Primary logo shown on dark, light, and profile picture variants. Includes an animated SVG version used on the website.
+- **Colour palette** — Primary brand colours (Brand Blue `#04203E`, Brand Gold `#BE9B48`, White, Black) plus full accent (blue) and base (neutral) scales with click-to-copy hex values.
+- **Typography** — The site uses [Inter](https://fonts.google.com/specimen/Inter), a variable sans-serif. The brand page displays the full type scale from Text XS through Display 3XL.
+- **Website elements** — Live previews of button and link components in all variants (Default, Accent, Muted) and sizes.
+- **Downloadable assets** — All logo files organised into four categories:
+
+| Category | Formats | Use case |
+|---|---|---|
+| Web Logos | SVG, PNG (transparent) | Digital, websites, overlays |
+| Print Logos | PDF, AI, EPS (CMYK & RGB), PNG/JPG banners | Print, signage, vehicle wraps |
+| Social & Profile | PNG, SVG, JPG | Profile pictures, social media avatars |
+| Brand Guidelines | PDF | Complete brand guidelines document |
+
+All assets are served from `public/brand/` and accessible at `/brand/<filename>`. The brand guidelines PDF can be downloaded directly at `/brand/brand-guidelines.pdf`.
+
+All brand assets are copyright MESCo and require written permission to use.
+
+### Interactive 404 Page
+
+The custom 404 page (`public/404.html`) features an interactive space-themed asteroid game. Users can click flying asteroids to score points, with a combo multiplier system. The footer includes a link inviting visitors to check it out.
 
 ---
 
@@ -266,13 +414,7 @@ The contact form is at `src/components/contact/Form.astro`.
 
 **Form action:**
 
-The form currently posts to:
-
-```
-https://forms-backend.withersco.workers.dev/api/forms/mesco
-```
-
-This is a Cloudflare Workers endpoint maintained by Josh Withers. It receives form submissions and forwards them to MESCo. If MESCo or a future administrator needs to change this — for example to use a different form backend, Formspree, or a self-hosted solution — update the `action` attribute on the `<form>` element in `src/components/contact/Form.astro`.
+The form currently posts to Netlify Forms.
 
 ---
 
@@ -300,7 +442,43 @@ The site builds to fully static files in `./dist/`. It requires no server runtim
 1. Run `npm install` then `npm run build`
 2. Upload the contents of `./dist/` to your host
 
-**Sitemap:** Auto-generated at `/sitemap-index.xml` during build. The site URL is configured in `astro.config.mjs` — update `site: "https://mesco.au"` if the domain changes.
+**Sitemap:** Auto-generated at `/sitemap-index.xml` during build. The site URL is configured in `src/config/site.ts` — update the `url` field if the domain changes.
+
+---
+
+## How to Update Content (for non-developers)
+
+You don't need to write code to update the website's content. Here's what to do for common tasks:
+
+### Add a new service
+1. Create a new `.md` file in `src/content/services/`
+2. Copy the front matter structure from an existing service file
+3. Fill in the title, description, image, and highlights
+4. Write the page body in Markdown below the `---`
+5. Build and deploy
+
+### Add a new project / case study
+1. Create a new `.md` file in `src/content/projects/`
+2. Copy the front matter structure from an existing project file
+3. Add project images to `src/images/projects/` (or a subfolder)
+4. Fill in all the details — title, client, location, metrics, etc.
+5. Write the page body in Markdown below the `---`
+6. Build and deploy
+
+### Add a new team member
+1. Create a new `.md` file in `src/content/team/`
+2. Add their portrait photo to `src/images/team/`
+3. Fill in name, role, bio, image path, and social links
+4. Write their full profile in Markdown below the `---`
+5. Build and deploy
+
+### Update legal pages
+1. Edit the relevant file in `src/content/legal/` (privacy.md, terms.md, or cookies.md)
+2. Update the `pubDate` in front matter to today's date
+3. Build and deploy
+
+### Update contact details
+Edit `src/config/site.ts` to change the email address or phone number. These values are used across the site (footer, contact page, schema.org data).
 
 ---
 
