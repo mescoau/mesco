@@ -11,7 +11,7 @@ import SchemaOrg from "@/components/fundations/head/SchemaOrg.astro";
 // Config
 import BirthdayHat from "@/components/team/BirthdayHat.astro";
 import { link, siteConfig } from "@/config/site";
-import { ORG_ID, SITE_ID } from "@/config/schema";
+import { ORG_ID } from "@/config/schema";
 // Content
 const { frontmatter } = Astro.props;
 
@@ -29,7 +29,6 @@ const personSchema = [
     worksFor: { "@id": ORG_ID },
     url: pageUrl,
     ...(email ? { email } : {}),
-    isPartOf: { "@id": SITE_ID },
   },
   {
     "@type": "BreadcrumbList",
