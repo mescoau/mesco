@@ -45,3 +45,23 @@
   font-family: var(--font-sans);
   font-feature-settings: "liga" 1, "calt" 1;
 }
+
+/* Transparent nav gradient – ensures white text/logo stays readable
+   even when the dark hero behind it hasn't painted yet (View Transitions, initial load). */
+nav.nav-transparent {
+  position: relative;
+}
+nav.nav-transparent::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  bottom: -2rem;
+  background: linear-gradient(to bottom, rgba(4, 32, 62, 0.6) 0%, transparent 100%);
+  pointer-events: none;
+  z-index: -1;
+  transition: opacity 300ms ease;
+}
+nav:not(.nav-transparent)::before {
+  content: "";
+  opacity: 0;
+}

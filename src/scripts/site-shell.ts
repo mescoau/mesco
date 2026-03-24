@@ -137,8 +137,10 @@ const applyNavTheme = (els: NavElements, solid: boolean) => {
 
   if (solid) {
     navEl.classList.add("bg-white/80", "backdrop-blur-xl");
+    navEl.classList.remove("nav-transparent");
   } else {
     navEl.classList.remove("bg-white/80", "backdrop-blur-xl");
+    navEl.classList.add("nav-transparent");
   }
 
   setTextColor(logoEl, solid);
