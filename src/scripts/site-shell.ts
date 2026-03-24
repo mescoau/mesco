@@ -55,7 +55,16 @@ const hydrateVideo = (video: HTMLVideoElement | null) => {
   tryPlay();
 };
 
+// AbortController to tear down listeners from the previous navigation,
+// preventing duplicates on the persisted nav element.
+let navAbort: AbortController | null = null;
+
 const initNavigation = () => {
+  // Abort any listeners from the previous page before re-binding
+  navAbort?.abort();
+  navAbort = new AbortController();
+  const { signal } = navAbort;
+
   const navEl = document.querySelector<HTMLElement>("[data-nav]");
   if (!navEl) {
     return;
@@ -127,34 +136,46 @@ const initNavigation = () => {
     updateIcons();
   };
 
-  menuButton?.addEventListener("click", () => {
-    const expanded = menuButton.getAttribute("aria-expanded") === "true";
-    expanded ? closeMenu() : openMenu();
-  });
+  menuButton?.addEventListener(
+    "click",
+    () => {
+      const expanded = menuButton.getAttribute("aria-expanded") === "true";
+      expanded ? closeMenu() : openMenu();
+    },
+    { signal }
+  );
 
-  document.addEventListener("click", (event) => {
-    const target = event.target;
+  document.addEventListener(
+    "click",
+    (event) => {
+      const target = event.target;
 
-    if (
-      mobileMenu &&
-      menuButton &&
-      target instanceof Node &&
-      !mobileMenu.contains(target) &&
-      !menuButton.contains(target) &&
-      menuButton.getAttribute("aria-expanded") === "true"
-    ) {
-      closeMenu();
-    }
-  });
+      if (
+        mobileMenu &&
+        menuButton &&
+        target instanceof Node &&
+        !mobileMenu.contains(target) &&
+        !menuButton.contains(target) &&
+        menuButton.getAttribute("aria-expanded") === "true"
+      ) {
+        closeMenu();
+      }
+    },
+    { signal }
+  );
 
-  document.addEventListener("keydown", (event) => {
-    if (
-      event.key === "Escape" &&
-      menuButton?.getAttribute("aria-expanded") === "true"
-    ) {
-      closeMenu();
-    }
-  });
+  document.addEventListener(
+    "keydown",
+    (event) => {
+      if (
+        event.key === "Escape" &&
+        menuButton?.getAttribute("aria-expanded") === "true"
+      ) {
+        closeMenu();
+      }
+    },
+    { signal }
+  );
 
   const swapColor = (element: HTMLElement | null, scrolled: boolean) => {
     if (!element) {
@@ -239,8 +260,11 @@ const initNavigation = () => {
     updateGlassTheme(isDark);
   };
 
+  // Close mobile menu on navigation (it persists across pages)
+  closeMenu();
+
   updateIcons();
-  window.addEventListener("scroll", handleScroll, { passive: true });
+  window.addEventListener("scroll", handleScroll, { passive: true, signal });
   handleScroll();
 
   if (!enableScrollSwap) {
@@ -257,21 +281,29 @@ const initNavigation = () => {
   if (glassNav && hoverPill) {
     glassNav.querySelectorAll<HTMLAnchorElement>("a[data-primary-link]").forEach(
       (link) => {
-        link.addEventListener("mouseenter", () => {
-          const containerRect = glassNav.getBoundingClientRect();
-          const linkRect = link.getBoundingClientRect();
-          hoverPill.style.left = `${linkRect.left - containerRect.left}px`;
-          hoverPill.style.top = `${linkRect.top - containerRect.top}px`;
-          hoverPill.style.width = `${linkRect.width}px`;
-          hoverPill.style.height = `${linkRect.height}px`;
-          hoverPill.style.opacity = "1";
-        });
+        link.addEventListener(
+          "mouseenter",
+          () => {
+            const containerRect = glassNav.getBoundingClientRect();
+            const linkRect = link.getBoundingClientRect();
+            hoverPill.style.left = `${linkRect.left - containerRect.left}px`;
+            hoverPill.style.top = `${linkRect.top - containerRect.top}px`;
+            hoverPill.style.width = `${linkRect.width}px`;
+            hoverPill.style.height = `${linkRect.height}px`;
+            hoverPill.style.opacity = "1";
+          },
+          { signal }
+        );
       }
     );
 
-    glassNav.addEventListener("mouseleave", () => {
-      hoverPill.style.opacity = "0";
-    });
+    glassNav.addEventListener(
+      "mouseleave",
+      () => {
+        hoverPill.style.opacity = "0";
+      },
+      { signal }
+    );
   }
 };
 
@@ -323,3 +355,25 @@ if (document.readyState === "loading") {
 } else {
   initSiteShell();
 }
+
+// Sync the persisted nav's transparent/solid state with the incoming page.
+// The new document may have a different data-swap value, so we copy it
+// across before the DOM swap happens.
+document.addEventListener("astro:before-swap", (event) => {
+  const currentNav = document.querySelector<HTMLElement>("[data-nav]");
+  const detail = (event as unknown as CustomEvent).detail;
+  const incomingNav =
+    detail.newDocument.querySelector<HTMLElement>("[data-nav]");
+
+  if (currentNav && incomingNav) {
+    currentNav.dataset.swap = incomingNav.dataset.swap ?? "false";
+  }
+});
+
+// Re-initialize after each client-side navigation.
+// astro:page-load fires on initial load AND after every View Transition nav.
+document.addEventListener("astro:page-load", () => {
+  initNavigation();
+  initHeroVideo();
+  initFooterVideo();
+});

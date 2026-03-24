@@ -4,6 +4,7 @@ import "@/styles/global.css";
 import BaseHead from "@/components/fundations/head/BaseHead.astro";
 import Footer from "@/components/global/Footer.astro";
 import Navigation from "@/components/global/navigation/Navigation.astro";
+import { ClientRouter } from "astro:transitions";
 
 const {
   hideNavigation = false,
@@ -23,6 +24,7 @@ const {
 <html lang="en" class="scroll-smooth">
   <head>
     <BaseHead title={seoTitle} description={seoDescription} />
+    <ClientRouter />
     <slot name="head" />
   </head>
   <body class="flex flex-col bg-white min-h-dvh">
@@ -34,7 +36,7 @@ const {
           <Navigation />
         ))
     }
-    <main class="grow"><slot /></main>
+    <main class="grow" transition:animate="fade"><slot /></main>
     {!hideFooter && <Footer />}
     <script>
       import "@/scripts/site-shell";
