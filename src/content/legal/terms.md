@@ -1,6 +1,7 @@
 ---
 page: Terms and Conditions
 pubDate: 2026-02-27
+description: "Review the terms and conditions for using the MESCo website, including acceptable use, intellectual property, and liability under Australian law."
 ---
 
 These Terms and Conditions govern your use of the McPhee Engineering Systems Co (MESCo) website located at mesco.au (the "Website"). By accessing or using the Website, you agree to be bound by these Terms. If you do not agree, please do not use the Website.

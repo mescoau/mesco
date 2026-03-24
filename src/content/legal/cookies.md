@@ -1,6 +1,7 @@
 ---
 page: Cookie Notice
 pubDate: 2026-02-27
+description: "Learn how MESCo uses cookies on its website, what data is collected, and how you can manage your cookie preferences and browser settings."
 ---
 
 This Cookie Notice explains how McPhee Engineering Systems Co (MESCo) uses cookies on this Website.

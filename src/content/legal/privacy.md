@@ -1,6 +1,7 @@
 ---
 page: Privacy Policy
 pubDate: 2026-02-27
+description: "Read how MESCo collects, uses, and protects your personal information in compliance with the Australian Privacy Act and Privacy Principles."
 ---
 
 McPhee Engineering Systems Co (MESCo) is committed to protecting your privacy. This Privacy Policy explains how we collect, use, and handle personal information in accordance with the *Privacy Act 1988* (Cth) and the Australian Privacy Principles (APPs).
