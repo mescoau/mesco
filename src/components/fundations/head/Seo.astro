@@ -15,7 +15,8 @@ const finalTitle = rawTitle.endsWith(" - MESCo")
 
 const finalDescription = description ?? defaultDescription;
 const siteName = "McPhee Engineering Systems (MESCo)";
-const url = Astro.url?.href ?? "";
+const rawUrl = Astro.url?.href ?? "";
+const url = rawUrl.replace(/\/+$/, "") || rawUrl;
 ---
 
 <title>{finalTitle}</title>
