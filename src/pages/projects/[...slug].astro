@@ -1,21 +1,14 @@
 ---
-import { getCollection, render } from "astro:content";
-import ProjectsLayout from "@/layouts/ProjectsLayout.astro";
+import { getCollection } from "astro:content";
+import { link } from "@/config/site";
+
 export async function getStaticPaths() {
   const projects = await getCollection("projects");
-  const paths = projects.map((page) => {
-    return {
-      params: { slug: page.id },
-      props: { page },
-      trailingSlash: false,
-    };
-  });
-  return paths;
+  return projects.map((page) => ({
+    params: { slug: page.id },
+  }));
 }
-const { page } = Astro.props;
-const { Content } = await render(page);
----
 
-<ProjectsLayout frontmatter={page.data}>
-  <Content />
-</ProjectsLayout>
+const { slug } = Astro.params;
+return Astro.redirect(link(`/case-studies/${slug}`), 301);
+---

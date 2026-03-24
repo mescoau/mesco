@@ -37,7 +37,7 @@ const projectSchema = [
     url: pageUrl,
     isPartOf: { "@id": SITE_ID },
     ...(frontmatter.year ? { datePublished: String(frontmatter.year) } : {}),
-    ...(frontmatter.client ? { sourceOrganization: frontmatter.client } : {}),
+    ...(frontmatter.client ? { sourceOrganization: { "@type": "Organization", name: frontmatter.client } } : {}),
     ...(frontmatter.category
       ? { about: { "@type": "Thing", name: frontmatter.category } }
       : {}),
