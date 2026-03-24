@@ -358,7 +358,9 @@ if (document.readyState === "loading") {
 
 // Sync the persisted nav's transparent/solid state with the incoming page.
 // The new document may have a different data-swap value, so we copy it
-// across before the DOM swap happens.
+// across AND immediately update visual classes before the DOM swap happens.
+// Without the class updates here, pages that don't use navTransparent
+// (e.g. /team) would flash white-on-white during the transition.
 document.addEventListener("astro:before-swap", (event) => {
   const currentNav = document.querySelector<HTMLElement>("[data-nav]");
   const detail = (event as unknown as CustomEvent).detail;
@@ -366,7 +368,90 @@ document.addEventListener("astro:before-swap", (event) => {
     detail.newDocument.querySelector<HTMLElement>("[data-nav]");
 
   if (currentNav && incomingNav) {
-    currentNav.dataset.swap = incomingNav.dataset.swap ?? "false";
+    const shouldSwap = incomingNav.dataset.swap === "true";
+    currentNav.dataset.swap = shouldSwap ? "true" : "false";
+
+    if (!shouldSwap) {
+      // Incoming page wants a solid nav — apply immediately so there is
+      // no white-on-white flash during the transition animation.
+      currentNav.classList.add("bg-white/80", "backdrop-blur-xl");
+
+      const logoEl = currentNav.querySelector<HTMLElement>("[data-logo]");
+      const logoImage = currentNav.querySelector<HTMLImageElement>("[data-logo-image]");
+      const primaryLinks = currentNav.querySelectorAll<HTMLElement>("[data-primary-link]");
+      const menuButton = currentNav.querySelector<HTMLElement>("[data-menu-button]");
+      const burger = menuButton?.querySelector<HTMLElement>("[data-burger]") ?? null;
+      const close = menuButton?.querySelector<HTMLElement>("[data-close]") ?? null;
+      const glassNav = currentNav.querySelector<HTMLElement>("[data-glass-nav]");
+      const hoverPill = glassNav?.querySelector<HTMLElement>("[data-hover-pill]") ?? null;
+
+      const fix = (el: HTMLElement | null) => {
+        if (!el) return;
+        el.classList.remove("text-white");
+        el.classList.add("text-base-800");
+      };
+
+      fix(logoEl);
+      fix(burger);
+      fix(close);
+      primaryLinks.forEach((el) => fix(el));
+
+      if (logoImage) {
+        logoImage.src = logoImage.dataset.lightSrc ?? logoImage.src;
+      }
+
+      if (glassNav) {
+        glassNav.style.background = "rgba(0,0,0,0.04)";
+        glassNav.style.borderColor = "rgba(0,0,0,0.08)";
+        glassNav.style.boxShadow =
+          "inset 0 1px 0 rgba(255,255,255,0.8), 0 2px 12px rgba(0,0,0,0.04)";
+      }
+
+      if (hoverPill) {
+        hoverPill.style.background = "rgba(0,0,0,0.07)";
+        hoverPill.style.boxShadow = "inset 0 1px 0 rgba(255,255,255,0.6)";
+      }
+    } else {
+      // Incoming page wants a transparent nav — remove solid classes
+      // so the nav starts transparent (scroll handler will re-add if needed).
+      currentNav.classList.remove("bg-white/80", "backdrop-blur-xl");
+
+      const logoEl = currentNav.querySelector<HTMLElement>("[data-logo]");
+      const logoImage = currentNav.querySelector<HTMLImageElement>("[data-logo-image]");
+      const primaryLinks = currentNav.querySelectorAll<HTMLElement>("[data-primary-link]");
+      const menuButton = currentNav.querySelector<HTMLElement>("[data-menu-button]");
+      const burger = menuButton?.querySelector<HTMLElement>("[data-burger]") ?? null;
+      const close = menuButton?.querySelector<HTMLElement>("[data-close]") ?? null;
+      const glassNav = currentNav.querySelector<HTMLElement>("[data-glass-nav]");
+      const hoverPill = glassNav?.querySelector<HTMLElement>("[data-hover-pill]") ?? null;
+
+      const fix = (el: HTMLElement | null) => {
+        if (!el) return;
+        el.classList.remove("text-base-800");
+        el.classList.add("text-white");
+      };
+
+      fix(logoEl);
+      fix(burger);
+      fix(close);
+      primaryLinks.forEach((el) => fix(el));
+
+      if (logoImage) {
+        logoImage.src = logoImage.dataset.darkSrc ?? logoImage.src;
+      }
+
+      if (glassNav) {
+        glassNav.style.background = "rgba(255,255,255,0.1)";
+        glassNav.style.borderColor = "rgba(255,255,255,0.2)";
+        glassNav.style.boxShadow =
+          "inset 0 1px 0 rgba(255,255,255,0.25), 0 2px 12px rgba(0,0,0,0.08)";
+      }
+
+      if (hoverPill) {
+        hoverPill.style.background = "rgba(255,255,255,0.22)";
+        hoverPill.style.boxShadow = "inset 0 1px 0 rgba(255,255,255,0.4)";
+      }
+    }
   }
 });
 
