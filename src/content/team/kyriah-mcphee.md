@@ -2,10 +2,7 @@
 name: Kyriah McPhee
 role: Director, Engineering Systems
 bio: >
-  A civil engineer recognised for her ability to build structure into complexity.
-  With a decade of experience spanning civil construction, mining, and
-  infrastructure projects across Western Australia, Queensland, and New Zealand,
-  Kyriah leads MESCo's engineering and quality systems portfolio.
+  Civil engineer with a decade of experience spanning construction, mining, and infrastructure across WA, QLD, and NZ. Leads MESCo's engineering systems.
 hatX: 47
 hatY: 23
 hatRotate: 18

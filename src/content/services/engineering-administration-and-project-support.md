@@ -2,9 +2,7 @@
 featured: true
 title: Engineering Administration & Project Support
 description: >
-  Daily project coordination made clear — lot registers, ITPs, test records,
-  NCRs and documentation workflows kept organised, current and easy for your
-  team to follow.
+  Daily project coordination made clear — lot registers, ITPs, test records, NCRs, and documentation workflows kept organised and current.
 excerpt: Replace project chaos with structured, reliable support that keeps delivery on track.
 image:
   url: "/src/images/services/Engineering Administration & Project Support.jpg"

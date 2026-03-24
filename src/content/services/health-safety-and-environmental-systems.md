@@ -2,9 +2,7 @@
 featured: true
 title: Health, Safety & Environmental Systems
 description: >
-  Safety and environmental compliance built into every project. Project-specific
-  WHSMPs, SWMSs, SOPs, hazard registers, environmental frameworks, toolbox talk
-  packs, incident templates, and compliance checklists.
+  Project-specific WHSMPs, SWMSs, hazard registers, environmental frameworks, and compliance checklists built for audit-ready field delivery.
 excerpt: Audit-ready safety and environmental systems that work in the field.
 image:
   url: "/src/images/services/Health, Safety & Environmental Systems.jpg"

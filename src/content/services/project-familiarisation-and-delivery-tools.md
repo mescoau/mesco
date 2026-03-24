@@ -2,9 +2,7 @@
 featured: false
 title: Project Familiarisation & Delivery Tools
 description: >
-  Supervisor cheat sheets, work packs, lot boundary plans, hold point
-  checklists, material spec summaries, staging/sequencing plans, quality
-  acceptance criteria, and safe work summaries.
+  Supervisor cheat sheets, work packs, lot boundary plans, hold point checklists, and quality acceptance criteria for field-ready delivery.
 excerpt: Visual, field-tested tools that simplify execution.
 image:
   url: "/src/images/services/Project Familiarisation & Delivery Tools.jpg"

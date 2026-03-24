@@ -2,9 +2,7 @@
 featured: false
 title: Short-Term Fill-Ins & Technical Support
 description: >
-  Scoped, flexible resource support — Site & Project Engineers, HSE Advisors,
-  Project Coordinators, Project Administrators trained to MESCo's high QA
-  standards. Work under your systems and procedures.
+  Scoped, flexible resource support — Site Engineers, HSE Advisors, and Project Coordinators trained to MESCo standards, working under your systems.
 excerpt: Experienced support when you need it.
 image:
   url: "/src/images/services/Short-Term Fill-Ins & Technical Support.jpg"

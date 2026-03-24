@@ -2,10 +2,7 @@
 name: Adrian McPhee
 role: Director, HSE & Compliance Systems
 bio: >
-  A safety and operations professional with more than two decades of experience
-  across mining, civil construction, and safety-critical environments throughout
-  Western Australia and Queensland. Adrian leads MESCo's HSE and compliance
-  systems portfolio.
+  Safety and operations professional with two decades of experience across mining, civil construction, and safety-critical environments in WA and QLD.
 image:
   url: "/src/images/team/Adrian-cropped.jpg"
   alt: "Adrian McPhee — Director, HSE & Compliance Systems"

@@ -2,9 +2,7 @@
 featured: false
 title: ISO Systems & Audit Support
 description: >
-  Gap assessments, procedure development, internal audit programs, corrective
-  action support, management review facilitation. Support for ISO 9001, 45001,
-  14001 certification.
+  Gap assessments, procedure development, internal audit programs, and corrective action support for ISO 9001, 45001, and 14001 certification.
 excerpt: Build systems that work on site.
 image:
   url: "/src/images/services/ISO Systems & Audit Support.jpg"

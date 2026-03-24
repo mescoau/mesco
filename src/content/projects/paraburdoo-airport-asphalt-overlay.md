@@ -2,9 +2,7 @@
 featured: true
 title: Paraburdoo Airport Asphalt Overlay
 description: >
-  On-site QA/QC engineering support for a high-stakes asphalt overlay project at
-  an operational airport, delivering zero audit findings and first-submission
-  handover acceptance.
+  On-site QA/QC engineering support for a high-stakes asphalt overlay at an operational airport, delivering zero audit findings at handover.
 client: DTI on behalf of Rio Tinto
 location: Paraburdoo, WA (Pilbara)
 duration: 6 months

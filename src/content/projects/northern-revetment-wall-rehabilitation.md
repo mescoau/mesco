@@ -2,9 +2,7 @@
 featured: true
 title: Northern Revetment Wall Rehabilitation
 description: >
-  QA/QC, HSE, and environmental compliance systems for the rehabilitation of a
-  322-metre revetment wall within an active bulk port facility, achieving zero
-  non-conformances at first audit.
+  QA/QC, HSE, and environmental compliance for a 322-metre revetment wall rehabilitation within an active bulk port, achieving zero non-conformances.
 client: North Queensland Bulk Port Corporation
 location: North Queensland
 duration: 5 months

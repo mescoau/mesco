@@ -2,9 +2,7 @@
 featured: true
 title: BHT LME04 Diversion Road Construction
 description: >
-  Integrated engineering and HSE support for construction of a temporary MAR
-  bypass at Hope Downs 1, delivering a clean close-out package with all tests
-  passed on first submission.
+  Engineering and HSE support for a temporary MAR bypass at Hope Downs 1, delivering a clean close-out with all tests passed first submission.
 client: WSP on behalf of Rio Tinto
 location: Hope Downs 1 – Bedded Hilltop (BHT), WA (Pilbara)
 duration: 3 months

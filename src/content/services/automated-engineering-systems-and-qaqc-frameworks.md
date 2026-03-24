@@ -2,9 +2,7 @@
 featured: true
 title: Automated Engineering Systems & QA/QC Frameworks
 description: >
-  Digital lot registers, ITPs, test records, NCRs — all automated and linked.
-  Real-time progress tracking, automated reporting, and automation that
-  eliminates repetitive data entry.
+  Digital lot registers, ITPs, test records, and NCRs — all automated and linked with real-time progress tracking and automated reporting.
 excerpt: Replace spreadsheet chaos with traceable, reliable systems.
 image:
   url: "/src/images/services/Automated Engineering Systems & QAQC Frameworks.jpg"

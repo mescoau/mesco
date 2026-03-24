@@ -2,9 +2,7 @@
 featured: false
 title: Project Close-Out Services
 description: >
-  Close-out done right, first time. Master Defect Registers, ITP close-out
-  verification, test record collation, lot completion packs, turnover folders,
-  as-built documentation, and compliance certificates.
+  Close-out done right, first time. Defect registers, ITP verification, lot completion packs, turnover folders, and as-built documentation.
 excerpt: Verified, documented handover that passes audit on first submission.
 image:
   url: "/src/images/services/Project Close-Out Services.jpg"

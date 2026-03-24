@@ -2,9 +2,7 @@
 featured: true
 title: Project Start-Up Services
 description: >
-  Systems, registers and procedures ready before mobilisation. Management plans,
-  project procedures, QA/QC frameworks, lot registers, WHSMPs and risk
-  registers — all controlled, documented, ready to mobilise.
+  Management plans, project procedures, QA/QC frameworks, lot registers, and WHSMPs — controlled, documented, and ready before mobilisation.
 excerpt: Move from blank page to fully mobilisation-ready.
 image:
   url: "/src/images/services/Project Start-Up Services.jpg"
