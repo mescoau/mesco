@@ -133,7 +133,7 @@ const defaults = {
 <script define:vars={{ logoUrl, siteUrl, disclaimer, defaults }}>
   function generateHTML(name, title, email, phone) {
     const tel = phone.replace(/\s/g, "");
-    return `<table cellpadding="0" cellspacing="0" border="0" role="presentation" style="font-family:Arial,Helvetica,sans-serif;border-collapse:collapse;">
+    return `<table cellpadding="0" cellspacing="0" border="0" role="presentation" style="font-family:Calibri,'Segoe UI',Arial,Helvetica,sans-serif;border-collapse:collapse;">
   <tr>
     <td style="padding:0 24px 0 0;vertical-align:top;">
       <a href="${siteUrl}" target="_blank" rel="noopener" style="display:block;text-decoration:none;border:none;">
@@ -141,14 +141,14 @@ const defaults = {
       </a>
     </td>
     <td style="padding:0 0 0 24px;border-left:2px solid #c4a245;vertical-align:top;">
-      <p style="margin:0 0 2px 0;font-family:Arial,Helvetica,sans-serif;font-size:14px;font-weight:bold;color:#0d2d5e;line-height:1.4;">${name} | ${title}</p>
-      <p style="margin:0 0 2px 0;font-family:Arial,Helvetica,sans-serif;font-size:13px;color:#555555;line-height:1.4;">McPhee Engineering Systems Co (MESCo)</p>
-      <p style="margin:0 0 10px 0;font-family:Arial,Helvetica,sans-serif;font-size:13px;color:#555555;line-height:1.4;">E: <a href="mailto:${email}" style="color:#0d2d5e;text-decoration:none;">${email}</a>&nbsp;&nbsp;|&nbsp;&nbsp;Ph: <a href="tel:${tel}" style="color:#0d2d5e;text-decoration:none;">${phone}</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="${siteUrl}" target="_blank" rel="noopener" style="color:#0d2d5e;text-decoration:none;">${siteUrl.replace(/^https?:\/\//, "")}</a></p>
-      <p style="margin:0 0 16px 0;font-family:Arial,Helvetica,sans-serif;font-size:12px;font-style:italic;color:#777777;line-height:1.4;">Built from experience. Delivered with intent.</p>
-      <p style="margin:0;font-family:Arial,Helvetica,sans-serif;font-size:10px;color:#999999;max-width:480px;line-height:1.5;">${disclaimer}</p>
+      <p style="margin:0 0 4px 0;font-family:Calibri,'Segoe UI',Arial,Helvetica,sans-serif;font-size:15px;font-weight:bold;color:#0d2d5e;line-height:1.4;">${name} | ${title}</p>
+      <p style="margin:0 0 2px 0;font-family:Calibri,'Segoe UI',Arial,Helvetica,sans-serif;font-size:13px;color:#555555;line-height:1.4;">McPhee Engineering Systems Co (MESCo)</p>
+      <p style="margin:0 0 2px 0;font-family:Calibri,'Segoe UI',Arial,Helvetica,sans-serif;font-size:13px;color:#555555;line-height:1.4;">E: <a href="mailto:${email}" style="color:#0d2d5e;text-decoration:none;">${email}</a>&nbsp;&nbsp;|&nbsp;&nbsp;Ph: <a href="tel:${tel}" style="color:#0d2d5e;text-decoration:none;">${phone}</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="${siteUrl}" target="_blank" rel="noopener" style="color:#0d2d5e;text-decoration:none;">${siteUrl.replace(/^https?:\/\//, "")}</a></p>
+      <p style="margin:12px 0 0 0;font-family:Calibri,'Segoe UI',Arial,Helvetica,sans-serif;font-size:13px;font-style:italic;color:#777777;line-height:1.4;"><em>Built from experience. Delivered with intent.</em></p>
     </td>
   </tr>
-</table>`;
+</table>
+<p style="margin:16px 0 0 0;font-family:Calibri,'Segoe UI',Arial,Helvetica,sans-serif;font-size:10px;color:#999999;max-width:600px;line-height:1.5;">${disclaimer}</p>`;
   }
 
   function getValues() {
@@ -174,7 +174,7 @@ const defaults = {
   document.getElementById("copy-formatted")?.addEventListener("click", async () => {
     const { name, title, email, phone } = getValues();
     const html = generateHTML(name, title, email, phone);
-    const plain = `${name} | ${title}\nMcPhee Engineering Systems Co (MESCo)\nE: ${email}  |  Ph: ${phone}  |  ${siteUrl}\nBuilt from experience. Delivered with intent.\n\n${disclaimer}`;
+    const plain = `${name} | ${title}\nMcPhee Engineering Systems Co (MESCo)\nE: ${email}  |  Ph: ${phone}  |  ${siteUrl}\n\nBuilt from experience. Delivered with intent.\n\n${disclaimer}`;
     const btn = document.getElementById("copy-formatted");
     try {
       await navigator.clipboard.write([
