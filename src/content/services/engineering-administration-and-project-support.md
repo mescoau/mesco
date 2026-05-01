@@ -1,73 +1,88 @@
 ---
 featured: true
-title: Engineering Administration & Project Support
+title: Project Performance (Data & Project Analytics)
 description: >
-  Daily project coordination made clear — lot registers, ITPs, test records, NCRs, and documentation workflows kept organised and current.
-excerpt: Replace project chaos with structured, reliable support that keeps delivery on track.
+  Project data connected, analysed, and translated into structured performance visibility — QA/QC, cost, programme, labour, materials, and delays aligned through structured systems, dashboards, and reporting.
+excerpt: Replace uncertainty with data-driven performance systems that turn project data into clear, decision-ready insight.
 image:
   url: "/src/images/services/Engineering Administration & Project Support.jpg"
-  alt: "Engineering administration and project support"
+  alt: "Project Performance (Data & Project Analytics)"
 highlights:
-  - Daily QA/QC coordination and reporting
-  - Lot register, ITP and test record management
-  - Close-out preparation and evidence capture
+  - Project data structuring, analytics, and performance reporting
+  - Cost, labour, materials, and programme integration with KPI tracking and forecasting
+  - Dashboards, delay analysis, trend identification, and decision-ready insight delivery
 ---
 
 ## Overview
 
-Engineering administration is the backbone of project delivery — the quiet engine that keeps QA/QC, documentation, testing, survey, registers and daily coordination running smoothly. MESCo delivers structured, project-specific engineering administration frameworks that keep information flowing, records accurate and teams aligned. We turn contract requirements, design data and client specifications into organised, traceable systems the project can actually run on — not spreadsheets buried in emails or registers updated once a week.
+Projects generate data every day — cost, labour, materials, QA/QC, programme, and delays. Without structured data analytics, that information remains disconnected, reactive, and under utilised.
 
-Every project produces mountains of information: tests, approvals, lot updates, NCRs, survey checks, close-out evidence, document revisions. Without a structured engine room, this becomes noise — and noise becomes delay, rework and compliance gaps. MESCo builds engineering admin systems that put order back into the operation. Lot registers stay current. ITPs stay aligned. Testing remains traceable. NCRs move quickly. Documentation stays controlled. Delivery becomes predictable.
+MESCo develops project-specific data analytics and performance systems that connect QA/QC, cost, programme, labour, materials, and field data into a single, structured view of project performance. Data is not just captured — it is analysed, aligned, and translated into clear, decision-ready insight that supports delivery.
+
+Cost is tracked against productivity. Labour hours are tied to output. Material usage is measured against progress. Delays are identified, quantified, and understood. QA/QC performance is visible and traceable. Reporting becomes consistent, structured, and aligned with the project.
+
+This provides timely visibility over project performance — allowing teams to identify issues earlier, understand root causes, and make informed decisions before problems escalate.
+
+At project completion, this structured data forms a complete performance record. MESCo applies end-of-project data analytics to identify trends, root causes, and key drivers across cost, productivity, delays, and quality. These insights are carried forward, supporting continuous improvement across future projects — not just closing out the current one.
 
 ## The Problem
 
-Most projects carry engineering admin as an afterthought. Registers fall behind. Test results arrive but aren't logged. ITPs aren't followed because nobody maintains them. Survey data isn't cross-checked. NCRs sit open for weeks. Design changes don't flow through to the field. Document control becomes reactive. Daily coordination relies on memory instead of systems.
+Projects generate data every day — but most teams aren’t using data analytics to understand what’s actually happening.
 
-The result: lot boundaries unclear, missing test evidence, approvals delayed, close-out takes months instead of weeks, retention gets held, auditors uncover discrepancies, site teams work blind, guessing instead of verifying.
+Cost, labour, materials, delays, and QA/QC data all exist, but they aren’t connected or analysed. Productivity isn’t measured against cost. Delays aren’t broken down. Quality issues aren’t tracked as trends. The data is there — but without structured analytics, it remains reactive and under utilised.
 
-When engineering administration fails, quality fails. Programs slip. Compliance breaks. Handover suffers. Teams burn out.
+Instead of understanding cost drivers, identifying productivity gaps, and quantifying delays, teams rely on manual reporting and fragmented information.
+
+The result:
+- Cost overruns without clear cause 
+- Productivity losses that go unnoticed 
+- Delays that aren’t properly analysed 
+- QA/QC issues that repeat 
+- Decisions made without full visibility 
+
+At project close-out, data is archived, not analysed. No structured performance review is completed, and the same issues carry into the next project.
+
+Without data analytics, project performance isn’t controlled — it’s interpreted after the fact.
 
 ## What's Included
 
-- **Lot Register Management** — daily updates, traceability links, close-out tracking, specification alignment, and federation with ITPs and testing flows.
-- **ITP Coordination** — hold/witness point scheduling, sign-off management, specification checks and real-time tracking of inspection progress.
-- **Test Record Administration** — lab result intake, pass/fail verification, data logging, automated validation, linking results to lots and closing out test requirements.
-- **NCR Management** — documentation, root-cause inputs, corrective action tracking, close-out evidence management and reporting.
-- **Survey Verification Workflow** — coordination of survey pickups, conformance checks, foundation verifications and linking as-cons to lot completion.
-- **Design Change Control** — tracking RFIs, TQs and revisions; distributing updates to stakeholders; ensuring updated criteria flow into QA/QC tools.
-- **Document Control Integration** — structured folder system, version control, naming conventions, issued-for-use registers and controlled document distribution.
-- **Daily Coordination & Reporting** — QA/QC summaries, test status, design queries, ITP progress, NCR updates, and next-day readiness items.
-- **Close-Out Preparation** — early evidence capture, lot-by-lot checklists, defect tracking, test record collation and turnover pack pre-build.
-- **Stakeholder Interface** — liaison with EPCMs, labs, surveyors, subcontractors and client engineering teams to keep approvals moving and decisions flowing.
+- **Project Data Structuring & Integration** — connecting QA/QC, cost, programme, labour, materials, and delay data into a single, usable dataset. 
+- **Cost, Labour & Productivity Tracking** — linking hours and materials to output to identify performance trends and cost drivers.  
+- **QA/QC & Test Data Analytics** — clear visibility over inspections, testing, and quality performance.  
+- **Delay & Programme Analysis** — identifying, categorising, and analysing delays to understand impacts and support recovery.  
+- **NCR & Defect Tracking** — root cause insights to reduce rework and recurring issues.  
+- **Dashboards, Performance Reporting & Insight Delivery** — dashboards and structured reports aligned to delivery.  
+- **Close-Out & Post-Project Analytics** — structured data used to analyse performance and drive continuous improvement.  
 
 ## How It Works
 
-1. **Systems Review** — We review your design data, contract requirements, ITPs, testing schedule, QA/QC framework, document control system and project sequencing. We identify gaps, inefficiencies and missing flows.
-2. **Framework Setup** — We build structured engineering admin systems — lot registers, ITP tracking flows, testing workflows, NCR processes, survey verification plans and controlled documentation paths.
-3. **Integration** — We ensure every system aligns: design to ITPs to test schedule to survey to NCR workflow to close-out. Nothing isolated. Nothing orphaned. Everything connected.
-4. **Daily Coordination** — We administer registers, update progress, log results, track sign-offs, escalate NCRs, coordinate survey and testing, and ensure all QA/QC evidence stays up to date in real time.
-5. **Reporting & Transparency** — We deliver clear daily, weekly and/or monthly reporting — QA status, open NCRs, testing progress, upcoming ITPs, survey requirements, and design clarifications.
-6. **Close-Out Enablement** — As the project progresses, we build the backbone of your turnover package. Test results are logged, lot evidence is organised, surveys are filed, NCRs are closed and ITPs are completed.
+1. **Systems & Data Review** — We review your design data, cost inputs, programme, QA/QC systems, and existing workflows to identify gaps, inefficiencies, and missing data connections.  
+2. **Data & Framework Setup** — We structure project systems and datasets — aligning QA/QC, cost, labour, materials, and programme data into a connected, analysis-ready framework.  
+3. **Integration & Alignment** — We connect key data streams — design, ITPs, testing, survey, NCRs, cost, and programme — ensuring nothing is isolated and performance can be measured end-to-end.  
+4. **Data Capture & Tracking** — We support and maintain project data inputs — updating registers, tracking progress, logging results, and ensuring QA/QC, cost, and field data remains accurate and current.  
+5. **Analytics & Performance Reporting** — We apply data analytics to deliver clear daily, weekly, and/or monthly insights — covering cost, productivity, delays, quality, and overall project performance.  
+6. **Close-Out & Post-Project Analytics** — As the project progresses, we build a complete performance dataset — enabling structured close-out, trend analysis, root cause identification, and continuous improvement for future projects.  
 
 ## Deliverables
 
-- Lot register (live, accurate, fully traceable)
-- ITP tracking system with hold/witness point oversight
-- Test record intake, validation and traceability logs
-- NCR log with corrective actions and closure evidence
-- Survey verification workflow and documentation
-- Design change register (RFIs, TQs, revisions)
-- Controlled document index and issue records
-- Daily or weekly QA/QC status reporting
-- Pre-built close-out pack framework
-- Evidence folders for turnover documentation
-- Action tracking and escalation logs
+- Structured project data framework  
+- Project performance dashboard  
+- KPI and performance tracking system  
+- Cost, labour and productivity analysis outputs  
+- Delay and programme analysis reports  
+- QA/QC and NCR performance tracking logs  
+- Performance reporting templates  
+- Close-out data and turnover framework  
+- Post-project analytics and performance review  
+- Continuous improvement action register  
 
 ## Who It's For
 
-- Contractors needing structured engineering support to maintain QA/QC accuracy and project momentum.
-- Projects with high testing volume, multiple lots, complex sequencing or tight documentation requirements.
-- EPCM-led works requiring clean, defensible records and rapid approval flow.
-- Teams without a dedicated project engineer or where existing engineers are overloaded.
-- Principal contractors needing consistent daily coordination, document control and QA support.
-- Projects targeting smooth, fast, first-time-pass close-out.
+- Contractors needing project performance visibility and data analytics across cost, productivity, quality, and delivery  
+- Projects generating high volumes of data — testing, QA/QC, labour, materials, and programme tracking — requiring structured analytics  
+- EPCM-led works requiring data analytics, performance reporting, and defensible decision-making  
+- Teams without a dedicated project or data analyst, or with limited capacity to structure and analyse project data  
+- Contractors requiring data analytics capability to support project performance without maintaining a full-time internal resource  
+- Principal contractors seeking improved cost control, productivity insight, and data-driven performance tracking  
+- Projects requiring early identification of delays, risks, and QA/QC trends through structured analytics  
+- Projects targeting controlled delivery, efficient close-out, and continuous improvement driven by data analytics  
