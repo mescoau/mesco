@@ -5,7 +5,7 @@ description: >
   Scoped, flexible resource support — Site Engineers, HSE Advisors, and Project Coordinators trained to MESCo standards, working under your systems.
 excerpt: Experienced support when you need it.
 image:
-  url: "/src/images/services/Short-Term Fill-Ins & Technical Support.jpg"
+  url: "/src/images/services/Short-Term Fill-Ins & Technical Support.png"
   alt: "Short-term engineering and systems support"
 highlights:
   - Site Engineers, HSE Advisors and Project Coordinators
