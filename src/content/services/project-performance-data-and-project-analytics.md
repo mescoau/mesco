@@ -5,7 +5,7 @@ description: >
   Project data connected, analysed, and translated into structured performance visibility — QA/QC, cost, programme, labour, materials, and delays aligned through structured systems, dashboards, and reporting.
 excerpt: Replace uncertainty with data-driven performance systems that turn project data into clear, decision-ready insight.
 image:
-  url: "/src/images/services/Engineering Administration & Project Support.jpg"
+  url: "/src/images/services/Project Performance Data Analytics.png"
   alt: "Project Performance (Data & Project Analytics)"
 highlights:
   - Project data structuring, analytics, and performance reporting
