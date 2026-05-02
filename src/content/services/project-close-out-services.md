@@ -5,7 +5,7 @@ description: >
   Close-out done right, first time. Defect registers, ITP verification, lot completion packs, turnover folders, and as-built documentation.
 excerpt: Verified, documented handover that passes audit on first submission.
 image:
-  url: "/src/images/services/Project Close-Out Services.jpg"
+  url: "/src/images/services/Project Close-Out Services.png"
   alt: "Project close-out documentation and handover"
 highlights:
   - Master Defect Registers and ITP close-out verification
