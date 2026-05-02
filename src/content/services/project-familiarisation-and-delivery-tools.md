@@ -5,7 +5,7 @@ description: >
   Supervisor cheat sheets, work packs, lot boundary plans, hold point checklists, and quality acceptance criteria for field-ready delivery.
 excerpt: Visual, field-tested tools that simplify execution.
 image:
-  url: "/src/images/services/Project Familiarisation & Delivery Tools.jpg"
+  url: "/src/images/services/Project Familiarisation & Delivery Tools.png"
   alt: "Project delivery tools and field guides"
 highlights:
   - Supervisor cheat sheets and work packs
